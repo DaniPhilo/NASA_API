@@ -1,0 +1,26 @@
+{
+  "name": "nasa_api",
+  "version": "1.0.0",
+  "description": "API exercise for FSD Bootcamp with Node, Express and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaniPhilo/NASA_API.git"
+  },
+  "author": "Daniel Carrasco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaniPhilo/NASA_API/issues"
+  },
+  "homepage": "https://github.com/DaniPhilo/NASA_API#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
