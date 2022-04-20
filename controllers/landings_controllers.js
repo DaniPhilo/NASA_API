@@ -10,7 +10,10 @@ const getLandingByMinMass = async (req, res) => {
                     queryMass
                 ]
             }
-        });
+        }, {
+            name: 1,
+            mass: 1
+        }).sort({ mass: 1 });
         if (!landing) {
             const error = 'No landings retrieved from database';
             throw error
@@ -31,6 +34,9 @@ const getLandingByMass = async (req, res) => {
                     queryMass
                 ]
             }
+        }, {
+            name: 1,
+            mass: 1
         });
         if (!landing) {
             const error = 'No landings retrieved from database';
@@ -45,7 +51,10 @@ const getLandingByMass = async (req, res) => {
 const getLandingByClass = async (req, res) => {
     try {
         const queryClass = req.params.queryClass;
-        const landing = await Landing.find({ recclass: queryClass });
+        const landing = await Landing.find({ recclass: queryClass }, {
+            name: 1,
+            recclass: 1
+        });
         if (!landing) {
             const error = 'No landings retrieved from database';
             throw error
@@ -62,14 +71,11 @@ const getLandingByDate = async (req, res) => {
         if (from || to) {
             try {
                 const results = []
-                const landing = await Landing.aggregate([{
-                    '$project': {
-                        '_id': 0,
-                        'name': 1,
-                        'mass': 1,
-                        'year': 1
-                    }
-                }]);
+                const landing = await Landing.find({}, {
+                    name: 1,
+                    mass: 1,
+                    year: 1
+                }).sort({ year: 1 });
                 landing.map(item => {
                     if (item.year) {
                         let year = item.year.slice(0, 4);
