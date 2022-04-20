@@ -97,9 +97,54 @@ const getLandingByDate = async (req, res) => {
     }
 }
 
+const createLanding = async (req, res) => {
+    try {
+        const landing = await Landing.create(req.body);
+        if (!landing) {
+            const error = 'Landing was not created in DB'
+            throw error
+        }
+        res.json({ landing })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const editLanding = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const landing = await Landing.findOneAndUpdate({ id: id }, req.body, { new: true });
+        if (!landing) {
+            const error = 'Landing was not updated in DB'
+            throw error
+        }
+        res.json({ landing })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const deleteLanding = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const landing = await Landing.findOneAndDelete({ id: id });
+        if (!landing) {
+            const error = 'Could not delete landing'
+            throw error
+        }
+        res.json({ landing });
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getLandingByMinMass,
     getLandingByMass,
     getLandingByClass,
-    getLandingByDate
+    getLandingByDate,
+    createLanding,
+    editLanding,
+    deleteLanding
 }
