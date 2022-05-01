@@ -3,9 +3,25 @@ const Landing = require('../models/landings_models');
 const { validateNumber, validateDocument } = require('../utils/validations');
 const CustomError = require('../utils/errors');
 
+const getAllLandings = async (req, res, next) => {
+    try {
+        const landings = await Landing.find({}, {
+            name: 1,
+            mass: 1,
+            year: 1
+        }).sort({ mass: 1 }).limit(10);
+        if (!landings || landings.legth < 1) {
+            return res.json({ message: 'No landings found' })
+        }
+        res.json({ landings })
+    } catch (error) {
+        return next(error)
+    }
+}
+
 const getLandingByMinMass = async (req, res, next) => {
     try {
-        const queryMass = Number(req.query.min_mass);
+        const queryMass = Number(req.params.minMass);
         if (!validateNumber(queryMass)) { throw new CustomError('Invalid parameter(mass): please, provide a whole number') }
         const landing = await Landing.find({
             $expr: {
@@ -148,6 +164,7 @@ const deleteLanding = async (req, res, next) => {
 }
 
 module.exports = {
+    getAllLandings,
     getLandingByMinMass,
     getLandingByMass,
     getLandingByClass,
