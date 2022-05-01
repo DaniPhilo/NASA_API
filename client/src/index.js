@@ -16,3 +16,7 @@ root.render(
 
   </React.StrictMode>
 );
+
+// El formulario para seleccionar landings en el mapa funciona por separado, no se pueden hacer queries conjuntas. Deberías solucionarlo si hay tiempo.
+
+// Hay que darle funcionalidad a los botones de editar y eliminar landing.

@@ -25,20 +25,17 @@ app.use('/api/astronomy/landings', landingRoutes);
 
 app.use((err, req, res, next) => {
     if (err.type === 'custom_error') {
-        return res.json({message: 'Error from server (custom): ' + err.message})
+        return res.status(400).json({response: false, message: 'Error from server (custom): ' + err.message})
     }
     else if (err.type !== 'custom_error') {
-        return res.json({message: 'Error: ' + err})
+        return res.status(400).json({response: false, message: 'Error: ' + err})
     }
     else {
         return next()
     }
 });
 app.use((req, res) => {
-    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    console.log(fullUrl)
-    const message = 'Route not found';
-    res.json({ message })
+    res.status(404).json({ response: false, message: 'Route not found' })
 })
 
 
