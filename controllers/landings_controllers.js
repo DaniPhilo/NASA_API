@@ -4,13 +4,15 @@ const { validateNumber, validateDocument } = require('../utils/validations');
 const CustomError = require('../utils/errors');
 
 const getAllLandings = async (req, res, next) => {
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    console.log(fullUrl);
     try {
         const landings = await Landing.find({}, {
             name: 1,
             mass: 1,
             year: 1
         }).sort({ mass: 1 }).limit(10);
-        if (!landings || landings.legth < 1) {
+        if (!landings || landings.length < 1) {
             return res.json({ message: 'No landings found' })
         }
         res.json({ landings })

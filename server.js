@@ -6,11 +6,17 @@ const app = express();
 // Database connection:
 const connectDB = require('./db/connect_db');
 
+// Various imports:
+const cors = require('cors')
+
 const port = process.env.PORT || 3000;
 
 // Middlewares:
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static('client/src'));
 
 // Routes:
 const landingRoutes = require('./routes/landing_routes');
@@ -29,6 +35,8 @@ app.use((err, req, res, next) => {
     }
 });
 app.use((req, res) => {
+    const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+    console.log(fullUrl)
     const message = 'Route not found';
     res.json({ message })
 })
