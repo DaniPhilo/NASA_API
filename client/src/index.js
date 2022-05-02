@@ -19,4 +19,4 @@ root.render(
 
 // El formulario para seleccionar landings en el mapa funciona por separado, no se pueden hacer queries conjuntas. Deberías solucionarlo si hay tiempo.
 
-// Hay que darle funcionalidad a los botones de editar y eliminar landing.
+// Hay que hacer try-catch con las API calls, que pareces nuevo.

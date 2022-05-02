@@ -5,6 +5,7 @@ function List() {
 
   const [landings, setLandings] = useState([]);
   const [created, setCreated] = useState(null);
+  const [triggerAPICall, setTriggerAPICall] = useState(false);
 
   useEffect(() => {
     const fetchLandings = async () => {
@@ -16,7 +17,11 @@ function List() {
     }
 
     fetchLandings();
-  }, []);
+  }, [triggerAPICall]);
+
+  const triggerRender = () => {
+    setTriggerAPICall(prevState => !prevState);
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -79,11 +84,10 @@ function List() {
 
       <section>
         {landings.length > 0 && landings.map(landing => {
-          return <Landing key={landing._id} {...landing} />
+          return <Landing key={landing._id} {...landing} triggerRender={triggerRender}/>
         })}
       </section>
     </>
-
   )
 }
 
