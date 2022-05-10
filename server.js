@@ -6,11 +6,17 @@ const app = express();
 // Database connection:
 const connectDB = require('./db/connect_db');
 
+// Various imports:
+const cors = require('cors')
+
 const port = process.env.PORT || 3000;
 
 // Middlewares:
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static('client/src'));
 
 // Routes:
 const landingRoutes = require('./routes/landing_routes');
@@ -18,18 +24,18 @@ const landingRoutes = require('./routes/landing_routes');
 app.use('/api/astronomy/landings', landingRoutes);
 
 app.use((err, req, res, next) => {
-    if (err) {
-        console.log('Error from server')
-        res.json({ err })
+    if (err.type === 'custom_error') {
+        return res.status(400).json({response: false, message: 'Error from server (custom): ' + err.message})
+    }
+    else if (err.type !== 'custom_error') {
+        return res.status(400).json({response: false, message: 'Error: ' + err})
     }
     else {
         return next()
     }
 });
-
 app.use((req, res) => {
-    const message = 'Route not found';
-    res.json({ message })
+    res.status(404).json({ response: false, message: 'Route not found' })
 })
 
 

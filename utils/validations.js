@@ -22,7 +22,7 @@ const validateDocument = (doc) => {
         throw new CustomError('Invalid name')
     }
 
-    if(!doc.id || !validateNumber(doc.id)) {
+    if(!doc.id) {
         console.log('Invalid id')
         throw new CustomError('Invalid id')
     }
@@ -32,7 +32,7 @@ const validateDocument = (doc) => {
         throw new CustomError('Invalid class')
     }
 
-    if (!doc.mass || !validateNumber(doc.mass)) {
+    if (!doc.mass) {
         console.log('Invalid mass')
         throw new CustomError('Invalid mass parameter: please, provide a whole number')
     }
@@ -42,12 +42,12 @@ const validateDocument = (doc) => {
         throw new CustomError('Invalid year')
     }
 
-    if (!doc.reclat || !validadteCoords(doc.reclat)) {
+    if (!doc.reclat) {
         console.log('Invalid lat')
         throw new CustomError('Invalid latitude')
     }
 
-    if (!doc.reclong || !validadteCoords(doc.reclong)) {
+    if (!doc.reclong) {
         console.log('Invalid long')
         throw new CustomError('Invalid longitude')
     }
