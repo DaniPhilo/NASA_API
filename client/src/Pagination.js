@@ -12,6 +12,7 @@ function Pagination({ landingsInPage, totalLandings, setCurrentPage }) {
     }
     return (
         <ul className='pagination-list'>
+            <li>Page: </li>
             {pageNumbers.map(num => {
                 return (
                     <li className='pagination-item'>

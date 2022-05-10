@@ -1,8 +1,12 @@
 import React from 'react'
+import Nav from './Nav';
 
 function Header() {
   return (
-    <div>Header</div>
+    <header>
+      <h1>NASA API</h1>
+      <Nav />
+    </header>
   )
 }
 

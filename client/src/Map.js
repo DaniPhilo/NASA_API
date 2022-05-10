@@ -27,6 +27,7 @@ function Map() {
         const data = await response.json();
         if (data.response) {
             setLandings(data.landings);
+            event.target.reset();
         }
     }
 
@@ -38,21 +39,24 @@ function Map() {
         const data = await response.json();
         if (data.response) {
             setLandings(data.landings);
+            event.target.reset();
         }
     }
 
     return (
         <>
-            <form action="" onSubmit={handleSubmitByWeight}>
-                <label htmlFor="weight">Filter by weight: </label>
-                <input type="number" name="weight" />
-                <button type='submit'>Filter</button>
-            </form>
-            <form action="" onSubmit={handleSubmitByClass}>
-                <label htmlFor="_class">Filter by class: </label>
-                <input type="text"  name="_class"/>
-                <button type='submit'>Filter</button>
-            </form>
+            <div className="map-form-container">
+                <form action="" onSubmit={handleSubmitByWeight}>
+                    <label htmlFor="weight">Filter by weight: </label>
+                    <input type="number" name="weight" />
+                    <button type='submit'>Filter</button>
+                </form>
+                <form action="" onSubmit={handleSubmitByClass}>
+                    <label htmlFor="_class">Filter by class: </label>
+                    <input type="text" name="_class" />
+                    <button type='submit'>Filter</button>
+                </form>
+            </div>
 
             <MapContainer center={[30, 0]} zoom={2} scrollWheelZoom={false}>
                 <TileLayer

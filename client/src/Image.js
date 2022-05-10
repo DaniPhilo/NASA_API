@@ -17,7 +17,7 @@ function Image() {
     }, []);
 
     return (
-        <section>
+        <section className='image-section'>
             {isLoading ?
                 <div>Loading...</div> :
                 <img src={apod} alt="" />}

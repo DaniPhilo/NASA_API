@@ -69,7 +69,10 @@ function List() {
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
+      <form action="" onSubmit={handleSubmit} className='list-form'>
+
+        <h4>Create new landing:</h4>
+
         <label htmlFor="name">Name: </label>
         <input type="text" name='name' />
 
@@ -91,7 +94,7 @@ function List() {
         <label htmlFor="reclong">Longitude: </label>
         <input type="text" name='reclong' />
 
-        <button type='submit'>Create</button>
+        <input type='submit' value='Create'/>
       </form>
 
       {created === 'success' && <p>New landing created.</p>}
@@ -102,7 +105,7 @@ function List() {
           <div className="loading">Loading...</div>
           :
           <>
-            <div>
+            <div className='landing-container'>
               {currentLandings.length > 0 && currentLandings.map(landing => {
                 return (
                   <Landing key={landing._id} {...landing} triggerRender={triggerRender} />

@@ -20,13 +20,13 @@ function Landing({ name, recclass, mass, year, reclat, reclong, id, triggerRende
     event.preventDefault();
 
     const editData = {
-      name: event.target.name.value,
+      name: event.target.name.value || event.target.recclass.placeholder,
       id: id,
-      recclass: event.target.recclass.value,
-      mass: event.target.mass.value,
-      year: event.target.year.value,
-      reclat: event.target.reclat.value,
-      reclong: event.target.reclong.value
+      recclass: event.target.recclass.value || event.target.recclass.placeholder,
+      mass: event.target.mass.value || event.target.mass.placeholder,
+      year: event.target.year.value || event.target.year.placeholder,
+      reclat: event.target.reclat.value || event.target.reclat.placeholder,
+      reclong: event.target.reclong.value || event.target.reclong.placeholder
     }
 
     const response = await fetch(`http://localhost:3001/api/astronomy/landings/edit/${id}`, {
@@ -44,17 +44,17 @@ function Landing({ name, recclass, mass, year, reclat, reclong, id, triggerRende
   }
 
   return (
-    <div className='landing-container'>
+    <div className='landing-card'>
       {!isEdit ?
 
         <>
           <div className="landing-info">
             <h4>{name}</h4>
-            <p>{recclass}</p>
-            <p>{mass}</p>
-            <p>{year}</p>
-            <p>{reclat}</p>
-            <p>{reclong}</p>
+            <p>Class: {recclass}</p>
+            <p>Mass: {mass}</p>
+            <p>Date: {year.slice(0, 10)}</p>
+            <p>Lat: {reclat}</p>
+            <p>Long: {reclong}</p>
           </div>
           <div className="buttons">
             <button type='button' onClick={() => setIsEdit(() => !isEdit)}>Edit</button>
