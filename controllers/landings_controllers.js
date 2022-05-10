@@ -5,7 +5,7 @@ const CustomError = require('../utils/errors');
 
 const getAllLandings = async (req, res, next) => {
     try {
-        const landings = await Landing.find({}).sort('name').limit(10);
+        const landings = await Landing.find({}).sort('name');
         if (!landings || landings.length < 1) {
             return res.status(400).json({ response: false, message: 'No landings found' })
         }

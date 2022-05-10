@@ -44,7 +44,7 @@ function Landing({ name, recclass, mass, year, reclat, reclong, id, triggerRende
   }
 
   return (
-    <div>
+    <div className='landing-container'>
       {!isEdit ?
 
         <>

@@ -1,27 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import Landing from './Landing'
+import Pagination from './Pagination';
 
 function List() {
 
+  // States to manage pagination:
   const [landings, setLandings] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [landingsInPage, setLandingsInPage] = useState(10);
+
+  const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(null);
   const [triggerAPICall, setTriggerAPICall] = useState(false);
 
+  const triggerRender = () => {
+    setTriggerAPICall(prevState => !prevState);
+  }
+
   useEffect(() => {
+
     const fetchLandings = async () => {
       const response = await fetch('http://localhost:3001/api/astronomy/landings');
       const data = await response.json();
       if (data.response) {
         setLandings(data.landings);
+        setLoading(false);
       }
     }
 
     fetchLandings();
+
   }, [triggerAPICall]);
 
-  const triggerRender = () => {
-    setTriggerAPICall(prevState => !prevState);
-  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,6 +61,11 @@ function List() {
     }
     // event.target.reset();
   }
+
+  // Manage pagination:
+  const lastLanding = currentPage * landingsInPage;
+  const firstLanding = lastLanding - landingsInPage;
+  const currentLandings = landings.slice(firstLanding, lastLanding);
 
   return (
     <>
@@ -82,11 +97,27 @@ function List() {
       {created === 'success' && <p>New landing created.</p>}
       {created === 'failure' && <p>Incorrect parameters. Please, try again..</p>}
 
-      <section>
-        {landings.length > 0 && landings.map(landing => {
-          return <Landing key={landing._id} {...landing} triggerRender={triggerRender}/>
-        })}
+      <section className='landings-section'>
+        {loading ?
+          <div className="loading">Loading...</div>
+          :
+          <>
+            <div>
+              {currentLandings.length > 0 && currentLandings.map(landing => {
+                return (
+                  <Landing key={landing._id} {...landing} triggerRender={triggerRender} />
+                )
+              })}
+            </div>
+
+            <div className='pagination-section'>
+              <Pagination landingsInPage={landingsInPage} totalLandings={landings.length} setCurrentPage={setCurrentPage} />
+            </div>
+          </>
+        }
       </section>
+
+
     </>
   )
 }
