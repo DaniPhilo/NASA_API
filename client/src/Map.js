@@ -35,7 +35,7 @@ function Map() {
         event.preventDefault();
 
         const _class = event.target._class.value;
-        const response = await fetch(`http://localhost:3001/api/astronomy/landings/class/${_class}`);
+        const response = await fetch(`/api/astronomy/landings/class/${_class}`);
         const data = await response.json();
         if (data.response) {
             setLandings(data.landings);
