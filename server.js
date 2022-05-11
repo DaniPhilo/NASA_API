@@ -18,13 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.resolve(__dirname, ".client/build")));
-app.use(express.static('client/src'));
 
 // Routes:
 const landingRoutes = require('./routes/landing_routes');
 
 app.use('/api/astronomy/landings', landingRoutes);
 
+// Error handlers:
 app.use((err, req, res, next) => {
     if (err.type === 'custom_error') {
         return res.status(400).json({response: false, message: 'Error from server (custom): ' + err.message})
