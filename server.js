@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const path = require('path');
 const app = express();
 
 // Database connection:
@@ -9,13 +10,14 @@ const connectDB = require('./db/connect_db');
 // Various imports:
 const cors = require('cors')
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 // Middlewares:
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.static(path.resolve(__dirname, ".client/build")));
 app.use(express.static('client/src'));
 
 // Routes:
