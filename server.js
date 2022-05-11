@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "/client")));
 
 // API Routes:
 const landingRoutes = require('./routes/landing_routes');
@@ -26,7 +26,7 @@ app.use('/api/astronomy/landings', landingRoutes);
 
 // REACT Routes:
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
 })
 
 // Error handlers:
