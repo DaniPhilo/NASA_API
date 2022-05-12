@@ -21,8 +21,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // API Routes:
 const landingRoutes = require('./routes/landings_routes');
+const neasRoutes = require('./routes/neas_routes');
 
 app.use('/api/astronomy/landings', landingRoutes);
+app.use('/api/astronomy/neas', neasRoutes)
 
 // REACT Routes:
 // app.use(express.static(path.join(__dirname, "/client/build")));

@@ -1,6 +1,6 @@
 const Landing = require('../models/landings_models');
 
-const { validateNumber, validateDocument } = require('../utils/validations');
+const { validateNumber } = require('../utils/validations');
 const CustomError = require('../utils/errors');
 
 const getAll = async () => {
@@ -28,7 +28,6 @@ const getByMinMass = async (minMass) => {
         return landings
     } 
     catch (error) {
-        console.log(error);
         return error
     }
 }

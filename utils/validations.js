@@ -15,7 +15,7 @@ const validadteCoords = (coord) => {
     return regex.test(parseFloat(coord))
 }
 
-const validateDocument = (doc) => {
+const validateLandingDocument = (doc) => {
     console.log(doc)
     if (!doc.name || !validateName(doc.name)) {
         console.log('Invalid name')
@@ -56,10 +56,24 @@ const validateDocument = (doc) => {
     }
     
 }
+const validateNeaDocument = (doc) => {
+    const keys = Object.keys(doc);
+    const result = keys.filter(key => !doc[key]);
+    return result.length < 1 ? true : false
+}
+
+const capitalizeString = (string) => {
+    const newString = string.split('').map((letter, index) => {
+        return index === 0 ? letter.toUpperCase() : letter.toLowerCase();
+    });
+    return newString.join('')
+}
 
 module.exports = {
     validateNumber,
     validateName,
     validadteCoords,
-    validateDocument
+    validateLandingDocument,
+    validateNeaDocument,
+    capitalizeString
 }
