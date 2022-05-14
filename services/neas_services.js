@@ -13,6 +13,24 @@ const getAll = async () => {
     }
 }
 
+const getNumberOfDocuments = async () => {
+    try {
+        const count = await Nea.countDocuments({});
+        return count
+    } catch (error) {
+        return error
+    }
+}
+
+const getPaginatedNeas = async (page) => {
+    try {
+        const neas = await Nea.find({}).skip((page - 1) * 10).limit(10);
+        return neas
+    } catch (error) {
+        return error
+    }
+}
+
 const getByOrbitClass = async (param) => {
     try {
         const orbitClass = capitalizeString(param);
@@ -63,6 +81,8 @@ const getByDate = async (from, to) => {
 
 module.exports = {
     getAll,
+    getNumberOfDocuments,
+    getPaginatedNeas,
     getByOrbitClass,
     getByDate
 }

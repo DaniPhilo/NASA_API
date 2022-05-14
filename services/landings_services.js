@@ -7,8 +7,26 @@ const getAll = async () => {
     try {
         const landings = await Landing.find({}).sort('name');
         return landings
-    } 
+    }
     catch (error) {
+        return error
+    }
+}
+
+const getNumberOfDocuments = async () => {
+    try {
+        const count = await Landing.countDocuments({});
+        return count
+    } catch (error) {
+        return error
+    }
+}
+
+const getPaginatedLandings = async (page) => {
+    try {
+        const landings = await Landing.find({}).skip((page - 1) * 10).limit(10);
+        return landings
+    } catch (error) {
         return error
     }
 }
@@ -26,7 +44,7 @@ const getByMinMass = async (minMass) => {
             }
         }).sort({ mass: 1 });
         return landings
-    } 
+    }
     catch (error) {
         return error
     }
@@ -44,7 +62,7 @@ const getByMass = async (mass) => {
             }
         });
         return landings
-    } 
+    }
     catch (error) {
         return error
     }
@@ -54,7 +72,7 @@ const getByClass = async (recclass) => {
     try {
         const landings = await Landing.find({ recclass: recclass });
         return landings
-    } 
+    }
     catch (error) {
         return error
     }
@@ -90,7 +108,7 @@ const getByDate = async (from, to) => {
 
         return landings
 
-    } 
+    }
     catch (error) {
         return error
     }
@@ -99,6 +117,8 @@ const getByDate = async (from, to) => {
 
 module.exports = {
     getAll,
+    getNumberOfDocuments,
+    getPaginatedLandings,
     getByMinMass,
     getByMass,
     getByClass,

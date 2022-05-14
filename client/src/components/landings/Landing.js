@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 
 import { ShoppingCartContext } from '../shopping_context'
 
@@ -70,7 +70,8 @@ function Landing({ landing, setLandings }) {
             <h4>{name}</h4>
             <p>Class: {recclass}</p>
             <p>Mass: {mass}</p>
-            <p>Date: {year.slice(0, 10)}</p>
+            {/* <p>Date: {year.slice(0, 10)}</p> */}
+            <p>Date: {year}</p>
             <p>Lat: {reclat}</p>
             <p>Long: {reclong}</p>
           </div>

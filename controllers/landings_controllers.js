@@ -1,15 +1,24 @@
 const Landing = require('../models/landings_models');
-const { getAll, getByMinMass, getByMass, getByClass, getByDate } = require('../services/landings_services');
+const { getAll, getNumberOfDocuments, getPaginatedLandings, getByMinMass, getByMass, getByClass, getByDate } = require('../services/landings_services');
 const { validateNumber, validateLandingDocument } = require('../utils/validations');
 const CustomError = require('../utils/errors');
 
 const getAllLandings = async (req, res, next) => {
     try {
-        const landings = await getAll();
+        const page = req.params.page;
+        let count = null;
+        let landings
+        if (page) {
+            count = await getNumberOfDocuments();
+            landings = await getPaginatedLandings(page);
+        } else {
+            landings = await getAll();
+        }
+
         if (!landings || landings.length < 1) {
             return res.status(400).json({ response: false, message: 'No landings found' });
         }
-        res.status(200).json({ response: true, landings });
+        res.status(200).json({ response: true, count: count, landings });
     }
     catch (error) {
         return next(error)
@@ -68,7 +77,7 @@ const getLandingByDate = async (req, res) => {
             return res.status(400).json({ message: 'No landings with such parameters' });
         }
         res.status(200).json({ response: true, landings });
-    } 
+    }
     catch (error) {
         return next(error)
     }
@@ -82,7 +91,7 @@ const createLanding = async (req, res, next) => {
             throw new CustomError('Landing was not created in DB');
         }
         res.status(201).json({ response: true, landing });
-    } 
+    }
     catch (error) {
         return next(error)
     }
@@ -98,7 +107,7 @@ const editLanding = async (req, res, next) => {
             throw new CustomError('No landings with such parameters');
         }
         res.status(200).json({ response: true, landings });
-    } 
+    }
     catch (error) {
         return next(error)
     }

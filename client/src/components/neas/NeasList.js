@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
 import Nea from './Nea';
+import NeasPagination from './NeasPagination';
 
 function NeasList() {
   // States to manage pagination:
   const [neas, setNeas] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [numberOfPages, setNumberOfPages] = useState(0);
 
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(null);
@@ -12,9 +16,10 @@ function NeasList() {
   useEffect(() => {
 
     const fetchNeas = async () => {
-      const response = await fetch('http://localhost:3001/api/astronomy/neas');
+      const response = await fetch(`http://localhost:3001/api/astronomy/neas/${currentPage}`);
       const data = await response.json();
       if (data.response) {
+        setNumberOfPages(Math.floor(data.count / 10));
         setNeas(data.neas);
         setLoading(false);
       }
@@ -22,7 +27,7 @@ function NeasList() {
 
     fetchNeas();
 
-  }, []);
+  }, [currentPage]);
 
 
   const handleSubmit = async (event) => {
@@ -103,13 +108,14 @@ function NeasList() {
           <div className="loading">Loading...</div>
           :
           <>
-              <div className='nea-container'>
-                {neas.length > 0 && neas.map(nea => {
-                  return (
-                    <Nea key={nea.designation} nea={nea} setNeas={setNeas} neas={neas} />
-                  )
-                })}
-              </div>
+            <div className='nea-container'>
+              {neas.length > 0 && neas.map(nea => {
+                return (
+                  <Nea key={nea.designation} nea={nea} setNeas={setNeas} neas={neas} />
+                )
+              })}
+            </div>
+            <NeasPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} />
           </>
         }
       </section>

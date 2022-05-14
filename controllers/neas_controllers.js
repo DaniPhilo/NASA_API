@@ -1,11 +1,20 @@
 const Nea = require('../models/neas_models');
-const { getAll, getByOrbitClass, getByDate } = require('../services/neas_services');
+const { getAll, getNumberOfDocuments, getPaginatedNeas, getByOrbitClass, getByDate } = require('../services/neas_services');
 const { validateNeaDocument } = require('../utils/validations');
 const CustomError = require('../utils/errors');
 
 const getAllNeas = async (req, res, next) => {
     try {
-        const neas = await getAll();
+        const page = req.params.page;
+        let count = null;
+        let neas
+        if (page) {
+            count = await getNumberOfDocuments();
+            neas = await getPaginatedNeas(page);
+        } else {
+            neas = await getAll();
+        }
+
         if (!neas || neas.length < 1) {
             return res.status(400).json({ response: false, message: 'No NEAs found' });
         }
@@ -37,7 +46,7 @@ const getNeaByDate = async (req, res) => {
             return res.status(400).json({ message: 'No NEAs with such parameters' });
         }
         res.status(200).json({ response: true, neas });
-    } 
+    }
     catch (error) {
         return next(error)
     }
@@ -51,7 +60,7 @@ const createNea = async (req, res, next) => {
             throw new CustomError('Nea was not created in DB');
         }
         res.status(201).json({ response: true, newNea });
-    } 
+    }
     catch (error) {
         return next(error)
     }
@@ -66,7 +75,7 @@ const editNea = async (req, res, next) => {
             throw new CustomError('No NEAs with such parameters');
         }
         res.status(200).json({ response: true, neas });
-    } 
+    }
     catch (error) {
         return next(error)
     }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import Landing from './Landing'
-import Pagination from './Pagination';
+import LandingsPagination from './LandingsPagination';
 
 function LandingsList() {
 
@@ -9,7 +9,7 @@ function LandingsList() {
   const [landings, setLandings] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [landingsInPage, setLandingsInPage] = useState(10);
+  const [numberOfPages, setNumberOfPages] = useState(0);
 
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(null);
@@ -17,9 +17,10 @@ function LandingsList() {
   useEffect(() => {
 
     const fetchLandings = async () => {
-      const response = await fetch('http://localhost:3001/api/astronomy/landings');
+      const response = await fetch(`http://localhost:3001/api/astronomy/landings/${currentPage}`);
       const data = await response.json();
       if (data.response) {
+        setNumberOfPages(Math.floor(data.count / 10));
         setLandings(data.landings);
         setLoading(false);
       }
@@ -27,7 +28,7 @@ function LandingsList() {
 
     fetchLandings();
 
-  }, []);
+  }, [currentPage]);
 
 
   const handleSubmit = async (event) => {
@@ -56,13 +57,7 @@ function LandingsList() {
     else {
       setCreated('failure');
     }
-    // event.target.reset();
   }
-
-  // Manage pagination:
-  const lastLanding = currentPage * landingsInPage;
-  const firstLanding = lastLanding - landingsInPage;
-  const currentLandings = landings.slice(firstLanding, lastLanding);
 
   return (
     <>
@@ -103,17 +98,15 @@ function LandingsList() {
           :
           <>
             <div className='landing-container'>
-              {currentLandings.length > 0 && currentLandings.map(landing => {
+              {landings.length > 0 && landings.map(landing => {
                 return (
                   <Landing key={landing._id} landing={landing} setLandings={setLandings} landings={landings} />
                 )
               })}
             </div>
-
-            <div className='pagination-section'>
-              <Pagination landingsInPage={landingsInPage} totalLandings={landings.length} setCurrentPage={setCurrentPage} />
-            </div>
+            <LandingsPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} />
           </>
+
         }
       </section>
 
