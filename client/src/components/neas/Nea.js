@@ -1,21 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react'
 
-import { NeasCartContext } from '../shopping_context'
+import { ShoppingCartContext } from '../shopping_context'
 
 function Nea({ nea, setNeas }) {
 
     const { designation, discovery_date, h_mag, moid_au, q_au_1, q_au_2, period_yr, i_deg, pha, orbit_class } = nea;
 
-    const { neasCart, setNeasCart } = useContext(NeasCartContext);
+    const { neasCart, setNeasCart } = useContext(ShoppingCartContext);
     const [isEdit, setIsEdit] = useState(false);
     const [isInCart, setIsInCart] = useState(() => {
         const match = neasCart.filter(item => item.designation === designation);
         return match.length > 0 ? true : false
     });
-
-    useEffect(() => {
-        localStorage.setItem('landings', JSON.stringify(neasCart));
-      }, [neasCart]);
 
     const handleDelete = async () => {
         const response = await fetch(`http://localhost:3001/api/astronomy/neas/delete/${designation}`, {
@@ -59,6 +55,7 @@ function Nea({ nea, setNeas }) {
     }
 
     const handleToCart = () => {
+        nea.price = (Math.random() * (1000 - 400) + 400).toFixed(2);
         setNeasCart(prevState => [...prevState, nea]);
         setIsInCart(true);
     }

@@ -3,8 +3,6 @@ import React, { useState, useEffect } from 'react'
 import Landing from './Landing'
 import Pagination from './Pagination';
 
-import { LandingsCartContextProvider } from '../shopping_context'
-
 function LandingsList() {
 
   // States to manage pagination:
@@ -104,15 +102,13 @@ function LandingsList() {
           <div className="loading">Loading...</div>
           :
           <>
-            <LandingsCartContextProvider>
-              <div className='landing-container'>
-                {currentLandings.length > 0 && currentLandings.map(landing => {
-                  return (
-                    <Landing key={landing._id} landing={landing} setLandings={setLandings} landings={landings} />
-                  )
-                })}
-              </div>
-            </LandingsCartContextProvider>
+            <div className='landing-container'>
+              {currentLandings.length > 0 && currentLandings.map(landing => {
+                return (
+                  <Landing key={landing._id} landing={landing} setLandings={setLandings} landings={landings} />
+                )
+              })}
+            </div>
 
             <div className='pagination-section'>
               <Pagination landingsInPage={landingsInPage} totalLandings={landings.length} setCurrentPage={setCurrentPage} />

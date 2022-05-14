@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import Nea from './Nea';
 
-import { NeasCartContextProvider } from '../shopping_context'
-
 function NeasList() {
   // States to manage pagination:
   const [neas, setNeas] = useState([]);
@@ -105,7 +103,6 @@ function NeasList() {
           <div className="loading">Loading...</div>
           :
           <>
-            <NeasCartContextProvider>
               <div className='nea-container'>
                 {neas.length > 0 && neas.map(nea => {
                   return (
@@ -113,7 +110,6 @@ function NeasList() {
                   )
                 })}
               </div>
-            </NeasCartContextProvider>
           </>
         }
       </section>

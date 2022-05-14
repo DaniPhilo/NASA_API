@@ -1,33 +1,20 @@
 import React, { useState } from 'react'
 
-const LandingsCartContext = React.createContext();
+const ShoppingCartContext = React.createContext();
 
-const LandingsCartContextProvider = ({ children }) => {
+const ShoppingCartContextProvider = ({ children }) => {
 
     const [landingsCart, setLandingsCart] = useState([]);
-
-    return (
-        <LandingsCartContext.Provider value={{ landingsCart, setLandingsCart }}>
-            {children}
-        </LandingsCartContext.Provider>
-    )
-}
-
-const NeasCartContext = React.createContext();
-
-const NeasCartContextProvider = ({ children }) => {
     const [neasCart, setNeasCart] = useState([]);
 
     return (
-        <NeasCartContext.Provider value={{ neasCart, setNeasCart }}>
+        <ShoppingCartContext.Provider value={{ landingsCart, setLandingsCart, neasCart, setNeasCart }}>
             {children}
-        </NeasCartContext.Provider>
+        </ShoppingCartContext.Provider>
     )
 }
 
 export {
-    LandingsCartContext,
-    LandingsCartContextProvider,
-    NeasCartContext,
-    NeasCartContextProvider
+    ShoppingCartContext,
+    ShoppingCartContextProvider
 }

@@ -5,6 +5,8 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer'
 
+import { ShoppingCartContextProvider } from './shopping_context'
+
 import '../styles/styles.scss'
 
 function App() {
@@ -13,9 +15,12 @@ function App() {
 
   return (
     <>
-        <Header />
+      <Header />
+      <ShoppingCartContextProvider>
         <Main />
-        <Footer />
+      </ShoppingCartContextProvider>
+
+      <Footer />
     </>
   );
 }

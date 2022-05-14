@@ -1,21 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react'
 
-import { LandingsCartContext } from '../shopping_context'
+import { ShoppingCartContext } from '../shopping_context'
 
 function Landing({ landing, setLandings }) {
 
   const { name, recclass, mass, year, reclat, reclong, id } = landing;
 
-  const { landingsCart, setLandingsCart } = useContext(LandingsCartContext);
+  const { landingsCart, setLandingsCart } = useContext(ShoppingCartContext);
   const [isInCart, setIsInCart] = useState(() => {
     const match = landingsCart.filter(item => item.id === id);
     return match.length > 0 ? true : false
   });
   const [isEdit, setIsEdit] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem('landings', JSON.stringify(landingsCart));
-  }, [landingsCart]);
 
   const handleDelete = async () => {
     const response = await fetch(`http://localhost:3001/api/astronomy/landings/delete/${id}`, {
@@ -55,6 +51,7 @@ function Landing({ landing, setLandings }) {
   }
 
   const handleToCart = () => {
+    landing.price = (Math.random() * (1000 - 400) + 400).toFixed(2);
     setLandingsCart(prevState => [...prevState, landing]);
     setIsInCart(true);
   }

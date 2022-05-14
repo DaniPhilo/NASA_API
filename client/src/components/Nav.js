@@ -9,6 +9,7 @@ function Nav() {
                 <li><Link to="/landings">Landings Map</Link></li>
                 <li><Link to="/landings/list">Landings List</Link></li>
                 <li><Link to='/neas'>Neas List</Link></li>
+                <li><Link to='/cart'>Cart</Link></li>
             </ul>
         </nav>
     )
