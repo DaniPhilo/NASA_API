@@ -7,7 +7,7 @@ const getAll = async () => {
     try {
         const neas = await Nea.find({}).sort('discovery_date');
         return neas
-    } 
+    }
     catch (error) {
         return error
     }
@@ -22,9 +22,9 @@ const getNumberOfDocuments = async () => {
     }
 }
 
-const getPaginatedNeas = async (page) => {
+const getPaginatedNeas = async (field, order, page) => {
     try {
-        const neas = await Nea.find({}).skip((page - 1) * 10).limit(10);
+        const neas = await Nea.find({}).sort({ [field]: order }).skip((page - 1) * 10).limit(10);
         return neas
     } catch (error) {
         return error
@@ -36,7 +36,7 @@ const getByOrbitClass = async (param) => {
         const orbitClass = capitalizeString(param);
         const neas = await Nea.find({ orbit_class: orbitClass }).sort('orbit_class');
         return neas
-    } 
+    }
     catch (error) {
         return error
     }
@@ -72,7 +72,7 @@ const getByDate = async (from, to) => {
 
         return neas
 
-    } 
+    }
     catch (error) {
         return error
     }

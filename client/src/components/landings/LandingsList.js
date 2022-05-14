@@ -5,8 +5,8 @@ import LandingsPagination from './LandingsPagination';
 
 function LandingsList() {
 
-  // States to manage pagination:
   const [landings, setLandings] = useState([]);
+  const [order, setOrder] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -14,20 +14,22 @@ function LandingsList() {
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(null);
 
-  useEffect(() => {
+  const fetchLandings = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data
+  }
 
-    const fetchLandings = async () => {
-      const response = await fetch(`http://localhost:3001/api/astronomy/landings/${currentPage}`);
-      const data = await response.json();
+  useEffect(() => {
+    const init = async () => {
+      const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/${currentPage}?field=name&order=1`);
       if (data.response) {
         setNumberOfPages(Math.floor(data.count / 10));
         setLandings(data.landings);
         setLoading(false);
       }
     }
-
-    fetchLandings();
-
+    init();
   }, [currentPage]);
 
 
@@ -56,6 +58,17 @@ function LandingsList() {
     }
     else {
       setCreated('failure');
+    }
+  }
+
+  const changeOrder = async (event) => {
+    setLoading(true);
+    const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/1?field=${event.target.id}&order=${order}`);
+    if (data.response) {
+      setNumberOfPages(Math.floor(data.count / 10));
+      setLandings(data.landings);
+      setOrder(prevState => prevState === 1 ? -1 : 1);
+      setLoading(false);
     }
   }
 
@@ -97,6 +110,12 @@ function LandingsList() {
           <div className="loading">Loading...</div>
           :
           <>
+            <div className="order-btns">
+              <button type='button' id='name' onClick={changeOrder}>Name</button>
+              <button type='button' id='mass' onClick={changeOrder}>Mass</button>
+              <button type='button' id='year' onClick={changeOrder}>Date</button>
+            </div>
+            
             <div className='landing-container'>
               {landings.length > 0 && landings.map(landing => {
                 return (

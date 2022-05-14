@@ -5,12 +5,13 @@ const CustomError = require('../utils/errors');
 
 const getAllLandings = async (req, res, next) => {
     try {
+        const { field, order } = req.query;
         const page = req.params.page;
         let count = null;
         let landings
         if (page) {
             count = await getNumberOfDocuments();
-            landings = await getPaginatedLandings(page);
+            landings = await getPaginatedLandings(field, order, page);
         } else {
             landings = await getAll();
         }

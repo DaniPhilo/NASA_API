@@ -5,12 +5,13 @@ const CustomError = require('../utils/errors');
 
 const getAllNeas = async (req, res, next) => {
     try {
+        const { field, order } = req.query;
         const page = req.params.page;
         let count = null;
         let neas
         if (page) {
             count = await getNumberOfDocuments();
-            neas = await getPaginatedNeas(page);
+            neas = await getPaginatedNeas(field, order, page);
         } else {
             neas = await getAll();
         }

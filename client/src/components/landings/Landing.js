@@ -70,8 +70,7 @@ function Landing({ landing, setLandings }) {
             <h4>{name}</h4>
             <p>Class: {recclass}</p>
             <p>Mass: {mass}</p>
-            {/* <p>Date: {year.slice(0, 10)}</p> */}
-            <p>Date: {year}</p>
+            <p>Date: {year.slice(0, 10)}</p>
             <p>Lat: {reclat}</p>
             <p>Long: {reclong}</p>
           </div>

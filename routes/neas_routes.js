@@ -4,7 +4,7 @@ const router = express.Router();
 // Neas controllers:
 const { getAllNeas, getNeaByOrbitClass, getNeaByDate, createNea, editNea, deleteNea } = require('../controllers/neas_controllers');
 
-router.get('/:page', getAllNeas);
+router.get('/:page?', getAllNeas);
 router.get('/class/:queryClass', getNeaByOrbitClass);
 router.get('/date', getNeaByDate);
 

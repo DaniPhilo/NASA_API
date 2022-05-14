@@ -22,9 +22,9 @@ const getNumberOfDocuments = async () => {
     }
 }
 
-const getPaginatedLandings = async (page) => {
+const getPaginatedLandings = async (field, order, page) => {
     try {
-        const landings = await Landing.find({}).skip((page - 1) * 10).limit(10);
+        const landings = await Landing.find({}).sort({ [field]: order }).skip((page - 1) * 10).limit(10);
         return landings
     } catch (error) {
         return error

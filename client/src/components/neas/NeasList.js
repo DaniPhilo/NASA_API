@@ -6,6 +6,7 @@ import NeasPagination from './NeasPagination';
 function NeasList() {
   // States to manage pagination:
   const [neas, setNeas] = useState([]);
+  const [order, setOrder] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -13,20 +14,22 @@ function NeasList() {
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(null);
 
-  useEffect(() => {
+  const fetchNeas = async (url) => {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data
+  }
 
-    const fetchNeas = async () => {
-      const response = await fetch(`http://localhost:3001/api/astronomy/neas/${currentPage}`);
-      const data = await response.json();
+  useEffect(() => {
+    const init = async () => {
+      const data = await fetchNeas(`http://localhost:3001/api/astronomy/neas/${currentPage}?field=designation&order=1`);
       if (data.response) {
         setNumberOfPages(Math.floor(data.count / 10));
         setNeas(data.neas);
         setLoading(false);
       }
     }
-
-    fetchNeas();
-
+    init();
   }, [currentPage]);
 
 
@@ -59,6 +62,17 @@ function NeasList() {
       setCreated('failure');
     }
     // event.target.reset();
+  }
+
+  const changeOrder = async (event) => {
+    setLoading(true);
+    const data = await fetchNeas(`http://localhost:3001/api/astronomy/neas/1?field=${event.target.id}&order=${order}`);
+    if (data.response) {
+      setNumberOfPages(Math.floor(data.count / 10));
+      setNeas(data.neas);
+      setOrder(prevState => prevState === 1 ? -1 : 1);
+      setLoading(false);
+    }
   }
 
   return (
@@ -108,6 +122,12 @@ function NeasList() {
           <div className="loading">Loading...</div>
           :
           <>
+            <div className="order-btns">
+              <button type='button' id='designation' onClick={changeOrder}>Name</button>
+              <button type='button' id='orbit_class' onClick={changeOrder}>Orbit class</button>
+              <button type='button' id='discovery_date' onClick={changeOrder}>Date</button>
+            </div>
+
             <div className='nea-container'>
               {neas.length > 0 && neas.map(nea => {
                 return (
