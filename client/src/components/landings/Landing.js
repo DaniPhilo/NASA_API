@@ -1,9 +1,21 @@
-import { Draggable } from 'leaflet';
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
-function Landing({ name, recclass, mass, year, reclat, reclong, id, setLandings, landings }) {
+import { LandingsCartContext } from '../shopping_context'
 
+function Landing({ landing, setLandings }) {
+
+  const { name, recclass, mass, year, reclat, reclong, id } = landing;
+
+  const { landingsCart, setLandingsCart } = useContext(LandingsCartContext);
+  const [isInCart, setIsInCart] = useState(() => {
+    const match = landingsCart.filter(item => item.id === id);
+    return match.length > 0 ? true : false
+  });
   const [isEdit, setIsEdit] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('landings', JSON.stringify(landingsCart));
+  }, [landingsCart]);
 
   const handleDelete = async () => {
     const response = await fetch(`http://localhost:3001/api/astronomy/landings/delete/${id}`, {
@@ -11,7 +23,6 @@ function Landing({ name, recclass, mass, year, reclat, reclong, id, setLandings,
     });
     const data = await response.json();
     if (data.response) {
-      //Se modifica el estado del parent para obligarlo a volver a hacer la llamada a la API. De este modo se cargarán los datos de la DB con el landing ya borrado. No es muy elegante: 
       setLandings(prevState => prevState.filter(landing => landing.id !== id));
     }
   }
@@ -37,10 +48,20 @@ function Landing({ name, recclass, mass, year, reclat, reclong, id, setLandings,
       body: JSON.stringify(editData)
     });
     const data = await response.json();
-    if(data.response) {
+    if (data.response) {
       setLandings(prevState => prevState.map(item => item.id === id ? data.landings : item));
       setIsEdit(!isEdit);
     }
+  }
+
+  const handleToCart = () => {
+    setLandingsCart(prevState => [...prevState, landing]);
+    setIsInCart(true);
+  }
+
+  const handleDeleteFromCart = () => {
+    setLandingsCart(prevState => prevState.filter(item => item.id !== id));
+    setIsInCart(false);
   }
 
   return (
@@ -59,6 +80,12 @@ function Landing({ name, recclass, mass, year, reclat, reclong, id, setLandings,
           <div className="buttons">
             <button type='button' onClick={() => setIsEdit(() => !isEdit)}>Edit</button>
             <button type='button' onClick={handleDelete}>Delete</button>
+            {isInCart ?
+              <button type='button' onClick={handleDeleteFromCart}>Remove From Cart</button>
+              :
+              <button type='button' onClick={handleToCart}>To Cart</button>
+            }
+
           </div>
         </>
 

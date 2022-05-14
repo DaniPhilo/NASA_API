@@ -1,8 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 
-function Nea({ designation, discovery_date, h_mag, moid_au, q_au_1, q_au_2, period_yr, i_deg, pha, orbit_class, neas, setNeas }) {
+import { NeasCartContext } from '../shopping_context'
 
+function Nea({ nea, setNeas }) {
+
+    const { designation, discovery_date, h_mag, moid_au, q_au_1, q_au_2, period_yr, i_deg, pha, orbit_class } = nea;
+
+    const { neasCart, setNeasCart } = useContext(NeasCartContext);
     const [isEdit, setIsEdit] = useState(false);
+    const [isInCart, setIsInCart] = useState(() => {
+        const match = neasCart.filter(item => item.designation === designation);
+        return match.length > 0 ? true : false
+    });
+
+    useEffect(() => {
+        localStorage.setItem('landings', JSON.stringify(neasCart));
+      }, [neasCart]);
 
     const handleDelete = async () => {
         const response = await fetch(`http://localhost:3001/api/astronomy/neas/delete/${designation}`, {
@@ -45,6 +58,16 @@ function Nea({ designation, discovery_date, h_mag, moid_au, q_au_1, q_au_2, peri
         }
     }
 
+    const handleToCart = () => {
+        setNeasCart(prevState => [...prevState, nea]);
+        setIsInCart(true);
+    }
+
+    const handleDeleteFromCart = () => {
+        setNeasCart(prevState => prevState.filter(item => item.designation !== designation));
+        setIsInCart(false);
+    }
+
     return (
         <div className='nea-card'>
             {!isEdit ?
@@ -65,6 +88,11 @@ function Nea({ designation, discovery_date, h_mag, moid_au, q_au_1, q_au_2, peri
                     <div className="buttons">
                         <button type='button' onClick={() => setIsEdit(() => !isEdit)}>Edit</button>
                         <button type='button' onClick={handleDelete}>Delete</button>
+                        {isInCart ?
+                            <button type='button' onClick={handleDeleteFromCart}>Remove From Cart</button>
+                            :
+                            <button type='button' onClick={handleToCart}>To Cart</button>
+                        }
                     </div>
                 </>
 

@@ -1,5 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+
 import Nea from './Nea';
+
+import { NeasCartContextProvider } from '../shopping_context'
 
 function NeasList() {
   // States to manage pagination:
@@ -28,15 +31,15 @@ function NeasList() {
     event.preventDefault();
 
     const neaData = {
-        designation: event.target.designation.value,
-        discovery_date: event.target.discovery_date.value,
-        h_mag: event.target.h_mag.value,
-        moid_au: event.target.moid_au.value,
-        q_au_1: event.target.q_au_1.value ,
-        period_yr: event.target.period_yr.value,
-        i_deg: event.target.i_deg.value,
-        pha: event.target.pha.value,
-        orbit_class: event.target.orbit_class.value,
+      designation: event.target.designation.value,
+      discovery_date: event.target.discovery_date.value,
+      h_mag: event.target.h_mag.value,
+      moid_au: event.target.moid_au.value,
+      q_au_1: event.target.q_au_1.value,
+      period_yr: event.target.period_yr.value,
+      i_deg: event.target.i_deg.value,
+      pha: event.target.pha.value,
+      orbit_class: event.target.orbit_class.value,
     }
     const response = await fetch('/api/astronomy/neas/create', {
       method: 'POST',
@@ -91,7 +94,7 @@ function NeasList() {
         <label htmlFor="orbit_class">Orbit_class: </label>
         <input type="text" name='orbit_class' />
 
-        <input type='submit' value='Create'/>
+        <input type='submit' value='Create' />
       </form>
 
       {created === 'success' && <p>New NEA created.</p>}
@@ -102,13 +105,15 @@ function NeasList() {
           <div className="loading">Loading...</div>
           :
           <>
-            <div className='nea-container'>
-              {neas.length > 0 && neas.map(nea => {
-                return (
-                  <Nea key={nea.designation} {...nea} setNeas={setNeas} neas={neas} />
-                )
-              })}
-            </div>
+            <NeasCartContextProvider>
+              <div className='nea-container'>
+                {neas.length > 0 && neas.map(nea => {
+                  return (
+                    <Nea key={nea.designation} nea={nea} setNeas={setNeas} neas={neas} />
+                  )
+                })}
+              </div>
+            </NeasCartContextProvider>
           </>
         }
       </section>

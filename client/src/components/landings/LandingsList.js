@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
+
 import Landing from './Landing'
 import Pagination from './Pagination';
+
+import { LandingsCartContextProvider } from '../shopping_context'
 
 function LandingsList() {
 
   // States to manage pagination:
   const [landings, setLandings] = useState([]);
-  
+
   const [currentPage, setCurrentPage] = useState(1);
   const [landingsInPage, setLandingsInPage] = useState(10);
 
@@ -90,7 +93,7 @@ function LandingsList() {
         <label htmlFor="reclong">Longitude: </label>
         <input type="text" name='reclong' />
 
-        <input type='submit' value='Create'/>
+        <input type='submit' value='Create' />
       </form>
 
       {created === 'success' && <p>New landing created.</p>}
@@ -101,13 +104,15 @@ function LandingsList() {
           <div className="loading">Loading...</div>
           :
           <>
-            <div className='landing-container'>
-              {currentLandings.length > 0 && currentLandings.map(landing => {
-                return (
-                  <Landing key={landing._id} {...landing} setLandings={setLandings} landings={landings} />
-                )
-              })}
-            </div>
+            <LandingsCartContextProvider>
+              <div className='landing-container'>
+                {currentLandings.length > 0 && currentLandings.map(landing => {
+                  return (
+                    <Landing key={landing._id} landing={landing} setLandings={setLandings} landings={landings} />
+                  )
+                })}
+              </div>
+            </LandingsCartContextProvider>
 
             <div className='pagination-section'>
               <Pagination landingsInPage={landingsInPage} totalLandings={landings.length} setCurrentPage={setCurrentPage} />
