@@ -1,5 +1,5 @@
 const Nea = require('../models/neas_models');
-const { getAll, getNumberOfDocuments, getPaginatedNeas, getByOrbitClass, getByDate } = require('../services/neas_services');
+const { getAll, getByDesignation, getNumberOfDocuments, getPaginatedNeas, getByOrbitClass, getByDate } = require('../services/neas_services');
 const { validateNeaDocument } = require('../utils/validations');
 const CustomError = require('../utils/errors');
 
@@ -19,14 +19,28 @@ const getAllNeas = async (req, res, next) => {
         if (!neas || neas.length < 1) {
             return res.status(400).json({ response: false, message: 'No NEAs found' });
         }
-        res.status(200).json({ response: true, neas });
+        res.status(200).json({ response: true, count: count, neas });
     }
     catch (error) {
         return next(error)
     }
 }
 
-const getNeaByOrbitClass = async (req, res, next) => {
+const getNeasByDesignation = async (req, res, next) => {
+    try {
+        const designation = req.params.designation;
+        const neas = await getByDesignation(designation);
+        if (!neas || neas.length < 1) {
+            return res.status(400).json({ response: false, message: 'No NEAs with such parameters' });
+        }
+        res.status(200).json({ response: true, count: neas.length, neas });
+    } 
+    catch (error) {
+        return next(error)
+    }
+}
+
+const getNeasByOrbitClass = async (req, res, next) => {
     try {
         const neas = await getByOrbitClass(req.params.queryClass);
         if (!neas || neas.length < 1) {
@@ -39,7 +53,7 @@ const getNeaByOrbitClass = async (req, res, next) => {
     }
 }
 
-const getNeaByDate = async (req, res) => {
+const getNeasByDate = async (req, res) => {
     const { from, to } = req.query;
     try {
         const neas = await getByDate(from, to);
@@ -98,8 +112,9 @@ const deleteNea = async (req, res, next) => {
 
 module.exports = {
     getAllNeas,
-    getNeaByOrbitClass,
-    getNeaByDate,
+    getNeasByDesignation,
+    getNeasByOrbitClass,
+    getNeasByDate,
     createNea,
     editNea,
     deleteNea

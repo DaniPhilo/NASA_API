@@ -4,12 +4,13 @@ import Nea from './Nea';
 import NeasPagination from './NeasPagination';
 
 function NeasList() {
-  // States to manage pagination:
+  
   const [neas, setNeas] = useState([]);
   const [order, setOrder] = useState(1);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
+  const [numberOfDocs, setNumberOfDocs] = useState(0);
 
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(null);
@@ -25,6 +26,7 @@ function NeasList() {
       const data = await fetchNeas(`http://localhost:3001/api/astronomy/neas/${currentPage}?field=designation&order=1`);
       if (data.response) {
         setNumberOfPages(Math.floor(data.count / 10));
+        setNumberOfDocs(data.count);
         setNeas(data.neas);
         setLoading(false);
       }
@@ -64,11 +66,25 @@ function NeasList() {
     // event.target.reset();
   }
 
+  const handleSearchByDesignation = async (event) => {
+    event.preventDefault();
+
+    setLoading(true);
+    const data = await fetchNeas(`http://localhost:3001/api/astronomy/neas/designation/${event.target.designation.value}`);
+    if (data.response) {
+      setNumberOfDocs(data.count);
+      setNeas(data.neas);
+      setLoading(false);
+    }
+    setLoading(false);
+  }
+
   const changeOrder = async (event) => {
     setLoading(true);
     const data = await fetchNeas(`http://localhost:3001/api/astronomy/neas/1?field=${event.target.id}&order=${order}`);
     if (data.response) {
       setNumberOfPages(Math.floor(data.count / 10));
+      setNumberOfDocs(data.count);
       setNeas(data.neas);
       setOrder(prevState => prevState === 1 ? -1 : 1);
       setLoading(false);
@@ -122,6 +138,14 @@ function NeasList() {
           <div className="loading">Loading...</div>
           :
           <>
+
+            <div className="search-by-name">
+              <form action="" onSubmit={handleSearchByDesignation}>
+                <input type="text" name='designation' placeholder='Search by designation...' />
+                <input type="submit" value='Search' />
+              </form>
+            </div>
+
             <div className="order-btns">
               <button type='button' id='designation' onClick={changeOrder}>Name</button>
               <button type='button' id='orbit_class' onClick={changeOrder}>Orbit class</button>
@@ -129,13 +153,16 @@ function NeasList() {
             </div>
 
             <div className='nea-container'>
-              {neas.length > 0 && neas.map(nea => {
-                return (
-                  <Nea key={nea.designation} nea={nea} setNeas={setNeas} neas={neas} />
-                )
-              })}
+              {neas.length > 0 ?
+                neas.map(nea => {
+                  return (
+                    <Nea key={nea.designation} nea={nea} setNeas={setNeas} neas={neas} />
+                  )
+                })
+                :
+                <p>No results...</p>}
             </div>
-            <NeasPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} />
+            <NeasPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} numberOfDocs={numberOfDocs} />
           </>
         }
       </section>

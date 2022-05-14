@@ -13,6 +13,16 @@ const getAll = async () => {
     }
 }
 
+const getByDesignation = async (designation) => {
+    try {
+        const regex = new RegExp(designation);
+        const neas = await Nea.find({ designation: { $regex: regex, $options: 'i' } }).limit(10).sort('designation');
+        return neas
+    } catch (error) {
+        return error
+    }
+}
+
 const getNumberOfDocuments = async () => {
     try {
         const count = await Nea.countDocuments({});
@@ -81,6 +91,7 @@ const getByDate = async (from, to) => {
 
 module.exports = {
     getAll,
+    getByDesignation,
     getNumberOfDocuments,
     getPaginatedNeas,
     getByOrbitClass,

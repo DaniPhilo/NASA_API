@@ -13,6 +13,16 @@ const getAll = async () => {
     }
 }
 
+const getByName = async (name) => {
+    try {
+        const regex = new RegExp(name);
+        const landings = await Landing.find({ name: { $regex: regex, $options: 'i' } }).limit(10).sort('name');
+        return landings
+    } catch (error) {
+        return error
+    }
+}
+
 const getNumberOfDocuments = async () => {
     try {
         const count = await Landing.countDocuments({});
@@ -117,6 +127,7 @@ const getByDate = async (from, to) => {
 
 module.exports = {
     getAll,
+    getByName,
     getNumberOfDocuments,
     getPaginatedLandings,
     getByMinMass,

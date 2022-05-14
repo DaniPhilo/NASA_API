@@ -10,6 +10,7 @@ function LandingsList() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
+  const [numberOfDocs, setNumberOfDocs] = useState(0);
 
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(null);
@@ -25,15 +26,17 @@ function LandingsList() {
       const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/${currentPage}?field=name&order=1`);
       if (data.response) {
         setNumberOfPages(Math.floor(data.count / 10));
+        setNumberOfDocs(data.count);
         setLandings(data.landings);
         setLoading(false);
       }
+      setLoading(false);
     }
     init();
   }, [currentPage]);
 
 
-  const handleSubmit = async (event) => {
+  const handleCreateForm = async (event) => {
     event.preventDefault();
 
     const landingData = {
@@ -61,20 +64,35 @@ function LandingsList() {
     }
   }
 
+  const handleSearchByName = async (event) => {
+    event.preventDefault();
+
+    setLoading(true);
+    const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/name/${event.target.name.value}`);
+    if (data.response) {
+      setNumberOfDocs(data.count);
+      setLandings(data.landings);
+      setLoading(false);
+    }
+    setLoading(false);
+  }
+
   const changeOrder = async (event) => {
     setLoading(true);
     const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/1?field=${event.target.id}&order=${order}`);
     if (data.response) {
       setNumberOfPages(Math.floor(data.count / 10));
+      setNumberOfDocs(data.count);
       setLandings(data.landings);
       setOrder(prevState => prevState === 1 ? -1 : 1);
       setLoading(false);
     }
+    setLoading(false);
   }
 
   return (
     <>
-      <form action="" onSubmit={handleSubmit} className='list-form'>
+      <form action="" onSubmit={handleCreateForm} className='list-form'>
 
         <h4>Create new landing:</h4>
 
@@ -110,20 +128,30 @@ function LandingsList() {
           <div className="loading">Loading...</div>
           :
           <>
+            <div className="search-by-name">
+              <form action="" onSubmit={handleSearchByName}>
+                <input type="text" name='name' placeholder='Search by name...' />
+                <input type="submit" value='Search' />
+              </form>
+            </div>
             <div className="order-btns">
               <button type='button' id='name' onClick={changeOrder}>Name</button>
               <button type='button' id='mass' onClick={changeOrder}>Mass</button>
               <button type='button' id='year' onClick={changeOrder}>Date</button>
             </div>
-            
+
             <div className='landing-container'>
-              {landings.length > 0 && landings.map(landing => {
+              {landings.length > 0 ? 
+              landings.map(landing => {
                 return (
                   <Landing key={landing._id} landing={landing} setLandings={setLandings} landings={landings} />
                 )
-              })}
+              })
+              :
+              <p>No results...</p>
+              }
             </div>
-            <LandingsPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} />
+            <LandingsPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} numberOfDocs={numberOfDocs} />
           </>
 
         }

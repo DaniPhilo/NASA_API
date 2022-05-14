@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 // Neas controllers:
-const { getAllNeas, getNeaByOrbitClass, getNeaByDate, createNea, editNea, deleteNea } = require('../controllers/neas_controllers');
+const { getAllNeas, getNeasByDesignation, getNeasByOrbitClass, getNeasByDate, createNea, editNea, deleteNea } = require('../controllers/neas_controllers');
 
 router.get('/:page?', getAllNeas);
-router.get('/class/:queryClass', getNeaByOrbitClass);
-router.get('/date', getNeaByDate);
+router.get('/designation/:designation', getNeasByDesignation);
+router.get('/class/:queryClass', getNeasByOrbitClass);
+router.get('/date', getNeasByDate);
 
 router.post('/create', createNea);
 

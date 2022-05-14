@@ -1,5 +1,5 @@
 const Landing = require('../models/landings_models');
-const { getAll, getNumberOfDocuments, getPaginatedLandings, getByMinMass, getByMass, getByClass, getByDate } = require('../services/landings_services');
+const { getAll, getByName, getNumberOfDocuments, getPaginatedLandings, getByMinMass, getByMass, getByClass, getByDate } = require('../services/landings_services');
 const { validateNumber, validateLandingDocument } = require('../utils/validations');
 const CustomError = require('../utils/errors');
 
@@ -26,7 +26,21 @@ const getAllLandings = async (req, res, next) => {
     }
 }
 
-const getLandingByMinMass = async (req, res, next) => {
+const getLandingsByName = async (req, res, next) => {
+    try {
+        const name = req.params.name;
+        const landings = await getByName(name);
+        if (!landings || landings.length < 1) {
+            return res.status(400).json({ response: false, message: 'No landings with such parameters' });
+        }
+        res.status(200).json({ response: true, count: landings.length, landings });
+    } 
+    catch (error) {
+        return next(error)
+    }
+}
+
+const getLandingsByMinMass = async (req, res, next) => {
     try {
         const queryMass = Number(req.params.minMass);
         const landings = await getByMinMass(queryMass);
@@ -41,7 +55,7 @@ const getLandingByMinMass = async (req, res, next) => {
     }
 }
 
-const getLandingByMass = async (req, res, next) => {
+const getLandingsByMass = async (req, res, next) => {
     try {
         const queryMass = Number(req.params.queryMass);
         const landings = await getByMass(queryMass);
@@ -56,7 +70,7 @@ const getLandingByMass = async (req, res, next) => {
     }
 }
 
-const getLandingByClass = async (req, res, next) => {
+const getLandingsByClass = async (req, res, next) => {
     try {
         const queryClass = req.params.queryClass;
         const landings = await getByClass(queryClass);
@@ -70,7 +84,7 @@ const getLandingByClass = async (req, res, next) => {
     }
 }
 
-const getLandingByDate = async (req, res) => {
+const getLandingsByDate = async (req, res) => {
     const { from, to } = req.query;
     try {
         const landings = await getByDate(from, to);
@@ -131,10 +145,11 @@ const deleteLanding = async (req, res, next) => {
 
 module.exports = {
     getAllLandings,
-    getLandingByMinMass,
-    getLandingByMass,
-    getLandingByClass,
-    getLandingByDate,
+    getLandingsByName,
+    getLandingsByMinMass,
+    getLandingsByMass,
+    getLandingsByClass,
+    getLandingsByDate,
     createLanding,
     editLanding,
     deleteLanding
