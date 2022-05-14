@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import './styles/styles.scss'
+import '../..//styles/styles.scss'
 
 function Map() {
 

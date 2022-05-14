@@ -13,9 +13,9 @@ function Pagination({ landingsInPage, totalLandings, setCurrentPage }) {
     return (
         <ul className='pagination-list'>
             <li>Page: </li>
-            {pageNumbers.map(num => {
+            {pageNumbers.map((num, i) => {
                 return (
-                    <li className='pagination-item'>
+                    <li key={i} className='pagination-item'>
                         <a href="#" className='pagination-link' onClick={() => changePage(num)}>{num}</a>
                     </li>
                 )

@@ -2,20 +2,16 @@ import React, { useState, useEffect } from 'react'
 import Landing from './Landing'
 import Pagination from './Pagination';
 
-function List() {
+function LandingsList() {
 
   // States to manage pagination:
   const [landings, setLandings] = useState([]);
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [landingsInPage, setLandingsInPage] = useState(10);
 
   const [loading, setLoading] = useState(true);
   const [created, setCreated] = useState(null);
-  const [triggerAPICall, setTriggerAPICall] = useState(false);
-
-  const triggerRender = () => {
-    setTriggerAPICall(prevState => !prevState);
-  }
 
   useEffect(() => {
 
@@ -30,7 +26,7 @@ function List() {
 
     fetchLandings();
 
-  }, [triggerAPICall]);
+  }, []);
 
 
   const handleSubmit = async (event) => {
@@ -108,7 +104,7 @@ function List() {
             <div className='landing-container'>
               {currentLandings.length > 0 && currentLandings.map(landing => {
                 return (
-                  <Landing key={landing._id} {...landing} triggerRender={triggerRender} />
+                  <Landing key={landing._id} {...landing} setLandings={setLandings} landings={landings} />
                 )
               })}
             </div>
@@ -125,4 +121,4 @@ function List() {
   )
 }
 
-export default List
+export default LandingsList

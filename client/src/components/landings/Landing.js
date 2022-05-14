@@ -1,7 +1,7 @@
 import { Draggable } from 'leaflet';
 import React, { useState } from 'react'
 
-function Landing({ name, recclass, mass, year, reclat, reclong, id, triggerRender }) {
+function Landing({ name, recclass, mass, year, reclat, reclong, id, setLandings, landings }) {
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -12,7 +12,7 @@ function Landing({ name, recclass, mass, year, reclat, reclong, id, triggerRende
     const data = await response.json();
     if (data.response) {
       //Se modifica el estado del parent para obligarlo a volver a hacer la llamada a la API. De este modo se cargarán los datos de la DB con el landing ya borrado. No es muy elegante: 
-      triggerRender();
+      setLandings(prevState => prevState.filter(landing => landing.id !== id));
     }
   }
 
@@ -38,8 +38,8 @@ function Landing({ name, recclass, mass, year, reclat, reclong, id, triggerRende
     });
     const data = await response.json();
     if(data.response) {
-      triggerRender();
-      setIsEdit(!isEdit)
+      setLandings(prevState => prevState.map(item => item.id === id ? data.landings : item));
+      setIsEdit(!isEdit);
     }
   }
 

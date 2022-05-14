@@ -5,7 +5,7 @@ const CustomError = require('../utils/errors');
 
 const getAll = async () => {
     try {
-        const neas = await Nea.find({}).sort('orbit_class');
+        const neas = await Nea.find({}).sort('discovery_date');
         return neas
     } 
     catch (error) {
