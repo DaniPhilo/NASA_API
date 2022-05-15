@@ -16,12 +16,14 @@ function App() {
 
   return (
     <>
-      <Header />
-      
       <UserContextProvider>
 
+        <Header />
+
         <ShoppingCartContextProvider>
+
           <Main />
+
         </ShoppingCartContextProvider>
 
       </UserContextProvider>

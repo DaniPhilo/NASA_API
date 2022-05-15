@@ -1,5 +1,5 @@
 const { saveUser } = require('../services/auth_services');
-const { findUserByField } = require('../services/users_services');
+const { findUserByField, updateUser } = require('../services/users_services');
 const { checkPassword } = require('../utils/hashing');
 const { signUpValidations } = require('../utils/validations');
 
@@ -48,7 +48,7 @@ const initSignIn = async (req, res, next) => {
             const error = new AuthenticationError(401, 'Wrong password');
             return next(error)
         }
-        req.user = { user_id: email }
+        req.user = { user_id: email };
         return next()
     }
     catch (error) {
@@ -59,7 +59,20 @@ const initSignIn = async (req, res, next) => {
 const closeSignIn = (req, res, next) => {
     try {
         res.status(200).header('Access-Control-Allow-Credentials', true).json({ authenticated: true, message: 'User logged in' });
-    } catch (error) {
+    }
+    catch (error) {
+        return next(error)
+    }
+}
+
+const logOut = async (req, res, next) => {
+    try {
+        const filter = { email: req.user.user_id };
+        const update = { refresh_token: null };
+        await updateUser(filter, update);
+        res.status(200).json({ response: true, message: 'User logged out' });
+    }
+    catch (error) {
         return next(error)
     }
 }
@@ -68,5 +81,6 @@ module.exports = {
     initSignUp,
     closeSignUp,
     initSignIn,
-    closeSignIn
+    closeSignIn,
+    logOut
 }
