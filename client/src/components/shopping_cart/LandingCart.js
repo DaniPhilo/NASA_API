@@ -13,7 +13,7 @@ function LandingCart({ landing, setLandingsCart, setTotalPrice }) {
         {landing.name}
       </h4>
       <span>
-        {landing.price}€
+        {(Math.abs(Number(landing.reclat)) * 100).toFixed(2)}€
       </span>
     </div>
   )

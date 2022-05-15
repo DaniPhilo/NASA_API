@@ -6,15 +6,11 @@ import App from './components/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-
     <BrowserRouter>
 
       <App />
 
     </BrowserRouter>
-
-  </React.StrictMode>
 );
 
 // El formulario para seleccionar landings en el mapa funciona por separado, no se pueden hacer queries conjuntas. Deberías solucionarlo si hay tiempo.

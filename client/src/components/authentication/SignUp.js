@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
-import axios from 'axios'
+import { UserContext } from '../../context/user_context'
 
 function SignUp({ setShowSignUp }) {
+
+    const { setIsAuthenticated } = useContext(UserContext);
 
     const handleSignUp = async (event) => {
         event.preventDefault();
@@ -24,14 +26,11 @@ function SignUp({ setShowSignUp }) {
             body: JSON.stringify(data)
         });
         const response = await request.json();
-        // const response = await axios.post('http://localhost:3001/api/auth/signUp',
-        //     { data },
-        //     { withCredentials: true })
-        //     .then(response => response.data);
+
         if (!response.authenticated) {
-            console.log(response.message);
+            return
         }
-        console.log(`Authenticated: ${response.message}`);
+        setIsAuthenticated(true);
     }
 
     const showSignIn = () => {

@@ -20,6 +20,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Auth middleware:
 const { authenticateToken } = require('./middlewares/auth_middlewares');
@@ -30,9 +31,9 @@ const landingRoutes = require('./routes/landings_routes');
 const neasRoutes = require('./routes/neas_routes');
 
 app.use('/api/auth', authRoutes);
-// app.use('/api/astronomy/landings', authenticateToken, landingRoutes);
-app.use('/api/astronomy/landings', landingRoutes);
-app.use('/api/astronomy/neas', neasRoutes)
+app.use('/api/astronomy/landings', authenticateToken, landingRoutes);
+// app.use('/api/astronomy/landings', landingRoutes);
+app.use('/api/astronomy/neas', authenticateToken, neasRoutes)
 
 // REACT Routes:
 // app.use(express.static(path.join(__dirname, "/client/build")));

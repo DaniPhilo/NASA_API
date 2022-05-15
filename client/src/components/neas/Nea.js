@@ -15,7 +15,11 @@ function Nea({ nea, setNeas }) {
 
     const handleDelete = async () => {
         const response = await fetch(`http://localhost:3001/api/astronomy/neas/delete/${designation}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            credentials: 'include',
         });
         const data = await response.json();
         if (data.response) {
@@ -45,6 +49,7 @@ function Nea({ nea, setNeas }) {
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(editData)
         });
         const data = await response.json();
@@ -55,7 +60,6 @@ function Nea({ nea, setNeas }) {
     }
 
     const handleToCart = () => {
-        nea.price = (Math.random() * (1000 - 400) + 400).toFixed(2);
         setNeasCart(prevState => [...prevState, nea]);
         setIsInCart(true);
     }

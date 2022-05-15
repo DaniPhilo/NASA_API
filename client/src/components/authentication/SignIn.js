@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { UserContext } from '../../context/user_context'
 
 function SignIn({ setShowSignUp }) {
+
+    const { setIsAuthenticated } = useContext(UserContext);
 
     const handleSignIn = async (event) => {
         event.preventDefault();
@@ -22,9 +25,9 @@ function SignIn({ setShowSignUp }) {
 
         const response = await request.json();
         if (!response.authenticated) {
-            console.log(response.message);
+            return
         }
-        console.log(`Authenticated: ${response.message}`);
+        setIsAuthenticated(true);
     }
 
     return (

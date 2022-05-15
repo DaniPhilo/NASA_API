@@ -15,7 +15,11 @@ function Landing({ landing, setLandings }) {
 
   const handleDelete = async () => {
     const response = await fetch(`http://localhost:3001/api/astronomy/landings/delete/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      credentials: 'include'
     });
     const data = await response.json();
     if (data.response) {
@@ -27,7 +31,7 @@ function Landing({ landing, setLandings }) {
     event.preventDefault();
 
     const editData = {
-      name: event.target.name.value || event.target.recclass.placeholder,
+      name: event.target.name.value || event.target.name.placeholder,
       id: id,
       recclass: event.target.recclass.value || event.target.recclass.placeholder,
       mass: event.target.mass.value || event.target.mass.placeholder,
@@ -41,6 +45,7 @@ function Landing({ landing, setLandings }) {
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify(editData)
     });
     const data = await response.json();
@@ -51,7 +56,6 @@ function Landing({ landing, setLandings }) {
   }
 
   const handleToCart = () => {
-    landing.price = (Math.random() * (1000 - 400) + 400).toFixed(2);
     setLandingsCart(prevState => [...prevState, landing]);
     setIsInCart(true);
   }

@@ -100,11 +100,12 @@ const getLandingsByDate = async (req, res) => {
 
 const createLanding = async (req, res, next) => {
     try {
-        if (!validateLandingDocument(req.body)) { throw new CustomError('Invalid parameters') }
+        // if (!validateLandingDocument(req.body)) { throw new CustomError('Invalid parameters') }
         const landing = await Landing.create(req.body);
         if (!landing) {
             throw new CustomError('Landing was not created in DB');
         }
+        console.log(landing);
         res.status(201).json({ response: true, landing });
     }
     catch (error) {

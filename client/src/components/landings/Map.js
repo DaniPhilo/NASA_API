@@ -2,20 +2,32 @@ import React, { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import '../..//styles/styles.scss'
 
+import axios from 'axios'
+
 function Map() {
 
     const [landings, setLandings] = useState([]);
 
+
+
     useEffect(() => {
         const fetchLandings = async () => {
-            const response = await fetch('http://localhost:3001/api/astronomy/landings/minMass/0');
-            const data = await response.json();
-            if (data.response) {
-                setLandings(data.landings);
+            try {
+                const response = await fetch('http://localhost:3001/api/astronomy/landings/minMass/0', {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    credentials: 'include',
+                });
+                const data = await response.json();
+                if (data.response) {
+                    setLandings(data.landings);
+                }
             }
-
+            catch (error) {
+                console.log(error);
+            }
         }
-
         fetchLandings();
     }, []);
 

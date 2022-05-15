@@ -4,7 +4,7 @@ import Nea from './Nea';
 import NeasPagination from './NeasPagination';
 
 function NeasList() {
-  
+
   const [neas, setNeas] = useState([]);
   const [order, setOrder] = useState(1);
 
@@ -16,7 +16,12 @@ function NeasList() {
   const [created, setCreated] = useState(null);
 
   const fetchNeas = async (url) => {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      credentials: 'include',
+    });
     const data = await response.json();
     return data
   }
@@ -44,16 +49,18 @@ function NeasList() {
       h_mag: event.target.h_mag.value,
       moid_au: event.target.moid_au.value,
       q_au_1: event.target.q_au_1.value,
+      q_au_2: event.target.q_au_2.value,
       period_yr: event.target.period_yr.value,
       i_deg: event.target.i_deg.value,
       pha: event.target.pha.value,
-      orbit_class: event.target.orbit_class.value,
+      orbit_class: event.target.orbit_class.value
     }
-    const response = await fetch('/api/astronomy/neas/create', {
+    const response = await fetch('http://localhost:3001/api/astronomy/neas/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify(neaData)
     });
     const data = await response.json();
@@ -100,8 +107,8 @@ function NeasList() {
         <label htmlFor="designation">Designation: </label>
         <input type="text" name='designation' />
 
-        <label htmlFor="date">Date: </label>
-        <input type="text" name='date' />
+        <label htmlFor="discovery_date">Date: </label>
+        <input type="text" name='discovery_date' />
 
         <label htmlFor="h_mag">H_mag: </label>
         <input type="text" name='h_mag' />

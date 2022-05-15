@@ -1,7 +1,7 @@
 import React from 'react'
 
 function NeaCart({ nea, setNeasCart, setTotalPrice }) {
-
+  
   const removeFromCart = () => {
     setNeasCart(prevState => prevState.filter(item => item.designation !== nea.designation))
   }
@@ -13,7 +13,7 @@ function NeaCart({ nea, setNeasCart, setTotalPrice }) {
         {nea.designation}
       </h4>
       <span>
-        {(Math.random() * (1000 - 400) + 400).toFixed(2)}€
+        {(Number(nea.i_deg) * 100).toFixed(2)}€
       </span>
     </div>
   )

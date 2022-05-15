@@ -16,7 +16,12 @@ function LandingsList() {
   const [created, setCreated] = useState(null);
 
   const fetchLandings = async (url) => {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      credentials: 'include',
+  });
     const data = await response.json();
     return data
   }
@@ -46,13 +51,15 @@ function LandingsList() {
       mass: event.target.mass.value,
       year: event.target.year.value,
       reclat: event.target.reclat.value,
-      reclong: event.target.reclong.value,
+      reclong: event.target.reclong.value
     }
-    const response = await fetch('/api/astronomy/landings/create', {
+
+    const response = await fetch('http://localhost:3001/api/astronomy/landings/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
+      credentials: 'include',
       body: JSON.stringify(landingData)
     });
     const data = await response.json();
@@ -68,7 +75,12 @@ function LandingsList() {
     event.preventDefault();
 
     setLoading(true);
-    const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/name/${event.target.name.value}`);
+    const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/name/${event.target.name.value}`, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      credentials: 'include',
+    });
     if (data.response) {
       setNumberOfDocs(data.count);
       setLandings(data.landings);
@@ -79,7 +91,12 @@ function LandingsList() {
 
   const changeOrder = async (event) => {
     setLoading(true);
-    const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/1?field=${event.target.id}&order=${order}`);
+    const data = await fetchLandings(`http://localhost:3001/api/astronomy/landings/1?field=${event.target.id}&order=${order}`, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      credentials: 'include',
+    });
     if (data.response) {
       setNumberOfPages(Math.floor(data.count / 10));
       setNumberOfDocs(data.count);
