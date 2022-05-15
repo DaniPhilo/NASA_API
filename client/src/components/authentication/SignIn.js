@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../../context/user_context'
 
-function SignIn({ setShowSignUp }) {
+function SignIn({ setShowSignUp, setErrorMessage }) {
 
     const { setIsAuthenticated } = useContext(UserContext);
 
@@ -25,6 +25,8 @@ function SignIn({ setShowSignUp }) {
 
         const response = await request.json();
         if (!response.authenticated) {
+            console.log(response.message);
+            setErrorMessage('Wrong username or password.');
             return
         }
         setIsAuthenticated(true);

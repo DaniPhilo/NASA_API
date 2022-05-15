@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import { UserContext } from '../../context/user_context'
 
-function SignUp({ setShowSignUp }) {
+function SignUp({ setShowSignUp, setErrorMessage }) {
 
     const { setIsAuthenticated } = useContext(UserContext);
 

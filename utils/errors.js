@@ -9,6 +9,7 @@ class CustomError extends Error {
 class AuthenticationError extends Error {
     constructor(code, message) {
         super();
+        this.type = 'authentication_error';
         this.code = code;
         this.message = message;
     }

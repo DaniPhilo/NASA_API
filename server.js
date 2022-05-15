@@ -43,12 +43,21 @@ app.use('/api/astronomy/neas', authenticateToken, neasRoutes)
 // })
 
 // Error handlers:
-app.use((err, req, res, next) => {
-    if (err.type === 'custom_error') {
-        return res.status(400).json({ response: false, message: 'Error from server (custom): ' + err.message })
+app.use((error, req, res, next) => {
+    if (error.type === 'custom_error') {
+        return res.status(400).json({ response: false, message: `Error from server (custom): ${error.message}`, full_error: error })
     }
-    else if (err.type !== 'custom_error') {
-        return res.status(400).json({ response: false, message: 'Error: ' + err })
+    if (error.type === 'authentication_error' && error.code === 400) {
+        return res.status(400).json({ response: false, authenticated: false, message: `Bad request: ${error.message}`, full_error: error })
+    }
+    if (error.type === 'authentication_error' && error.code === 401) {
+        return res.status(401).json({ response: false, authenticated: false, message: `Unauthorized: ${error.message}`, full_error: error })
+    }
+    if (error.type === 'authentication_error' && error.code === 403) {
+        return res.status(403).json({ response: false, message: `Forbidden: ${error.message}`, full_error: error })
+    }
+    else if (error.type !== 'custom_error') {
+        return res.status(500).json({ response: false, message: `Error: ${error}`, full_error: error })
     }
     else {
         return next()

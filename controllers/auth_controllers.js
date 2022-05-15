@@ -6,11 +6,13 @@ const { AuthenticationError } = require('../utils/errors');
 
 const initSignUp = async (req, res, next) => {
     try {
+        // validations
+        //...
         const { name, email, password, password2 } = req.body;
         req.user = { user_id: email };
         const newUser = await saveUser(name, email, password, password2);
         if (!newUser) {
-            const error = new AuthenticationError(401, 'Unable to sign up');
+            const error = new AuthenticationError(400, 'Unable to sign up');
             return next(error)
         }
         return next()
@@ -39,7 +41,7 @@ const initSignIn = async (req, res, next) => {
         }
         const passwordCheck = await checkPassword(password, user.password);
         if (!passwordCheck) {
-            const error = new AuthenticationError(403, 'Wrong password');
+            const error = new AuthenticationError(401, 'Wrong password');
             return next(error)
         }
         req.user = { user_id: email }
