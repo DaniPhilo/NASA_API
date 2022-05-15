@@ -1,10 +1,13 @@
 import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { UserContext } from '../../context/user_context'
 
 function SignUp({ setShowSignUp, setErrorMessage }) {
 
     const { setIsAuthenticated } = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     const handleSignUp = async (event) => {
         event.preventDefault();
@@ -31,6 +34,7 @@ function SignUp({ setShowSignUp, setErrorMessage }) {
             return
         }
         setIsAuthenticated(true);
+        navigate('/home');
     }
 
     const showSignIn = () => {

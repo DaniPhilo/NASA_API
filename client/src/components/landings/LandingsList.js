@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../../context/user_context';
 
 import Landing from './Landing'
 import LandingsPagination from './LandingsPagination';
 
 function LandingsList() {
+
+  const { setIsAuthenticated } = useContext(UserContext);
 
   const [landings, setLandings] = useState([]);
   const [order, setOrder] = useState(1);
@@ -18,10 +21,13 @@ function LandingsList() {
   const fetchLandings = async (url) => {
     const response = await fetch(url, {
       headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
       credentials: 'include',
-  });
+    });
+    if (response.status === 403) {
+      setIsAuthenticated(false);
+    }
     const data = await response.json();
     return data
   }
@@ -34,8 +40,8 @@ function LandingsList() {
         setNumberOfDocs(data.count);
         setLandings(data.landings);
         setLoading(false);
+        return
       }
-      setLoading(false);
     }
     init();
   }, [currentPage]);
@@ -62,6 +68,9 @@ function LandingsList() {
       credentials: 'include',
       body: JSON.stringify(landingData)
     });
+    if (response.status === 403) {
+      return setIsAuthenticated(false);
+    }
     const data = await response.json();
     if (data.response) {
       setCreated('success');
@@ -158,14 +167,14 @@ function LandingsList() {
             </div>
 
             <div className='landing-container'>
-              {landings.length > 0 ? 
-              landings.map(landing => {
-                return (
-                  <Landing key={landing._id} landing={landing} setLandings={setLandings} landings={landings} />
-                )
-              })
-              :
-              <p>No results...</p>
+              {landings.length > 0 ?
+                landings.map(landing => {
+                  return (
+                    <Landing key={landing._id} landing={landing} setLandings={setLandings} landings={landings} />
+                  )
+                })
+                :
+                <p>No results...</p>
               }
             </div>
             <LandingsPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} numberOfDocs={numberOfDocs} />

@@ -1,12 +1,16 @@
 import React, { useState, useContext } from 'react'
 
 import { ShoppingCartContext } from '../../context/shopping_context'
+import { UserContext } from '../../context/user_context';
 
 function Nea({ nea, setNeas }) {
 
     const { designation, discovery_date, h_mag, moid_au, q_au_1, q_au_2, period_yr, i_deg, pha, orbit_class } = nea;
 
+    const { setIsAuthenticated } = useContext(UserContext);
+
     const { neasCart, setNeasCart } = useContext(ShoppingCartContext);
+
     const [isEdit, setIsEdit] = useState(false);
     const [isInCart, setIsInCart] = useState(() => {
         const match = neasCart.filter(item => item.designation === designation);
@@ -21,6 +25,9 @@ function Nea({ nea, setNeas }) {
             },
             credentials: 'include',
         });
+        if (response.status === 403) {
+            return setIsAuthenticated(false);
+          }
         const data = await response.json();
         if (data.response) {
             //Se modifica el estado del parent para obligarlo a volver a hacer la llamada a la API. De este modo se cargarán los datos de la DB con el landing ya borrado. No es muy elegante: 
@@ -52,6 +59,9 @@ function Nea({ nea, setNeas }) {
             credentials: 'include',
             body: JSON.stringify(editData)
         });
+        if (response.status === 403) {
+            return setIsAuthenticated(false);
+          }
         const data = await response.json();
         if (data.response) {
             setNeas(prevState => prevState.map(item => item.designation === designation ? data.neas : item));

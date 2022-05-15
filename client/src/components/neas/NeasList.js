@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import Nea from './Nea';
 import NeasPagination from './NeasPagination';
 
+import { UserContext } from '../../context/user_context';
+
 function NeasList() {
+
+  const { setIsAuthenticated } = useContext(UserContext);
 
   const [neas, setNeas] = useState([]);
   const [order, setOrder] = useState(1);
@@ -22,6 +26,9 @@ function NeasList() {
       },
       credentials: 'include',
     });
+    if (response.status === 403) {
+      return setIsAuthenticated(false);
+    }
     const data = await response.json();
     return data
   }
@@ -63,6 +70,9 @@ function NeasList() {
       credentials: 'include',
       body: JSON.stringify(neaData)
     });
+    if (response.status === 403) {
+      return setIsAuthenticated(false);
+    }
     const data = await response.json();
     if (data.response) {
       setCreated('success');

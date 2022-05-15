@@ -7,6 +7,7 @@ const { initSignUp,  closeSignUp, initSignIn, closeSignIn } = require('../contro
 // Auth middlewares:
 const { validateUser, createAccessToken, createRefreshToken, authenticateToken } = require('../middlewares/auth_middlewares');
 
+router.get('/session', authenticateToken, closeSignIn);
 router.post('/signUp', initSignUp, createAccessToken, createRefreshToken, closeSignUp);
 router.post('/signIn', initSignIn, createAccessToken, createRefreshToken, closeSignIn);
 

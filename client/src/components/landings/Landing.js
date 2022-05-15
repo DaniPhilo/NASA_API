@@ -1,12 +1,16 @@
 import React, { useState, useContext } from 'react'
 
 import { ShoppingCartContext } from '../../context/shopping_context'
+import { UserContext } from '../../context/user_context';
 
 function Landing({ landing, setLandings }) {
 
   const { name, recclass, mass, year, reclat, reclong, id } = landing;
 
+  const { setIsAuthenticated } = useContext(UserContext);
+
   const { landingsCart, setLandingsCart } = useContext(ShoppingCartContext);
+  
   const [isInCart, setIsInCart] = useState(() => {
     const match = landingsCart.filter(item => item.id === id);
     return match.length > 0 ? true : false
@@ -21,6 +25,9 @@ function Landing({ landing, setLandings }) {
       },
       credentials: 'include'
     });
+    if (response.status === 403) {
+      return setIsAuthenticated(false);
+    }
     const data = await response.json();
     if (data.response) {
       setLandings(prevState => prevState.filter(landing => landing.id !== id));
@@ -48,6 +55,9 @@ function Landing({ landing, setLandings }) {
       credentials: 'include',
       body: JSON.stringify(editData)
     });
+    if (response.status === 403) {
+      return setIsAuthenticated(false);
+    }
     const data = await response.json();
     if (data.response) {
       setLandings(prevState => prevState.map(item => item.id === id ? data.landings : item));
