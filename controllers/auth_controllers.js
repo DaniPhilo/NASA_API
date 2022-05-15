@@ -1,13 +1,17 @@
 const { saveUser } = require('../services/auth_services');
 const { findUserByField } = require('../services/users_services');
 const { checkPassword } = require('../utils/hashing');
+const { signUpValidations } = require('../utils/validations');
 
 const { AuthenticationError } = require('../utils/errors');
 
 const initSignUp = async (req, res, next) => {
     try {
-        // validations
-        //...
+        const validationErrors = signUpValidations(req.body);
+        if (validationErrors.length) {
+            const error = new AuthenticationError(400, validationErrors);
+            return next(error)
+        }
         const { name, email, password, password2 } = req.body;
         req.user = { user_id: email };
         const newUser = await saveUser(name, email, password, password2);

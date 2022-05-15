@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { UserContext } from '../../context/user_context'
 
-function SignUp({ setShowSignUp, setErrorMessage }) {
+function SignUp({ setShowSignUp }) {
 
     const { setIsAuthenticated } = useContext(UserContext);
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
 
@@ -31,10 +33,12 @@ function SignUp({ setShowSignUp, setErrorMessage }) {
         const response = await request.json();
 
         if (!response.authenticated) {
-            return
+            return setErrorMessage(response.full_error.message);
         }
+
         setIsAuthenticated(true);
         navigate('/home');
+        return
     }
 
     const showSignIn = () => {
@@ -48,11 +52,26 @@ function SignUp({ setShowSignUp, setErrorMessage }) {
                 <label htmlFor="name">Name: </label>
                 <input type="text" name='name' />
 
+                {errorMessage.includes('name') &&
+                    <div className='login-error'>
+                        <p>Invalid name.</p>
+                    </div>}
+
                 <label htmlFor="email">Email: </label>
                 <input type="text" name='email' />
 
+                {errorMessage.includes('email') &&
+                    <div className='login-error'>
+                        <p>Invalid email.</p>
+                    </div>}
+
                 <label htmlFor="password">Password: </label>
                 <input type="password" name='password' />
+
+                {errorMessage.includes('password') &&
+                    <div className='login-error'>
+                        <p>Invalid password.</p>
+                    </div>}
 
                 <label htmlFor="password2">Repeat password: </label>
                 <input type="password" name='password2' />

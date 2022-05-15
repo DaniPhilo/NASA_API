@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { UserContext } from '../../context/user_context'
 
-function SignIn({ setShowSignUp, setErrorMessage }) {
+function SignIn({ setShowSignUp }) {
 
     const { setIsAuthenticated } = useContext(UserContext);
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     const navigate = useNavigate();
 
@@ -49,6 +51,10 @@ function SignIn({ setShowSignUp, setErrorMessage }) {
 
                 <button type='submit'>Sign In</button>
             </form>
+            {errorMessage &&
+                <div className='login-error'>
+                    <p>{errorMessage}</p>
+                </div>}
             <p className='show-signIn' onClick={() => setShowSignUp(true)}>I don't have an account yet.</p>
         </div>
     )
