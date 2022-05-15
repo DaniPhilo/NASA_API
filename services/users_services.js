@@ -6,7 +6,7 @@ const findUserByField = async (field, value) => {
         if (!user) {
             return false
         }
-        return user
+        return user[0]
     } catch (error) {
         return error
     }

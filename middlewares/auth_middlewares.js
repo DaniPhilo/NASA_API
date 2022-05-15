@@ -37,14 +37,14 @@ const createRefreshToken = async (req, res, next) => {
 
 const authenticateToken = async (req, res, next) => {
     try {
-        const accessToken = req.cookies.access_token;
+        const accessToken = req.cookies.aT;
         if (!accessToken) {
             const error = new AuthenticationError(403, 'No access token provided');
             return next(error)
         }
         const user = verifyAccessToken(accessToken);
         if (!user) {
-            const refreshToken = req.cookies.refresh_token;
+            const refreshToken = req.cookies.rT;
             if (!refreshToken) {
                 const error = new AuthenticationError(403, 'No refresh token provided');
                 return next(error)

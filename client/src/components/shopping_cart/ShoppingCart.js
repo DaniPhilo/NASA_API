@@ -4,7 +4,7 @@ import LandingCart from './LandingCart'
 import NeaCart from './NeaCart'
 import TotalCart from './TotalCart'
 
-import { ShoppingCartContext } from '../shopping_context'
+import { ShoppingCartContext } from '../../context/shopping_context'
 
 function ShoppingCart() {
 

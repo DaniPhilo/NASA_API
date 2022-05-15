@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 
+import AuthenticationForms from './authentication/AuthenticationForms';
 import Image from './Image'
 import Map from './landings/Map';
 import LandingsList from './landings/LandingsList';
@@ -11,7 +12,8 @@ function Main() {
     return (
         <main>
             <Routes>
-                <Route path="/" element={<Image />} />
+                <Route path="/" element={<AuthenticationForms />} />
+                <Route path="/home" element={<Image />} />
                 <Route path="/landings" element={<Map />} />
                 <Route path="/landings/list" element={<LandingsList />} />
                 <Route path="/neas" element={<NeasList />} />

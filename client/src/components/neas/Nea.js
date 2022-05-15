@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 
-import { ShoppingCartContext } from '../shopping_context'
+import { ShoppingCartContext } from '../../context/shopping_context'
 
 function Nea({ nea, setNeas }) {
 

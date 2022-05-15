@@ -14,11 +14,15 @@ const cors = require('cors')
 const port = process.env.PORT || 3001;
 
 // Middlewares:
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
+// Auth middleware:
+const { authenticateToken } = require('./middlewares/auth_middlewares');
 
 // API Routes:
 const authRoutes = require('./routes/auth_routes');
@@ -26,6 +30,7 @@ const landingRoutes = require('./routes/landings_routes');
 const neasRoutes = require('./routes/neas_routes');
 
 app.use('/api/auth', authRoutes);
+// app.use('/api/astronomy/landings', authenticateToken, landingRoutes);
 app.use('/api/astronomy/landings', landingRoutes);
 app.use('/api/astronomy/neas', neasRoutes)
 
@@ -39,10 +44,10 @@ app.use('/api/astronomy/neas', neasRoutes)
 // Error handlers:
 app.use((err, req, res, next) => {
     if (err.type === 'custom_error') {
-        return res.status(400).json({response: false, message: 'Error from server (custom): ' + err.message})
+        return res.status(400).json({ response: false, message: 'Error from server (custom): ' + err.message })
     }
     else if (err.type !== 'custom_error') {
-        return res.status(400).json({response: false, message: 'Error: ' + err})
+        return res.status(400).json({ response: false, message: 'Error: ' + err })
     }
     else {
         return next()

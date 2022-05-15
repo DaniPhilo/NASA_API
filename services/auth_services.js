@@ -18,7 +18,7 @@ const saveUser = async (name, email, password) => {
 }
 
 const getAccessToken = (email) => {
-    const accessToken = jwt.sign({ user_id: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5s' });
+    const accessToken = jwt.sign({ user_id: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10s' });
     if (!accessToken) {
         return false
     }
@@ -50,7 +50,7 @@ const verifyAccessToken = (token) => {
         if (err) {
             return false
         }
-        return { type: 'access', user: user }
+        return user
     });
 }
 
@@ -59,25 +59,10 @@ const verifyRefreshToken = (token) => {
         if (err) {
             return false
         }
-        return { type: 'refresh', user: user }
+        return user
     });
 }
 
-const autahenticateToken = async (accessToken, refreshToken) => {
-    const response = verifyAccessToken(accessToken) || verifyRefreshToken(refreshToken);
-    if (!response) {
-        return false
-    }
-    if (response.type === 'refresh') {
-        const user = await User.find({ email: response.user.user_id });
-        const compare = user.refresh_token === refreshToken;
-        if (!compare) {
-
-        }
-    }
-    if (response.type === 'access') {
-        return true
-    }
 
     //     jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
     //         if (err) {
@@ -98,7 +83,7 @@ const autahenticateToken = async (accessToken, refreshToken) => {
     //                     return next(error)
     //                 }
     //             })
-}
+
 
 // const authenticateRefreshToken = async (refreshToken) => {
 //     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
