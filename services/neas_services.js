@@ -1,7 +1,7 @@
 const Nea = require('../models/neas_models');
 
 const { validateNumber, validateNeaDocument, capitalizeString } = require('../utils/validations');
-const CustomError = require('../utils/errors');
+const {CustomError} = require('../utils/errors');
 
 const getAll = async () => {
     try {

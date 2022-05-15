@@ -1,7 +1,7 @@
 const Landing = require('../models/landings_models');
 const { getAll, getByName, getNumberOfDocuments, getPaginatedLandings, getByMinMass, getByMass, getByClass, getByDate } = require('../services/landings_services');
 const { validateNumber, validateLandingDocument } = require('../utils/validations');
-const CustomError = require('../utils/errors');
+const {CustomError} = require('../utils/errors');
 
 const getAllLandings = async (req, res, next) => {
     try {

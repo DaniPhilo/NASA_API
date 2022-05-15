@@ -1,7 +1,7 @@
 const Landing = require('../models/landings_models');
 
 const { validateNumber } = require('../utils/validations');
-const CustomError = require('../utils/errors');
+const {CustomError} = require('../utils/errors');
 
 const getAll = async () => {
     try {

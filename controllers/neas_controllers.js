@@ -1,7 +1,7 @@
 const Nea = require('../models/neas_models');
 const { getAll, getByDesignation, getNumberOfDocuments, getPaginatedNeas, getByOrbitClass, getByDate } = require('../services/neas_services');
 const { validateNeaDocument } = require('../utils/validations');
-const CustomError = require('../utils/errors');
+const {CustomError} = require('../utils/errors');
 
 const getAllNeas = async (req, res, next) => {
     try {

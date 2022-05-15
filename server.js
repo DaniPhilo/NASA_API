@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const express = require('express');
 const path = require('path');
@@ -20,9 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // API Routes:
+const authRoutes = require('./routes/auth_routes');
 const landingRoutes = require('./routes/landings_routes');
 const neasRoutes = require('./routes/neas_routes');
 
+app.use('/api/auth', authRoutes);
 app.use('/api/astronomy/landings', landingRoutes);
 app.use('/api/astronomy/neas', neasRoutes)
 
