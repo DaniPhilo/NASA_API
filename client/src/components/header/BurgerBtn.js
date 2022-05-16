@@ -1,17 +1,22 @@
 import React from 'react'
 
-function BurgerBtn({ setIsVisible }) {
+function BurgerBtn({ setIsVisible, windowWidth }) {
 
     const handleNavDisplay = () => {
         setIsVisible(prevState => !prevState);
     }
 
     return (
-        <div className='burger-btn' onClick={handleNavDisplay}>
-            <div className='burger-top'></div>
-            <div className='burger-mid'></div>
-            <div className='burger-bot'></div>
-        </div>
+        <>
+            {windowWidth < 750 &&
+                <div className='burger-btn' onClick={handleNavDisplay}>
+                    <div className='burger-top'></div>
+                    <div className='burger-mid'></div>
+                    <div className='burger-bot'></div>
+                </div>
+            }
+        </>
+
     )
 }
 
