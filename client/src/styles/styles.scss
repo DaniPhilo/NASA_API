@@ -163,7 +163,7 @@ main {
   left: 0;
   z-index: 11;
 
-  width: 100vw;
+  min-width: 100vw;
   height: 100vh;
 
   background-color: $modal-color;
@@ -172,11 +172,14 @@ main {
 }
 
 .create-form {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+
+  padding: 1.5rem;
 
   color: white;
 }
@@ -187,14 +190,56 @@ main {
   justify-content: center;
   align-items: center;
 }
-.create-form > div:last-child {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 
-  width: 50vw;
-  max-width: 150px;
+.create-form > button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25rem;
+
+  background-color: $modal-color;
+  border: none;
+}
+.create-form > button > .fa-xmark {
+  font-size: 1.5rem;
+  color: $delete-btn-color; 
+}
+
+.order-buttons {
+  width: fit-content;
+  height: fit-content;
+  margin: 1rem auto;
+}
+.order-buttons > button {
+  padding: 0.25rem 0.75rem;
+  background-color: $alt-color;
+  color: $accent-color;
+}
+.order-buttons > button:nth-of-type(1) {
+  border-top: 1px solid $accent-color;
+  border-bottom: 1px solid $accent-color;
+  border-left: 1px solid $accent-color;
+  border-right: 1px solid $accent-color;
+  border-radius: 5px 0 0 5px;
+}
+.order-buttons > button:nth-of-type(2) {
+  border-top: 1px solid $accent-color;
+  border-bottom: 1px solid $accent-color;
+  border-left: 1px solid $accent-color;
+  border-right: 1px solid $accent-color;
+}
+.order-buttons > button:nth-of-type(3) {
+  border-top: 1px solid $accent-color;
+  border-bottom: 1px solid $accent-color;
+  border-left: 1px solid $accent-color;
+  border-right: 1px solid $accent-color;
+  border-radius: 0 5px 5px 0;
+}
+.order-buttons > .fa-arrow-down-long,
+.order-buttons > .fa-arrow-up-long {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  color: $accent-color;
 }
 
 .cards-container {
@@ -206,18 +251,10 @@ main {
   gap: 1rem;
 
   width: 90vw;
-  margin: 1rem auto;
-}
-
-.landing-card>form>input {
-  display: block;
-  width: 95%;
   margin: 0 auto;
 }
 
-.landing-card>form>button {
-  margin: 0.25rem 0 0 0.25rem;
-}
+
 
 .card {
   position: relative;

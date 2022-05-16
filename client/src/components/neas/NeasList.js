@@ -18,7 +18,7 @@ function NeasList() {
   const [numberOfDocs, setNumberOfDocs] = useState(0);
 
   const [loading, setLoading] = useState(true);
-  const [created, setCreated] = useState(null);
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   const fetchNeas = async (url) => {
     const response = await fetch(url, {
@@ -62,6 +62,7 @@ function NeasList() {
 
   const changeOrder = async (event) => {
     setLoading(true);
+    setIsFirstRender(false);
     const data = await fetchNeas(`http://localhost:3001/api/astronomy/neas/1?field=${event.target.id}&order=${order}`);
     if (data.response) {
       setNumberOfPages(Math.floor(data.count / 10));
@@ -89,9 +90,10 @@ function NeasList() {
               </form>
             </div>
 
-            <div className="order-btns">
+            <div className="order-buttons">
+              {!isFirstRender ? (order === -1 ? <i className="fa-solid fa-arrow-down-long"></i> : <i className="fa-solid fa-arrow-up-long"></i>) : ''}
               <button type='button' id='designation' onClick={changeOrder}>Name</button>
-              <button type='button' id='orbit_class' onClick={changeOrder}>Orbit class</button>
+              <button type='button' id='orbit_class' onClick={changeOrder}>Orbit Class</button>
               <button type='button' id='discovery_date' onClick={changeOrder}>Date</button>
             </div>
 

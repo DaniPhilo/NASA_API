@@ -93,10 +93,10 @@ function CreateNea() {
                         <label htmlFor="orbit_class">Orbit_class: </label>
                         <input type="text" name='orbit_class' />
                     </div>
-                    <div className="create-aside-buttons">
-                        <input type='submit' value='Create' />
-                        <button type='button' onClick={() => setIsScaled(prevState => !prevState)}>Close</button>
-                    </div>
+
+                    <input type='submit' value='Create' />
+
+                    <button type='button' onClick={() => setIsScaled(prevState => !prevState)}><i class="fa-solid fa-xmark"></i></button>
 
                 </form>
 

@@ -79,11 +79,10 @@ function CreateLanding() {
                         <label htmlFor="reclong">Longitude: </label>
                         <input type="text" name='reclong' />
                     </div>
-                    <div className="create-aside-buttons">
-                        <input type='submit' value='Create' />
-                        <button type='button' onClick={() => setIsScaled(prevState => !prevState)}>Close</button>
-                    </div>
 
+                    <input type='submit' value='Create' />
+
+                    <button type='button' onClick={() => setIsScaled(prevState => !prevState)}><i className="fa-solid fa-xmark"></i></button>
                 </form>
 
                 {created === 'success' && <p>New landing created.</p>}
