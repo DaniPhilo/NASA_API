@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 
 import LogOut from './LogOut'
 
-function Nav({ isVisible }) {
+function Nav({ isVisible, setIsVisible }) {
 
     const [currentPage, setCurrentPage] = useState('');
 
     const handleClick = (event) => {
         setCurrentPage(event.target.innerText);
+        setIsVisible(prevState => !prevState);
     }
 
     return (

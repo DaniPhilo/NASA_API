@@ -27,7 +27,7 @@ function Header() {
       <h1>NASA API</h1>
       <BurgerBtn setIsVisible={setIsVisible} windowWidth={windowWidth} />
       <BigNav windowWidth={windowWidth} />
-      <Nav isVisible={isVisible} />
+      <Nav isVisible={isVisible} setIsVisible={setIsVisible} />
     </header>
   )
 }

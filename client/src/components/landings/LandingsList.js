@@ -84,9 +84,7 @@ function LandingsList() {
 
   return (
     <>
-      <section>
-        <CreateLanding />
-      </section>
+      <CreateLanding />
       <section className='list-section'>
         {loading ?
           <div className="loading">Loading...</div>

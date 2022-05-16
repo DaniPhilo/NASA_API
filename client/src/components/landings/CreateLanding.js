@@ -6,6 +6,7 @@ function CreateLanding() {
     const { setIsAuthenticated } = useContext(UserContext);
 
     const [created, setCreated] = useState(null);
+    const [isScaled, setIsScaled] = useState(true);
 
     const handleCreateForm = async (event) => {
         event.preventDefault();
@@ -42,36 +43,53 @@ function CreateLanding() {
 
     return (
         <>
-            <form action="" onSubmit={handleCreateForm} className='list-form'>
+            <button type='button' onClick={() => setIsScaled(prevState => !prevState)} className={isScaled ? 'launch-create-form' : 'scaled'}>Create Landing</button>
 
-                <h4>Create new landing:</h4>
+            <aside className={isScaled ? 'create-aside scaled' : 'create-aside'}>
 
-                <label htmlFor="name">Name: </label>
-                <input type="text" name='name' />
+                <form action="" onSubmit={handleCreateForm} className='create-form'>
 
-                <label htmlFor="id">Id: </label>
-                <input type="text" name='id' />
+                    <h4>Create new landing:</h4>
 
-                <label htmlFor="recclass">Class: </label>
-                <input type="text" name='recclass' />
+                    <div>
+                        <label htmlFor="name">Name: </label>
+                        <input type="text" name='name' />
+                    </div>
+                    <div>
+                        <label htmlFor="id">Id: </label>
+                        <input type="text" name='id' />
+                    </div>
+                    <div>
+                        <label htmlFor="recclass">Class: </label>
+                        <input type="text" name='recclass' />
+                    </div>
+                    <div>
+                        <label htmlFor="mass">Weight: </label>
+                        <input type="text" name='mass' />
+                    </div>
+                    <div>
+                        <label htmlFor="year">Date: </label>
+                        <input type="text" name='year' />
+                    </div>
+                    <div>
+                        <label htmlFor="reclat">Latitude: </label>
+                        <input type="text" name='reclat' />
+                    </div>
+                    <div>
+                        <label htmlFor="reclong">Longitude: </label>
+                        <input type="text" name='reclong' />
+                    </div>
+                    <div className="create-aside-buttons">
+                        <input type='submit' value='Create' />
+                        <button type='button' onClick={() => setIsScaled(prevState => !prevState)}>Close</button>
+                    </div>
 
-                <label htmlFor="mass">Weight: </label>
-                <input type="text" name='mass' />
+                </form>
 
-                <label htmlFor="year">Date: </label>
-                <input type="text" name='year' />
+                {created === 'success' && <p>New landing created.</p>}
+                {created === 'failure' && <p>Incorrect parameters. Please, try again..</p>}
 
-                <label htmlFor="reclat">Latitude: </label>
-                <input type="text" name='reclat' />
-
-                <label htmlFor="reclong">Longitude: </label>
-                <input type="text" name='reclong' />
-
-                <input type='submit' value='Create' />
-            </form>
-
-            {created === 'success' && <p>New landing created.</p>}
-            {created === 'failure' && <p>Incorrect parameters. Please, try again..</p>}
+            </aside>
         </>
     )
 }

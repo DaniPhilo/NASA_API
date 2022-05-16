@@ -12,6 +12,8 @@ body {
 }
 
 header {
+  height: 15vh;
+
   background-color: $secondary-color;
   color: $text-color;
 }
@@ -23,6 +25,7 @@ nav {
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 9;
 
   background-color: $secondary-color;
 
@@ -102,21 +105,21 @@ nav>ul>li:last-child {
   width: 25px;
   height: 3px;
 
-  background-color: $text-color;
+  background-color: white;
 }
 
 .burger-mid {
   width: 25px;
   height: 3px;
 
-  background-color: $text-color;
+  background-color: white;
 }
 
 .burger-bot {
   width: 25px;
   height: 3px;
 
-  background-color: $text-color;
+  background-color: white;
 }
 
 
@@ -146,27 +149,52 @@ main {
   margin-top: 1rem;
 }
 
-// List:
-.list-form {
+.scaled {
+  transform: scale(0);
+}
+
+.create-aside {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 11;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: $modal-color;
+
+  transition: transform 0.25s ease-in-out;
+}
+
+.create-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 
-  width: 90vw;
-  max-width: 500px;
-  margin: 0 auto;
+  color: white;
 }
 
-.list-form>input,
-.list-form>label {
-  width: 90%;
-  margin-top: 0.5rem;
+.create-form > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+.create-form > div:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
-.list-form>input:last-child {
-  width: fit-content;
-  padding: 0.5rem 1.5rem;
+  width: 50vw;
+  max-width: 150px;
 }
 
 .cards-container {
@@ -221,13 +249,6 @@ main {
   overflow: hidden;
 
   cursor: pointer;
-}
-
-.card-body {
-  width: 100%;
-  height: 100%;
-
-  backdrop-filter: opacity(10%);
 }
 
 .card:hover .card-title {
@@ -346,8 +367,46 @@ main {
   color: $buy-btn-color;
 }
 
+.edit-form {
+  display: flex;
+  flex-direction: column;
+   justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  
+  width: 250px;
+  height: 250px;
+  padding: 1rem;
+  background-color: $card-color;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.edit-nea-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 0.25rem;
+  
+  width: 250px;
+  height: 250px;
+  padding: 1rem;
+  
+  background-color: $card-color;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.edit-nea-form > input {
+  width: 100%;
+}
 
 @media (min-width: 750px) {
+
+  main {
+    margin-left: $desktop-icon-nav-width;
+  }
 
   // *** NAV *** //
 
@@ -357,18 +416,19 @@ main {
 
   .icons-navbar {
     position: fixed;
-    top: $desktop-nav-top-position;
+    top: 0;
     left: 0;
     z-index: 10;
 
-    width: $desktop-nav-width;
+    width: $desktop-icon-nav-width;
     height: 100vh;
+    padding-top: $header-height;
 
     background-color: $secondary-color;
   }
 
   .icons-navbar:hover+nav {
-    left: $desktop-nav-width;
+    left: $desktop-icon-nav-width;
   }
 
   .icons-navbar>ul {
@@ -400,19 +460,20 @@ main {
 
   nav {
     position: fixed;
-    top: $desktop-nav-top-position;
-    left: calc($desktop-nav-width - 8rem);
-    // left: calc($desktop-nav-width);
+    top: 0;
+    left: calc($desktop-icon-nav-width - 8rem);
+    left: calc($desktop-icon-nav-width);
     z-index: 9;
 
-    width: 8rem;
-    height: 100vh;
+    width: $desktop-nav-width;
+    height: 100vh;;
+    padding-top: $header-height;
   }
 
   nav:hover {
     position: fixed;
     top: $desktop-nav-top-position;
-    left: $desktop-nav-width;
+    left: $desktop-icon-nav-width;
   }
 
   nav>ul {
@@ -436,6 +497,7 @@ main {
   }
 
   nav>ul>li:last-child {
+    padding: 0;
     margin: 0;
   }
 
@@ -443,12 +505,12 @@ main {
     width: 100%;
     height: 100%;
 
-    line-height: 3rem;
+    line-height: 4rem;
   }
 
   .current-page::after {
     position: absolute;
-    top: 2.5rem;
+    top: 3rem;
     left: 1rem;
     content: '';
     width: 6rem;

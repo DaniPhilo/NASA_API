@@ -27,7 +27,7 @@ function LogOut() {
     }
 
     return (
-        <button type='button' onClick={handleLogOut}>Log Out</button>
+        <a onClick={handleLogOut}>Log Out</a>
     )
 }
 
