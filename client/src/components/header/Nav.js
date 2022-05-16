@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import LogOut from './LogOut'
 
 function Nav({ isVisible }) {
 
+    const [currentPage, setCurrentPage] = useState('');
+
+    const handleClick = (event) => {
+        setCurrentPage(event.target.innerText);
+    }
+
     return (
         <nav className={isVisible ? 'links-navbar' : 'hidden'}>
             <ul>
-                <li><Link to="/home">Home</Link></li>
-                <li><Link to="/landings">Landings Map</Link></li>
-                <li><Link to="/landings/list">Landings List</Link></li>
-                <li><Link to='/neas'>Neas List</Link></li>
-                <li><Link to='/cart'>Cart</Link></li>
+                <li className={currentPage === 'Home' ? 'current-page' : 'nav-item'} onClick={handleClick}><Link to="/home">Home</Link></li>
+                <li className={currentPage === 'Landings Map' ? 'current-page' : 'nav-item'} onClick={handleClick}><Link to="/landings">Landings Map</Link></li>
+                <li className={currentPage === 'Landings List' ? 'current-page' : 'nav-item'} onClick={handleClick}><Link to="/landings/list">Landings List</Link></li>
+                <li className={currentPage === 'Neas List' ? 'current-page' : 'nav-item'} onClick={handleClick}><Link to='/neas'>Neas List</Link></li>
+                <li className={currentPage === 'Cart' ? 'current-page' : 'nav-item'} onClick={handleClick}><Link to='/cart'>Cart</Link></li>
                 <li><LogOut /></li>
             </ul>
         </nav>

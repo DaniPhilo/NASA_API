@@ -224,6 +224,17 @@ main {
     transform: none;
   }
 
+  .current-page::after {
+    position: absolute;
+    top: 3rem;
+    left: 0.75rem;
+    content: '';
+    width: 6rem;
+    height: 2px;
+
+    background-color: $accent-color;
+  }
+
   .icons-navbar {
     position: fixed;
     top: $desktop-nav-top-position;
@@ -235,9 +246,9 @@ main {
 
     background-color: $secondary-color;
   }
-  .icons-navbar:hover + nav {
-    left: $desktop-nav-width;
-  }
+  // .icons-navbar:hover + nav {
+  //   left: $desktop-nav-width;
+  // }
 
   .icons-navbar > ul {
     display: flex;
@@ -267,9 +278,10 @@ main {
   }
 
   nav {
-    position: absolute;
+    position: fixed;
     top: $desktop-nav-top-position;
-    left: calc($desktop-nav-width - 8rem);
+    // left: calc($desktop-nav-width - 8rem);
+    left: calc($desktop-nav-width);
     z-index: 9;
 
     width: 8rem;
@@ -291,6 +303,7 @@ main {
   }
 
   nav > ul > li {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
