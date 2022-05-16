@@ -225,7 +225,7 @@ main {
   }
 
   .icons-navbar {
-    position: absolute;
+    position: fixed;
     top: $desktop-nav-top-position;
     left: 0;
     z-index: 10;
@@ -234,6 +234,9 @@ main {
     height: 100vh;
 
     background-color: $secondary-color;
+  }
+  .icons-navbar:hover + nav {
+    left: $desktop-nav-width;
   }
 
   .icons-navbar > ul {
@@ -266,11 +269,16 @@ main {
   nav {
     position: absolute;
     top: $desktop-nav-top-position;
-    left: $desktop-nav-width;
+    left: calc($desktop-nav-width - 8rem);
     z-index: 9;
 
     width: 8rem;
     height: 100vh;
+  }
+  nav:hover {
+    position: fixed;
+    top: $desktop-nav-top-position;
+    left: $desktop-nav-width;
   }
 
   nav > ul {
@@ -285,7 +293,7 @@ main {
   nav > ul > li {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 
     width: 100%;
