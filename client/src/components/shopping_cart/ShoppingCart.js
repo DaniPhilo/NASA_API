@@ -25,7 +25,7 @@ function ShoppingCart() {
 
 
     return (
-        <section>
+        <section className='shopping-section'>
             <div className="landings-cart">
                 <h3>Landings:</h3>
                 {landingsCart.map(item => {
@@ -34,6 +34,9 @@ function ShoppingCart() {
                     )
                 })}
             </div>
+
+            <div className="dividers"></div>
+
             <div className="neas-cart">
                 <h3>NEAs:</h3>
                 {neasCart.map(item => {
@@ -42,6 +45,9 @@ function ShoppingCart() {
                     )
                 })}
             </div>
+
+            <div className="dividers"></div>
+            
             <div className="total-cart">
                 <TotalCart landingsCart={landingsCart} neasCart={neasCart} />
             </div>

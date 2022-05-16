@@ -7,14 +7,15 @@ function LandingCart({ landing, setLandingsCart, setTotalPrice }) {
   }
 
   return (
-    <div>
-      <h4>
-        <button type='button' onClick={removeFromCart}>Remove</button>
-        {landing.name}
-      </h4>
-      <span>
+    <div className='cart-item'>
+      <div className='cart-info'>
+        <button type='button' onClick={removeFromCart}><i class="fa-solid fa-trash-can"></i></button>
+        <h4>{landing.name}</h4>
+      </div>
+
+      <div className='price'>
         {(Math.abs(Number(landing.reclat)) * 100).toFixed(2)}€
-      </span>
+      </div>
     </div>
   )
 }

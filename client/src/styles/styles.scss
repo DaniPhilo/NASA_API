@@ -219,22 +219,6 @@ main {
   margin: 0.25rem 0 0 0.25rem;
 }
 
-.pagination-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-
-  width: 90vw;
-  margin: 1rem auto;
-
-  list-style-type: none;
-}
-
-
-.pagination-list>li>a {
-  text-decoration: none;
-}
-
 .card {
   position: relative;
 
@@ -402,6 +386,68 @@ main {
   width: 100%;
 }
 
+
+// *** CART *** //
+
+
+
+.shopping-section > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+
+  width: 90vw;
+  max-width: 500px;
+  margin: 1rem auto;
+
+  color: $text-color;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  color: $text-color;
+}
+
+.shopping-section > div:last-child > * {
+  font-size: 2rem;
+  color: $accent-color;
+}
+
+.cart-info {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.cart-info > button {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  background-color: $alt-color;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-info > button > .fa-xmark {
+  font-size: 1.25rem;
+  color: $delete-btn-color;
+}
+
+.dividers {
+  width: 100%;
+  height: 2px;
+  background-color: $accent-color;
+}
+
+
 @media (min-width: 750px) {
 
   main {
@@ -427,7 +473,7 @@ main {
     background-color: $secondary-color;
   }
 
-  .icons-navbar:hover+nav {
+  .icons-navbar:hover + nav {
     left: $desktop-icon-nav-width;
   }
 
@@ -461,8 +507,8 @@ main {
   nav {
     position: fixed;
     top: 0;
-    left: calc($desktop-icon-nav-width - 8rem);
-    left: calc($desktop-icon-nav-width);
+    left: calc($desktop-icon-nav-width - $desktop-nav-width);
+    // left: calc($desktop-icon-nav-width);
     z-index: 9;
 
     width: $desktop-nav-width;
@@ -472,7 +518,6 @@ main {
 
   nav:hover {
     position: fixed;
-    top: $desktop-nav-top-position;
     left: $desktop-icon-nav-width;
   }
 
@@ -511,7 +556,7 @@ main {
   .current-page::after {
     position: absolute;
     top: 3rem;
-    left: 1rem;
+    left: 2rem;
     content: '';
     width: 6rem;
     height: 2px;

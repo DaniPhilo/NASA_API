@@ -6,7 +6,7 @@ function TotalCart({ landingsCart, neasCart }) {
   const totalNeas = neasCart.length ? neasCart.map(nea => Number(nea.i_deg) * 100).reduce((prev, curr) => prev + curr) : 0;
 
   return (
-    <div>
+    <div className='cart-item'>
       <h3>Total</h3>
       <span>{(totalLandings + totalNeas).toFixed(2)}€</span>
     </div>
