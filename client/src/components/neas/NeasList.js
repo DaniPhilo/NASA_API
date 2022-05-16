@@ -150,7 +150,7 @@ function NeasList() {
       {created === 'success' && <p>New NEA created.</p>}
       {created === 'failure' && <p>Incorrect parameters. Please, try again...</p>}
 
-      <section className='neas-section'>
+      <section className='list-section'>
         {loading ?
           <div className="loading">Loading...</div>
           :
@@ -169,7 +169,7 @@ function NeasList() {
               <button type='button' id='discovery_date' onClick={changeOrder}>Date</button>
             </div>
 
-            <div className='nea-container'>
+            <div className='cards-container'>
               {neas.length > 0 ?
                 neas.map(nea => {
                   return (

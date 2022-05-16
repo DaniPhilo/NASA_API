@@ -27,7 +27,7 @@ function Nea({ nea, setNeas }) {
         });
         if (response.status === 403) {
             return setIsAuthenticated(false);
-          }
+        }
         const data = await response.json();
         if (data.response) {
             //Se modifica el estado del parent para obligarlo a volver a hacer la llamada a la API. De este modo se cargarán los datos de la DB con el landing ya borrado. No es muy elegante: 
@@ -61,7 +61,7 @@ function Nea({ nea, setNeas }) {
         });
         if (response.status === 403) {
             return setIsAuthenticated(false);
-          }
+        }
         const data = await response.json();
         if (data.response) {
             setNeas(prevState => prevState.map(item => item.designation === designation ? data.neas : item));
@@ -80,31 +80,36 @@ function Nea({ nea, setNeas }) {
     }
 
     return (
-        <div className='nea-card'>
+        <div className='card nea-card'>
             {!isEdit ?
 
                 <>
-                    <div className="nea-info">
+                    <div className="card-title">
                         <h4>{designation}</h4>
-                        <p>Date: {discovery_date.slice(0, 10)}</p>
-                        <p>H_Mag: {h_mag}</p>
-                        <p>Moid_au: {moid_au}</p>
-                        <p>Q_au_1: {q_au_1}</p>
-                        <p>Q_au_2: {q_au_2}</p>
-                        <p>Period_yr: {period_yr}</p>
-                        <p>I_deg: {i_deg}</p>
-                        <p>Pha: {pha}</p>
-                        <p>Class: {orbit_class}</p>
                     </div>
-                    <div className="buttons">
-                        <button type='button' onClick={() => setIsEdit(() => !isEdit)}>Edit</button>
-                        <button type='button' onClick={handleDelete}>Delete</button>
-                        {isInCart ?
-                            <button type='button' onClick={handleDeleteFromCart}>Remove From Cart</button>
-                            :
-                            <button type='button' onClick={handleToCart}>To Cart</button>
-                        }
+                    <div className="card-content">
+                        <div className="card-info">
+                            <p>Date: {discovery_date.slice(0, 10)}</p>
+                            <p>H_Mag: {h_mag}</p>
+                            <p>Moid_au: {moid_au}</p>
+                            <p>Q_au_1: {q_au_1}</p>
+                            <p>Q_au_2: {q_au_2}</p>
+                            <p>Period_yr: {period_yr}</p>
+                            <p>I_deg: {i_deg}</p>
+                            <p>Pha: {pha}</p>
+                            <p>Class: {orbit_class}</p>
+                        </div>
+                        <div className="card-buttons">
+                            <button type='button' onClick={() => setIsEdit(() => !isEdit)}><i className="fa-solid fa-pen-to-square"></i></button>
+                            <button type='button' onClick={handleDelete}><i className="fa-solid fa-trash-can"></i></button>
+                            {isInCart ?
+                                <button type='button' onClick={handleDeleteFromCart}><i className="fa-solid fa-cart-shopping"></i></button>
+                                :
+                                <button type='button' onClick={handleToCart}><i className="fa-solid fa-cart-shopping"></i></button>
+                            }
+                        </div>
                     </div>
+
                 </>
 
                 :

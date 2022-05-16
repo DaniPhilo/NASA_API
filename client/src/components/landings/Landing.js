@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react'
 
+import LandingFront from './LandingFront';
+
 import { ShoppingCartContext } from '../../context/shopping_context'
 import { UserContext } from '../../context/user_context';
 
@@ -10,7 +12,7 @@ function Landing({ landing, setLandings }) {
   const { setIsAuthenticated } = useContext(UserContext);
 
   const { landingsCart, setLandingsCart } = useContext(ShoppingCartContext);
-  
+
   const [isInCart, setIsInCart] = useState(() => {
     const match = landingsCart.filter(item => item.id === id);
     return match.length > 0 ? true : false
@@ -76,28 +78,33 @@ function Landing({ landing, setLandings }) {
   }
 
   return (
-    <div className='landing-card'>
+    <div className='card landing-card'>
       {!isEdit ?
 
         <>
-          <div className="landing-info">
-            <h4>{name}</h4>
-            <p>Class: {recclass}</p>
-            <p>Mass: {mass}</p>
-            <p>Date: {year.slice(0, 10)}</p>
-            <p>Lat: {reclat}</p>
-            <p>Long: {reclong}</p>
-          </div>
-          <div className="buttons">
-            <button type='button' onClick={() => setIsEdit(() => !isEdit)}>Edit</button>
-            <button type='button' onClick={handleDelete}>Delete</button>
-            {isInCart ?
-              <button type='button' onClick={handleDeleteFromCart}>Remove From Cart</button>
-              :
-              <button type='button' onClick={handleToCart}>To Cart</button>
-            }
 
+          <div className="card-title">
+            <h4>{name}</h4>
           </div>
+          <div className="card-content">
+            <div className="card-info">
+              <p>Class: {recclass}</p>
+              <p>Mass: {mass}</p>
+              <p>Date: {year.slice(0, 10)}</p>
+              <p>Lat: {reclat}</p>
+              <p>Long: {reclong}</p>
+            </div>
+            <div className="card-buttons">
+              <button type='button' onClick={() => setIsEdit(() => !isEdit)}><i className="fa-solid fa-pen-to-square"></i></button>
+              <button type='button' onClick={handleDelete}><i className="fa-solid fa-trash-can"></i></button>
+              {isInCart ?
+                <button type='button' onClick={handleDeleteFromCart}><i className="fa-solid fa-cart-shopping"></i></button>
+                :
+                <button type='button' onClick={handleToCart}><i className="fa-solid fa-cart-shopping"></i></button>
+              }
+            </div>
+          </div>
+
         </>
 
         :

@@ -8,7 +8,7 @@
 }
 
 body {
-  background-color: $primary-color;
+  background-color: $alt-color;
 }
 
 header {
@@ -29,7 +29,7 @@ nav {
   transition: 0.25s ease-in-out;
 }
 
-nav > ul {
+nav>ul {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,21 +40,41 @@ nav > ul {
   margin-top: 5rem;
 }
 
-nav > ul > li {
-  width: fit-content;
+nav>ul>li {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 2rem;
 
   list-style-type: none;
 }
 
-nav > ul > li > a {
-  padding: 0.5rem 1rem;
+nav>ul>li>a {
+  width: 100%;
 
   text-decoration: none;
+  text-align: center;
   color: $text-color;
 }
-nav > ul > li:last-child {
+
+nav>ul>li:last-child {
   margin-top: 4rem;
   padding: 0.5rem 1rem;
+}
+
+.current-page::after {
+  position: absolute;
+  top: 2rem;
+  left: 1.5rem;
+  content: '';
+  width: calc(50vw - 3rem);
+  height: 2px;
+
+  background-color: $accent-color;
 }
 
 .hidden {
@@ -67,7 +87,7 @@ nav > ul > li:last-child {
   align-items: center;
   gap: 5px;
 
-  position: absolute;
+  position: fixed;
   right: 5%;
   top: 5%;
   z-index: 10;
@@ -77,18 +97,21 @@ nav > ul > li:last-child {
 
   cursor: pointer;
 }
+
 .burger-top {
   width: 25px;
   height: 3px;
 
   background-color: $text-color;
 }
+
 .burger-mid {
   width: 25px;
   height: 3px;
 
   background-color: $text-color;
 }
+
 .burger-bot {
   width: 25px;
   height: 3px;
@@ -146,7 +169,7 @@ main {
   padding: 0.5rem 1.5rem;
 }
 
-.landing-container {
+.cards-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -156,36 +179,6 @@ main {
 
   width: 90vw;
   margin: 1rem auto;
-}
-
-.landing-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  row-gap: 0.75rem;
-
-  width: 40vw;
-  max-width: 175px;
-  height: 200px;
-  margin-top: 2rem;
-  padding: 0.5rem;
-
-  border-radius: 5px;
-  // box-shadow: 2px 2px 10px rgb(206, 206, 206);
-
-  background-color: $card-color
-}
-
-.landing-card>.buttons {
-  display: flex;
-  justify-content: space-between;
-
-  width: 90%;
-}
-
-.landing-card>.buttons>button {
-  padding: 0.25rem 0.5rem;
 }
 
 .landing-card>form>input {
@@ -214,6 +207,144 @@ main {
   text-decoration: none;
 }
 
+.card {
+  position: relative;
+
+  width: 250px;
+  height: 250px;
+  padding: 1rem;
+
+  background-color: $card-color;
+  background-size: cover;
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+}
+
+.card-body {
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: opacity(10%);
+}
+
+.card:hover .card-title {
+  transform: translateY(-6rem);
+}
+.card:hover .card-title > h4 {
+  font-size: 1.5rem;
+}
+.card:hover .card-title > h4::after {
+  transform: scale(1);
+}
+.card:hover .card-content {
+  transform: translateY(20%);
+}
+.card:hover .card-content > * {
+  opacity: 1
+}
+
+.card-title {
+  position: absolute;
+
+  width: 100%;
+  left: 0;
+  bottom: 35%;
+
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  
+  transition: transform 0.5s ease-in-out;
+}
+
+.card-title > h4 {
+  position: relative;
+
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 0.25rem;
+
+  color: $text-color;
+  text-align: center;
+  font-size: 2rem;
+
+  transition-property: font-size, width;
+  transition: 0.5s ease-in-out;
+}
+
+.card-title > h4::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+
+  content: '';
+  background-color: $accent-color;
+
+  transform: scale(0);
+  transition: transform 0.25s ease-in-out;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  transform: translateY(110%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.card-content > * {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  margin-bottom: 1rem;
+}
+
+.nea-card > .card-content > .card-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+}
+
+.card-info > p {
+  color: $text-color;
+  font-size: 1rem;
+}
+
+.card-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card-buttons > button {
+  background-color: $card-color;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+.fa-pen-to-square {
+  color: $edit-btn-color;
+}
+.fa-trash-can {
+  color: $delete-btn-color;
+}
+.fa-cart-shopping {
+  color: $buy-btn-color;
+}
 
 
 @media (min-width: 750px) {
@@ -222,17 +353,6 @@ main {
 
   .hidden {
     transform: none;
-  }
-
-  .current-page::after {
-    position: absolute;
-    top: 3rem;
-    left: 0.75rem;
-    content: '';
-    width: 6rem;
-    height: 2px;
-
-    background-color: $accent-color;
   }
 
   .icons-navbar {
@@ -246,11 +366,12 @@ main {
 
     background-color: $secondary-color;
   }
-  // .icons-navbar:hover + nav {
-  //   left: $desktop-nav-width;
-  // }
 
-  .icons-navbar > ul {
+  .icons-navbar:hover+nav {
+    left: $desktop-nav-width;
+  }
+
+  .icons-navbar>ul {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -261,7 +382,7 @@ main {
     margin-top: $list-margin-top;
   }
 
-  .icons-navbar > ul > li {
+  .icons-navbar>ul>li {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -273,27 +394,28 @@ main {
     list-style-type: none;
   }
 
-  .icons-navbar > ul > li > i {
+  .icons-navbar>ul>li>i {
     font-size: 1.5rem;
   }
 
   nav {
     position: fixed;
     top: $desktop-nav-top-position;
-    // left: calc($desktop-nav-width - 8rem);
-    left: calc($desktop-nav-width);
+    left: calc($desktop-nav-width - 8rem);
+    // left: calc($desktop-nav-width);
     z-index: 9;
 
     width: 8rem;
     height: 100vh;
   }
+
   nav:hover {
     position: fixed;
     top: $desktop-nav-top-position;
     left: $desktop-nav-width;
   }
 
-  nav > ul {
+  nav>ul {
     flex-direction: column;
     gap: $list-gap;
 
@@ -302,7 +424,7 @@ main {
     margin-top: $list-margin-top;
   }
 
-  nav > ul > li {
+  nav>ul>li {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -313,15 +435,26 @@ main {
     height: 4rem;
   }
 
-  nav > ul > li:last-child {
+  nav>ul>li:last-child {
     margin: 0;
   }
 
-  nav > ul > li > a {
+  nav>ul>li>a {
     width: 100%;
     height: 100%;
 
     line-height: 3rem;
+  }
+
+  .current-page::after {
+    position: absolute;
+    top: 2.5rem;
+    left: 1rem;
+    content: '';
+    width: 6rem;
+    height: 2px;
+
+    background-color: $accent-color;
   }
 
 

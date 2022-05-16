@@ -87,7 +87,7 @@ function LandingsList() {
       <section>
         <CreateLanding />
       </section>
-      <section className='landings-section'>
+      <section className='list-section'>
         {loading ?
           <div className="loading">Loading...</div>
           :
@@ -104,7 +104,7 @@ function LandingsList() {
               <button type='button' id='year' onClick={changeOrder}>Date</button>
             </div>
 
-            <div className='landing-container'>
+            <div className='cards-container'>
               {landings.length > 0 ?
                 landings.map(landing => {
                   return (
