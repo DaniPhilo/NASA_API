@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { UserContext } from '../context/user_context';
+import { UserContext } from '../../context/user_context';
 
-function Nav() {
+function Nav({ isVisible }) {
 
     const { setIsAuthenticated } = useContext(UserContext);
 
@@ -27,7 +27,7 @@ function Nav() {
     }
 
     return (
-        <nav>
+        <nav className={!isVisible && 'hidden'}>
             <ul>
                 <li><Link to="/home">Home</Link></li>
                 <li><Link to="/landings">Landings Map</Link></li>

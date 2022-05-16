@@ -30,12 +30,12 @@ function Main() {
         setIsAuthenticated(true);
     }
 
-    useEffect(() => {
-        console.log('Authentication check in Main');
-        if (!isAuthenticated) {
-            checkSession();
-        }
-    }, [isAuthenticated]);
+    // useEffect(() => {
+    //     console.log('Authentication check in Main');
+    //     if (!isAuthenticated) {
+    //         checkSession();
+    //     }
+    // }, [isAuthenticated]);
 
 
 

@@ -4,7 +4,7 @@ const UserContext = React.createContext();
 
 const UserContextProvider = ({ children }) => {
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
 
     return (
         <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
