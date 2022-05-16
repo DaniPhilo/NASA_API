@@ -16,7 +16,6 @@ function BurgerBtn({ setIsVisible, windowWidth }) {
                 </div>
             }
         </>
-
     )
 }
 

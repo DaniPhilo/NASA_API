@@ -1,4 +1,5 @@
 @import 'color_variables';
+@import 'navbar_variables';
 
 * {
   margin: 0;
@@ -223,25 +224,83 @@ main {
     transform: none;
   }
 
-  nav {
-    position: relative;
+  .icons-navbar {
+    position: absolute;
+    top: $desktop-nav-top-position;
+    left: 0;
+    z-index: 10;
+
+    width: $desktop-nav-width;
+    height: 100vh;
+
+    background-color: $secondary-color;
+  }
+
+  .icons-navbar > ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $list-gap;
 
     width: 100%;
-    height: 3rem;
-    
+
+    margin-top: $list-margin-top;
+  }
+
+  .icons-navbar > ul > li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 4rem;
+
+    list-style-type: none;
+  }
+
+  .icons-navbar > ul > li > i {
+    font-size: 1.5rem;
+  }
+
+  nav {
+    position: absolute;
+    top: $desktop-nav-top-position;
+    left: $desktop-nav-width;
+    z-index: 9;
+
+    width: 8rem;
+    height: 100vh;
   }
 
   nav > ul {
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    gap: $list-gap;
 
     width: 100%;
     height: 100%;
-    margin: 0;
+    margin-top: $list-margin-top;
   }
 
   nav > ul > li {
-    height: f;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+
+    width: 100%;
+    height: 4rem;
+  }
+
+  nav > ul > li:last-child {
+    margin: 0;
+  }
+
+  nav > ul > li > a {
+    width: 100%;
+    height: 100%;
+
+    line-height: 3rem;
   }
 
 

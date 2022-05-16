@@ -9,28 +9,24 @@ function Header() {
   const [isVisible, setIsVisible] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(() => {
 
-    useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    }
 
-        function handleResize() {
-            setWindowWidth(window.innerWidth);
-        }
+    window.addEventListener('resize', handleResize);
 
-        window.addEventListener('resize', handleResize)
-
-        return _ => {
-            window.removeEventListener('resize', handleResize)
-
-        }
-    })
-
-    
+    return _ => {
+      window.removeEventListener('resize', handleResize);
+    }
+  });
 
   return (
     <header>
       <h1>NASA API</h1>
-      <BigNav windowWidth={windowWidth} />
       <BurgerBtn setIsVisible={setIsVisible} windowWidth={windowWidth} />
+      <BigNav windowWidth={windowWidth} />
       <Nav isVisible={isVisible} />
     </header>
   )

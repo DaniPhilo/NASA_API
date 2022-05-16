@@ -6,7 +6,7 @@ import LogOut from './LogOut'
 function Nav({ isVisible }) {
 
     return (
-        <nav className={!isVisible && 'hidden'}>
+        <nav className={isVisible ? 'links-navbar' : 'hidden'}>
             <ul>
                 <li><Link to="/home">Home</Link></li>
                 <li><Link to="/landings">Landings Map</Link></li>
