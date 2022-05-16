@@ -1,7 +1,7 @@
 const Landing = require('../models/landings_models');
 const { getAll, getByName, getNumberOfDocuments, getPaginatedLandings, getByMinMass, getByMass, getByClass, getByDate } = require('../services/landings_services');
 const { validateNumber, validateLandingDocument } = require('../utils/validations');
-const {CustomError} = require('../utils/errors');
+const { CustomError } = require('../utils/errors');
 
 const getAllLandings = async (req, res, next) => {
     try {
@@ -34,7 +34,7 @@ const getLandingsByName = async (req, res, next) => {
             return res.status(400).json({ response: false, message: 'No landings with such parameters' });
         }
         res.status(200).json({ response: true, count: landings.length, landings });
-    } 
+    }
     catch (error) {
         return next(error)
     }
@@ -100,12 +100,9 @@ const getLandingsByDate = async (req, res) => {
 
 const createLanding = async (req, res, next) => {
     try {
-        // if (!validateLandingDocument(req.body)) { throw new CustomError('Invalid parameters') }
+        if (!validateLandingDocument(req.body)) { throw new CustomError(400, 'Invalid parameters') }
         const landing = await Landing.create(req.body);
-        if (!landing) {
-            throw new CustomError('Landing was not created in DB');
-        }
-        console.log(landing);
+        if (!landing) { throw new CustomError('Landing was not created in DB') }
         res.status(201).json({ response: true, landing });
     }
     catch (error) {
@@ -116,12 +113,9 @@ const createLanding = async (req, res, next) => {
 const editLanding = async (req, res, next) => {
     try {
         const id = req.params.id;
-        if (!validateNumber(id)) { throw new CustomError('Invalid parameter(id): please, provide a whole number') }
-        if (!validateLandingDocument(req.body)) { throw new CustomError('Invalid parameters') }
+        if (!validateLandingDocument(req.body)) { throw new CustomError(400, 'Invalid parameters') }
         const landings = await Landing.findOneAndUpdate({ id: id }, req.body, { new: true });
-        if (!landings || landings.length < 1) {
-            throw new CustomError('No landings with such parameters');
-        }
+        if (!landings) { throw new CustomError(400, 'No landings with such parameters') }
         res.status(200).json({ response: true, landings });
     }
     catch (error) {
@@ -132,10 +126,9 @@ const editLanding = async (req, res, next) => {
 const deleteLanding = async (req, res, next) => {
     try {
         const id = req.params.id;
-        if (!validateNumber(id)) { throw new CustomError('Invalid parameter(id): please, provide a whole number') }
         const landing = await Landing.findOneAndDelete({ id: id });
         if (!landing || landing.length < 1) {
-            throw new CustomError('No landings with such parameters');
+            throw new CustomError(400, 'No landings with such parameters');
         }
         res.status(200).json({ response: true, landing });
     }

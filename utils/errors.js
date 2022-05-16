@@ -1,7 +1,8 @@
 class CustomError extends Error {
-    constructor(message) {
+    constructor(code, message) {
         super();
         this.type = 'custom_error';
+        this.code = code;
         this.message = message;
     }
 }
@@ -15,7 +16,17 @@ class AuthenticationError extends Error {
     }
 }
 
+class ValidationError extends Error {
+    constructor(code, message) {
+        super();
+        this.type = 'validation_error';
+        this.code = code;
+        this.message = message;
+    }
+}
+
 module.exports = {
     CustomError,
-    AuthenticationError
+    AuthenticationError,
+    ValidationError
 };
