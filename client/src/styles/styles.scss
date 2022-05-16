@@ -153,6 +153,21 @@ main {
   transform: scale(0);
 }
 
+.launch-create-form {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: $alt-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.launch-create-form:hover {
+  background-color: $accent-color;
+}
+
 .create-aside {
   position: fixed;
   display: flex;
@@ -205,6 +220,46 @@ main {
   color: $delete-btn-color; 
 }
 
+.search-by-name {
+  margin: 0.5rem auto;
+}
+
+.search-by-name > form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-by-name > form > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  color: $text-color;
+  background-color: $alt-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+.search-by-name > form > input:checked {
+  height: 1.75rem;
+  padding: 0.25rem;
+  color: $text-color;
+  background-color: $alt-color;
+  border: 1px solid red;
+  border-radius: 20px;
+}
+
+.search-by-name > form > button {
+  padding: 0.25rem;
+  background-color: $alt-color;
+  border: none;
+  cursor: pointer;
+}
+.search-by-name > form > button > .fa-magnifying-glass {
+  font-size: 1.25rem;
+  color: $accent-color;
+}
+
 .order-buttons {
   width: fit-content;
   height: fit-content;
@@ -213,7 +268,11 @@ main {
 .order-buttons > button {
   padding: 0.25rem 0.75rem;
   background-color: $alt-color;
-  color: $accent-color;
+  color: $text-color;
+  cursor: pointer;
+}
+.order-buttons > button:hover {
+  background-color: $accent-color;
 }
 .order-buttons > button:nth-of-type(1) {
   border-top: 1px solid $accent-color;
@@ -581,6 +640,7 @@ main {
   nav>ul>li:last-child {
     padding: 0;
     margin: 0;
+    cursor: pointer;
   }
 
   nav>ul>li>a {

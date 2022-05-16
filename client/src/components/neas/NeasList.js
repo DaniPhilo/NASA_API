@@ -86,7 +86,7 @@ function NeasList() {
             <div className="search-by-name">
               <form action="" onSubmit={handleSearchByDesignation}>
                 <input type="text" name='designation' placeholder='Search by designation...' />
-                <input type="submit" value='Search' />
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
               </form>
             </div>
 

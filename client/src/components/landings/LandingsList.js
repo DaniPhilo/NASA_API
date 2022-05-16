@@ -95,7 +95,7 @@ function LandingsList() {
             <div className="search-by-name">
               <form action="" onSubmit={handleSearchByName}>
                 <input type="text" name='name' placeholder='Search by name...' />
-                <input type="submit" value='Search' />
+                <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
               </form>
             </div>
             <div className="order-buttons">
