@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 
 // Middlewares:
 app.use(cors({
-    origin: 'https://chimerical-concha-25ad5f.netlify.app/',
+    origin: 'https://chimerical-concha-25ad5f.netlify.app',
     credentials: true
 }));
 app.use(express.json());

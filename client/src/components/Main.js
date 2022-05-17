@@ -17,7 +17,7 @@ function Main() {
     const navigate = useNavigate();
 
     const checkSession = async () => {
-        const request = await fetch('http://localhost:3001/api/auth/session', {
+        const request = await fetch('https://vast-castle-72865.herokuapp.com/api/auth/session', {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },

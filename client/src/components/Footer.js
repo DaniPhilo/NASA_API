@@ -1,18 +1,10 @@
 import React, { useContext } from 'react'
 
-
-import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/user_context';
 
 function Footer() {
 
   const { isAuthenticated } = useContext(UserContext);
-
-  const navigate = useNavigate();
-
-  const redirectToDocs = () => {
-    navigate('http://localhost:3001/api/docs');
-  }
 
   return (
     <footer>
