@@ -64,11 +64,6 @@ nav>ul>li>a {
   color: $text-color;
 }
 
-nav>ul>li:last-child {
-  margin-top: 4rem;
-  padding: 0.5rem 1rem;
-}
-
 .current-page::after {
   position: absolute;
   top: 2rem;

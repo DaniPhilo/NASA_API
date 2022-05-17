@@ -37,10 +37,10 @@ const neasRoutes = require('./routes/neas_routes');
 const { authenticateToken } = require('./middlewares/auth_middlewares');
 
 app.use('/api/auth', authRoutes);
-// app.use('/api/astronomy/landings', authenticateToken, landingRoutes);
-app.use('/api/astronomy/landings', landingRoutes);
-// app.use('/api/astronomy/neas', authenticateToken, neasRoutes)
-app.use('/api/astronomy/neas', neasRoutes)
+app.use('/api/astronomy/landings', authenticateToken, landingRoutes);
+// app.use('/api/astronomy/landings', landingRoutes);
+app.use('/api/astronomy/neas', authenticateToken, neasRoutes)
+// app.use('/api/astronomy/neas', neasRoutes);
 
 // REACT Routes:
 // app.use(express.static(path.join(__dirname, "/client/build")));
