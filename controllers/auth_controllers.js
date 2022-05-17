@@ -73,6 +73,7 @@ const logOut = async (req, res, next) => {
         res.status(200).json({ response: true, message: 'User logged out' });
     }
     catch (error) {
+        console.log(error);
         return next(error)
     }
 }

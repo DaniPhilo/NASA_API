@@ -18,7 +18,12 @@ const deleteCookie = (res, name) => {
     });
 }
 
+const removeCookies = (res, names) => {
+    names.forEach(name => deleteCookie(res, name));
+}
+
 module.exports = {
     createCookie,
-    deleteCookie
+    deleteCookie,
+    removeCookies
 }

@@ -12,7 +12,6 @@ function Header() {
 
   const [isVisible, setIsVisible] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [showNavs, setShowNavs] = useState(false);
 
   useEffect(() => {
 

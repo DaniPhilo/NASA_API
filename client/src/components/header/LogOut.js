@@ -16,7 +16,7 @@ function LogOut() {
             },
             credentials: 'include',
         });
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 403) {
             setIsAuthenticated(false);
             return navigate('/')
         }
