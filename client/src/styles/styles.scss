@@ -660,12 +660,36 @@ nav>ul>li:last-child {
   width: 100%;
 }
 
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 
+  width: 90vw;
+  margin: 1rem auto;
+}
 
+.pagination-container > span {
+  color: $text-color;
+}
+
+.pagination-container > button {
+  padding: 0.25rem;
+
+  background-color: $alt-color;
+  border: none;
+}
+
+.pagination-container > button > .fa-chevron-right,
+.pagination-container > button > .fa-chevron-left {
+  color: $accent-color;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
 
 // *** CART *** //
-
-
 
 .shopping-section > div {
   display: flex;

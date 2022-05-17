@@ -13,9 +13,9 @@ function LandingsPagination({ currentPage, setCurrentPage, numberOfPages, number
     <div className='pagination-container'>
       {numberOfDocs > 10 &&
         <>
-          <button className='previous-page' type='button' onClick={previousPage}>-</button>
+          <button className='previous-page' type='button' onClick={previousPage}><i className="fa-solid fa-chevron-left"></i></button>
           <span>{currentPage} of {numberOfPages}</span>
-          <button className='next-page' type='button' onClick={nextPage}>+</button>
+          <button className='next-page' type='button' onClick={nextPage}><i className="fa-solid fa-chevron-right"></i></button>
         </>
       }
     </div>
