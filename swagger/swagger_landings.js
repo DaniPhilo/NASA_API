@@ -109,6 +109,116 @@
 
 /**
  * @swagger
+ * /landings/minMass/{minMass}:
+ *   get:
+ *     summary: Gets landings whose mass is equal or greater than {minMass} parameter
+ *     tags: [Landings]
+ *     parameters:
+ *       - in: path
+ *         name: minMass
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: Landing's mass
+ *     responses:
+ *       200:
+ *         description: A list of matching landings
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Landing'
+ *       400:
+ *         description: No matching landings found
+ */
+
+/**
+ * @swagger
+ * /landings/mass/{queryMass}:
+ *   get:
+ *     summary: Gets landings whose mass is equal to {mass} query parameter
+ *     tags: [Landings]
+ *     parameters:
+ *       - in: path
+ *         name: queryMass
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: Landing's mass
+ *     responses:
+ *       200:
+ *         description: A list of matching landings
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Landing'
+ *       400:
+ *         description: No matching landings found
+ */
+
+/**
+ * @swagger
+ * /landings/class/{queryClass}:
+ *   get:
+ *     summary: Gets landings whose class match {queryClass} parameter
+ *     tags: [Landings]
+ *     parameters:
+ *       - in: path
+ *         name: queryClass
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Landing's class
+ *     responses:
+ *       200:
+ *         description: A list of matching landings
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Landing'
+ *       400:
+ *         description: No matching landings found
+ */
+
+/**
+ * @swagger
+ * /landings/date:
+ *   get:
+ *     summary: Gets landings whose date matches query {from} and / or {to} parameters
+ *     tags: [Landings]
+ *     parameters:
+ *       - in: query
+ *         name: from
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Landing's minimum date
+ *       - in: query
+ *         name: to
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: Landing's maximum date
+ *     responses:
+ *       200:
+ *         description: A list of matching landings
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Landing'
+ *       400:
+ *         description: No matching landings found
+ */
+
+/**
+ * @swagger
  * /landings/create:
  *   post:
  *     summary: Creates a new landing

@@ -14,7 +14,7 @@ const options = {
             }
         ]
     },
-    apis: ["./swagger/swagger_landings.js", "./routes/neas_routes.js"]
+    apis: ["./swagger/swagger_landings.js", "./swagger/swagger_neas.js"]
 }
 
 const specs = swaggerJsDoc(options);
