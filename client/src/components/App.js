@@ -26,9 +26,11 @@ function App() {
 
         </ShoppingCartContextProvider>
 
+        <Footer />
+
       </UserContextProvider>
 
-      <Footer />
+
     </>
   );
 }
