@@ -49,34 +49,40 @@ function SignUp({ setShowSignUp }) {
         <div className="signing-container">
             <h3>Sign Up</h3>
             <form onSubmit={handleSignUp}>
-                <label htmlFor="name">Name: </label>
-                <input type="text" name='name' />
+                <div>
+                    <label htmlFor="name">Name: </label>
+                    <input type="text" name='name' />
 
-                {errorMessage.includes('name') &&
-                    <div className='login-error'>
-                        <p>Invalid name.</p>
-                    </div>}
+                    {errorMessage.includes('name') &&
+                        <div className='login-error'>
+                            <p>Invalid name.</p>
+                        </div>}
+                </div>
+                <div>
+                    <label htmlFor="email">Email: </label>
+                    <input type="text" name='email' />
 
-                <label htmlFor="email">Email: </label>
-                <input type="text" name='email' />
+                    {errorMessage.includes('email') &&
+                        <div className='login-error'>
+                            <p>Invalid email.</p>
+                        </div>}
+                </div>
+                <div>
+                    <label htmlFor="password">Password: </label>
+                    <input type="password" name='password' />
 
-                {errorMessage.includes('email') &&
-                    <div className='login-error'>
-                        <p>Invalid email.</p>
-                    </div>}
-
-                <label htmlFor="password">Password: </label>
-                <input type="password" name='password' />
-
-                {errorMessage.includes('password') &&
-                    <div className='login-error'>
-                        <p>Invalid password.</p>
-                    </div>}
-
-                <label htmlFor="password2">Repeat password: </label>
-                <input type="password" name='password2' />
-
+                    {errorMessage.includes('password') &&
+                        <div className='login-error'>
+                            <p>Invalid password.</p>
+                        </div>}
+                </div>
+                <div>
+                    <label htmlFor="password2">Repeat password: </label>
+                    <input type="password" name='password2' />
+                </div>
+                
                 <button type='submit'>Sign Up</button>
+
             </form>
             <p className='show-signIn' onClick={showSignIn}>I already have an account.</p>
         </div>

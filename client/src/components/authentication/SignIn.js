@@ -43,13 +43,17 @@ function SignIn({ setShowSignUp }) {
         <div className="signing-container">
             <h3>Sign In</h3>
             <form onSubmit={handleSignIn}>
-                <label htmlFor="email">Email: </label>
-                <input type="text" name='email' />
-
-                <label htmlFor="password">Password: </label>
-                <input type="password" name='password' />
-
+                
+                <div>
+                    <label htmlFor="email">Email: </label>
+                    <input type="text" name='email' />
+                </div>
+                <div>
+                    <label htmlFor="password">Password: </label>
+                    <input type="password" name='password' />
+                </div>
                 <button type='submit'>Sign In</button>
+
             </form>
             {errorMessage &&
                 <div className='login-error'>
