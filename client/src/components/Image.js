@@ -19,7 +19,7 @@ function Image() {
     return (
         <section className='image-section'>
             {isLoading ?
-                <div>Loading...</div>
+                <div className="loading"><div className="lds-ring"><div></div><div></div><div></div><div></div></div></div>
                 :
                 <>
                     <div className="image-container">

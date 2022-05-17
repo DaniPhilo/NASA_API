@@ -79,7 +79,7 @@ function NeasList() {
 
       <section className='list-section'>
         {loading ?
-          <div className="loading">Loading...</div>
+          <div className="loading"><div className="lds-ring"><div></div><div></div><div></div><div></div></div></div>
           :
           <>
 

@@ -38,10 +38,6 @@ function Main() {
         }
     }, [isAuthenticated]);
 
-
-
-
-
     return (
         <main>
             <Routes>
