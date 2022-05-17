@@ -39,7 +39,7 @@ function Main() {
     }, [isAuthenticated]);
 
     return (
-        <main>
+        <main className={isAuthenticated ? 'regular' : 'full'}>
             <Routes>
                 <Route path="/" element={<AuthenticationForms />} />
                 <Route path="/home" element={<Image />} />

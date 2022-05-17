@@ -777,13 +777,20 @@ footer > .footer-dividers {
   color: $accent-color;
 }
 
-
+.footer-div:last-child > a {
+  text-decoration: none;
+  color: $text-color;
+  cursor: pointer;
+}
 
 
 @media (min-width: 750px) {
 
   main {
     margin-left: $desktop-icon-nav-width;
+  }
+  .full {
+    margin-left: 0;
   }
 
   // *** NAV *** //

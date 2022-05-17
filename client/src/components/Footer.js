@@ -1,10 +1,18 @@
 import React, { useContext } from 'react'
 
+
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/user_context';
 
 function Footer() {
 
   const { isAuthenticated } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const redirectToDocs = () => {
+    navigate('http://localhost:3001/api/docs');
+  }
 
   return (
     <footer>
@@ -29,7 +37,7 @@ function Footer() {
 
           <div className="footer-div">
             <h4>Documentation</h4>
-            <p>API documentation.</p>
+            <a href='http://localhost:3001/api/docs'>API documentation.</a>
           </div>
         </>}
     </footer>
