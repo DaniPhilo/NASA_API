@@ -37,7 +37,7 @@ function Footer() {
 
           <div className="footer-div">
             <h4>Documentation</h4>
-            <a href='http://localhost:3001/api/docs'>API documentation.</a>
+            <a href='http://localhost:3001/api/docs' target="_blank">API documentation.</a>
           </div>
         </>}
     </footer>

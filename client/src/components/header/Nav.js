@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 import LogOut from './LogOut'
 
-function Nav({ isVisible, setIsVisible }) {
+function Nav({ currentPage, setCurrentPage, isVisible, setIsVisible }) {
 
-    const [currentPage, setCurrentPage] = useState('');
+    
 
     const handleClick = (event) => {
         setCurrentPage(event.target.innerText);

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 
 import Nav from './Nav';
 import BurgerBtn from './BurgerBtn';
-import BigNav from './BigNav';
+import IconNav from './IconNav';
 
 import { UserContext } from '../../context/user_context';
 
@@ -12,6 +12,7 @@ function Header() {
 
   const [isVisible, setIsVisible] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [currentPage, setCurrentPage] = useState('first');
 
   useEffect(() => {
 
@@ -32,8 +33,8 @@ function Header() {
       {isAuthenticated &&
         <>
           <BurgerBtn setIsVisible={setIsVisible} windowWidth={windowWidth} />
-          <BigNav windowWidth={windowWidth} />
-          <Nav isVisible={isVisible} setIsVisible={setIsVisible} />
+          <IconNav currentPage={currentPage} setCurrentPage={setCurrentPage} windowWidth={windowWidth} />
+          <Nav currentPage={currentPage} setCurrentPage={setCurrentPage} isVisible={isVisible} setIsVisible={setIsVisible} />
         </>}
       <h1>NASA<span>.api</span></h1>
 
