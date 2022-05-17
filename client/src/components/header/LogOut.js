@@ -10,7 +10,7 @@ function LogOut() {
     const navigate = useNavigate();
 
     const handleLogOut = async () => {
-        const response = await fetch('http://localhost:3001/api/auth/logOut', {
+        const response = await fetch('https://vast-castle-72865.herokuapp.com/api/auth/logOut', {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -19,10 +19,6 @@ function LogOut() {
         if (response.status === 200 || response.status === 403) {
             setIsAuthenticated(false);
             return navigate('/')
-        }
-        else {
-            const data = await response.json();
-            console.log(data);
         }
     }
 

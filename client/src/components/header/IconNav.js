@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 function IconNav({ currentPage, windowWidth }) {
 
@@ -6,7 +6,6 @@ function IconNav({ currentPage, windowWidth }) {
         <>
             {windowWidth > 750 &&
                 <div className='icons-navbar'>
-                    {console.log(currentPage)}
                     <ul>
                         <li className={currentPage === 'Home' ? 'current-page' : 'icon-nav-item'}><i className="fa-solid fa-house"></i></li>
                         <li className={currentPage === 'Landings Map' ? 'current-page' : 'icon-nav-item'}><i className="fa-solid fa-map-location-dot"></i></li>

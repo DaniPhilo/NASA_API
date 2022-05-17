@@ -14,7 +14,7 @@ function NeaFront({ nea, setNeas, setIsEdit, setIsAuthenticated}) {
     });
 
     const handleDelete = async () => {
-        const response = await fetch(`http://localhost:3001/api/astronomy/neas/delete/${designation}`, {
+        const response = await fetch(`https://vast-castle-72865.herokuapp.com/api/astronomy/neas/delete/${designation}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -26,7 +26,6 @@ function NeaFront({ nea, setNeas, setIsEdit, setIsAuthenticated}) {
         }
         const data = await response.json();
         if (data.response) {
-            //Se modifica el estado del parent para obligarlo a volver a hacer la llamada a la API. De este modo se cargarán los datos de la DB con el landing ya borrado. No es muy elegante: 
             setNeas(prevState => prevState.filter(nea => nea.designation !== designation));
         }
     }

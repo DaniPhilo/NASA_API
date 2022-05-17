@@ -10,7 +10,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:3001/api/astronomy"
+                url: "https://vast-castle-72865.herokuapp.com/api/astronomy"
             }
         ]
     },

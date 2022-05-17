@@ -1,6 +1,6 @@
 import React from 'react'
 
-function NeaCart({ nea, setNeasCart, setTotalPrice }) {
+function NeaCart({ nea, setNeasCart }) {
   
   const removeFromCart = () => {
     setNeasCart(prevState => prevState.filter(item => item.designation !== nea.designation))

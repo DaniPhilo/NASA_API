@@ -14,7 +14,7 @@ function LandingFront({ landing, setLandings, setIsEdit, setIsAuthenticated }) {
     });
 
     const handleDelete = async () => {
-        const response = await fetch(`http://localhost:3001/api/astronomy/landings/delete/${id}`, {
+        const response = await fetch(`https://vast-castle-72865.herokuapp.com/api/astronomy/landings/delete/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

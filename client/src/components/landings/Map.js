@@ -17,7 +17,7 @@ function Map() {
     useEffect(() => {
         const fetchLandings = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/astronomy/landings/minMass/0', {
+                const response = await fetch('https://vast-castle-72865.herokuapp.com/api/astronomy/landings/minMass/0', {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
@@ -47,7 +47,7 @@ function Map() {
         event.preventDefault();
 
         const weight = event.target.weight.value;
-        const response = await fetch(`http://localhost:3001/api/astronomy/landings/minMass/${weight}`);
+        const response = await fetch(`https://vast-castle-72865.herokuapp.com/api/astronomy/landings/minMass/${weight}`);
         const data = await response.json();
         if (data.response) {
             setLandings(data.landings);
@@ -59,7 +59,7 @@ function Map() {
         event.preventDefault();
 
         const _class = event.target._class.value;
-        const response = await fetch(`/api/astronomy/landings/class/${_class}`);
+        const response = await fetch(`https://vast-castle-72865.herokuapp.com/api/astronomy/landings/class/${_class}`);
         const data = await response.json();
         if (data.response) {
             setLandings(data.landings);

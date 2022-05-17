@@ -17,7 +17,7 @@ function LandingEdit({ landing, setIsEdit, setLandings, setIsAuthenticated }) {
             reclong: event.target.reclong.value || event.target.reclong.placeholder
         }
 
-        const response = await fetch(`http://localhost:3001/api/astronomy/landings/edit/${id}`, {
+        const response = await fetch(`https://vast-castle-72865.herokuapp.com/api/astronomy/landings/edit/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LandingCart({ landing, setLandingsCart, setTotalPrice }) {
+function LandingCart({ landing, setLandingsCart }) {
 
   const removeFromCart = () => {
     setLandingsCart(prevState => prevState.filter(item => item.id !== landing.id))

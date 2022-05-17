@@ -21,7 +21,7 @@ function CreateLanding() {
             reclong: event.target.reclong.value
         }
 
-        const response = await fetch('http://localhost:3001/api/astronomy/landings/create', {
+        const response = await fetch('https://vast-castle-72865.herokuapp.com/api/astronomy/landings/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

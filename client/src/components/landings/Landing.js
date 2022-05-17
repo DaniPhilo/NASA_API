@@ -3,7 +3,6 @@ import React, { useState, useContext } from 'react'
 import LandingFront from './LandingFront';
 import LandingEdit from './LandingEdit';
 
-import { ShoppingCartContext } from '../../context/shopping_context'
 import { UserContext } from '../../context/user_context';
 
 function Landing({ landing, setLandings }) {
