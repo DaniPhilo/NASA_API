@@ -11,6 +11,28 @@ body {
   background-color: $alt-color;
 }
 
+header > h1 {
+  width: fit-content;
+  height: $header-height;
+  margin: 0 auto;
+
+  font-family: 'Monoton', cursive;
+  font-weight: 100;
+  font-size: 2.5rem;
+  line-height: $header-height;
+  color: $accent-color;
+}
+header > h1 > span {
+  width: fit-content;
+  height: $header-height;
+  margin: 0 auto;
+
+  font-family: 'Dancing Script', cursive;
+  font-weight: 2rem;
+  font-size: rem;
+  color: $alt-accent-color;
+}
+
 main {
   min-height: calc(100vh - $header-height - 1rem);
   margin-top: 1rem;
@@ -787,6 +809,22 @@ footer > .footer-dividers {
 
 @media (min-width: 750px) {
 
+  header > h1 {
+    width: fit-content;
+    height: $header-height;
+    margin-left: calc($desktop-icon-nav-width + 1rem);
+    text-align: center;
+    
+    line-height: $header-height;
+    font-size: 3.5rem;
+    font-weight: 200;
+
+    transition: transform 0.25s ease-in-out;
+  }
+  header > h1 > span {
+    font-size: 3rem;
+  }
+
   main {
     margin-left: $desktop-icon-nav-width;
   }
@@ -815,6 +853,9 @@ footer > .footer-dividers {
 
   .icons-navbar:hover + nav {
     left: $desktop-icon-nav-width;
+  }
+  .icons-navbar:hover ~ h1 {
+    transform: translateX($desktop-nav-width);
   }
 
   .icons-navbar>ul {
@@ -859,6 +900,9 @@ footer > .footer-dividers {
   nav:hover {
     position: fixed;
     left: $desktop-icon-nav-width;
+  }
+  nav:hover ~ h1 {
+    transform: translateX($desktop-nav-width);
   }
 
   nav>ul {

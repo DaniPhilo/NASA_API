@@ -28,13 +28,15 @@ function Header() {
 
   return (
     <header>
-      <h1>NASA API</h1>
+
       {isAuthenticated &&
         <>
           <BurgerBtn setIsVisible={setIsVisible} windowWidth={windowWidth} />
           <BigNav windowWidth={windowWidth} />
           <Nav isVisible={isVisible} setIsVisible={setIsVisible} />
         </>}
+      <h1>NASA<span>.api</span></h1>
+
 
     </header>
   )
