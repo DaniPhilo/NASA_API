@@ -21,7 +21,7 @@ function SignUp({ setShowSignUp }) {
             password2: event.target.password2.value,
         }
 
-        const request = await fetch('http://localhost:3001/api/auth/signUp', {
+        const request = await fetch('https://vast-castle-72865.herokuapp.com/api/auth/signUp', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
