@@ -1,22 +1,46 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import './styles/styles.scss'
+import '../..//styles/styles.scss'
+
+import { UserContext } from '../../context/user_context';
 
 function Map() {
 
+    const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
+
     const [landings, setLandings] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchLandings = async () => {
-            const response = await fetch('http://localhost:3001/api/astronomy/landings/minMass/0');
-            const data = await response.json();
-            if (data.response) {
-                setLandings(data.landings);
+            try {
+                const response = await fetch('http://localhost:3001/api/astronomy/landings/minMass/0', {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    credentials: 'include',
+                });
+                if (response.status === 403) {
+                    setIsAuthenticated(false);
+                  }
+                const data = await response.json();
+                if (data.response) {
+                    setLandings(data.landings);
+                }
             }
-
+            catch (error) {
+                console.log(error);
+            }
         }
-
-        fetchLandings();
+        if (isAuthenticated) {
+            fetchLandings();
+        }
+        else {
+            navigate('/');
+        }
     }, []);
 
     const handleSubmitByWeight = async (event) => {
@@ -44,21 +68,25 @@ function Map() {
     }
 
     return (
-        <>
+        <section>
             <div className="map-form-container">
                 <form action="" onSubmit={handleSubmitByWeight}>
                     <label htmlFor="weight">Filter by weight: </label>
-                    <input type="number" name="weight" />
-                    <button type='submit'>Filter</button>
+                    <div>
+                        <input type="number" name="weight" />
+                        <button type='submit'>Filter</button>
+                    </div>
                 </form>
                 <form action="" onSubmit={handleSubmitByClass}>
                     <label htmlFor="_class">Filter by class: </label>
-                    <input type="text" name="_class" />
-                    <button type='submit'>Filter</button>
+                    <div>
+                        <input type="text" name="_class" />
+                        <button type='submit'>Filter</button>
+                    </div>
                 </form>
             </div>
 
-            <MapContainer center={[30, 0]} zoom={2} scrollWheelZoom={false}>
+            <MapContainer center={[40, -3]} zoom={5} scrollWheelZoom={false}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -74,7 +102,7 @@ function Map() {
                     }
                 })}
             </MapContainer>
-        </>
+        </section>
     );
 
 }

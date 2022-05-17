@@ -1,91 +1,472 @@
+@import 'color_variables';
+@import 'navbar_variables';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-header>h1 {
-  margin: 1rem 0;
-  text-align: center;
+body {
+  background-color: $alt-color;
+}
+
+header > h1 {
+  width: fit-content;
+  height: $header-height;
+  margin: 0 auto;
+
+  font-family: 'Monoton', cursive;
+  font-weight: 100;
+  font-size: 2.5rem;
+  line-height: $header-height;
+  color: $accent-color;
+}
+header > h1 > span {
+  width: fit-content;
+  height: $header-height;
+  margin: 0 auto;
+
+  font-family: 'Dancing Script', cursive;
+  font-weight: 2rem;
+  font-size: rem;
+  color: $alt-accent-color;
+}
+
+main {
+  min-height: calc(100vh - $header-height - 1rem);
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+header {
+  height: 15vh;
+
+  background-color: $secondary-color;
+  color: $text-color;
 }
 
 nav {
-  height: 3rem;
+  height: 100vh;
+  width: $mobile-nav-width;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+
+  background-color: $secondary-color;
+
+  transition: 0.25s ease-in-out;
 }
 
 nav>ul {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 
-  height: 100%;
-  ;
+  width: 100%;
+
+  margin-top: 5rem;
+}
+
+nav>ul>li {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 2rem;
 
   list-style-type: none;
 }
 
-nav>ul>li {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+nav>ul>li:hover {
+  background-color: $alt-color;
+}
+
+nav>ul>li.current-page::after {
+  position: absolute;
+  top: 2rem;
+
+  width: calc($mobile-nav-width - 6rem);
+  height: 1px;
+
+  content: '';
+  background-color: $accent-color;
 }
 
 nav>ul>li>a {
-  padding: 1rem 2rem;
+  width: 100%;
+  height: 100%;
 
   text-decoration: none;
+  text-align: center;
+  line-height: 2rem;
+  color: $text-color;
+  cursor: pointer;
 }
 
-main {
-  margin-top: 1rem;
+.hidden {
+  transform: translateX(100%);
+}
+
+.burger-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  position: fixed;
+  right: 5%;
+  top: 5%;
+  z-index: 10;
+
+  width: fit-content;
+  height: fit-content;
+
+  cursor: pointer;
+}
+
+.burger-top {
+  width: 25px;
+  height: 3px;
+
+  background-color: white;
+}
+
+.burger-mid {
+  width: 25px;
+  height: 3px;
+
+  background-color: white;
+}
+
+.burger-bot {
+  width: 25px;
+  height: 3px;
+
+  background-color: white;
+}
+
+// *** AUTH FORMS *** //
+
+.signing-container {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+.signing-container > h3 {
+  margin: 1rem 0;
+  color: $text-color;
+  text-align: center;
+}
+
+.signing-container > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+
+  color: $text-color;
+}
+
+.signing-container > form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.signing-container > form > div > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  color: $text-color;
+  background-color: $modal-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+
+.signing-container > form > button {
+  padding: 0.5rem 1rem;
+  background-color: $card-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+} 
+
+.signing-container > form > button:hover {
+  background-color: $accent-color;
+}
+
+.signing-container > p {
+  margin: 1rem auto;;
+  text-align: center;
+  color: $accent-color;
+  cursor: pointer;
 }
 
 
 // Image:
 .image-section {
+  padding: 1rem;
   width: 100vw;
 }
 
-.image-section>img {
+.image-container {
   width: 100%;
 }
 
+.image-container > h4 {
+  text-align: center;
+  margin: 1rem auto;
+
+  color: $text-color;
+}
+
+.image-container > img {
+  width: 100%;
+}
+
+.explanation {
+  margin-top: 1rem;
+}
+
+.explanation > p {
+  color: $text-color;
+}
+
 // Map:
-.map-form-container>form {
-  margin: 0.5rem 0;
+.map-form-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  width: 90vw;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+.map-form-container > form {
+  color: $text-color;
+}
+
+.map-form-container > form > label {
+  margin-left: 0.5rem;
+}
+
+.map-form-container > form > div > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  margin: 0.25rem 0.5rem 0 0;
+  color: $text-color;
+  background-color: $modal-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+
+.map-form-container > form > div > button {
+  padding: 0.35rem 1rem;
+  background-color: $alt-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.map-form-container > form > div > button:hover {
+  background-color: $accent-color;
 }
 
 .leaflet-container {
   width: 100vw;
   height: 50vh;
-
-  margin-top: 1rem;
+  z-index: 5;
 }
 
-// List:
-.list-form {
+.scaled {
+  transform: scale(0);
+}
+
+.launch-create-form {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: $alt-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.launch-create-form:hover {
+  background-color: $accent-color;
+}
+
+.create-aside {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 11;
+
+  width: 100vw;
+  max-height: 100vh;
+
+  background-color: $modal-color;
+
+  transition: transform 0.25s ease-in-out;
+}
+
+
+
+.create-form {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 
-  width: 90vw;
-  max-width: 500px;
-  margin: 0 auto;
+  padding: 1.5rem;
+
+  color: white;
 }
 
-.list-form > input,
-.list-form > label {
-  width: 90%;
-  margin-top: 0.5rem;
+.create-form > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.list-form>input:last-child {
+.create-form > div > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  color: $text-color;
+  background-color: $modal-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+
+.create-form > .create-button {
+  padding: 0.5rem 1rem;
+  background-color: $alt-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.create-form > .create-button:hover {
+  background-color: $accent-color;
+}
+
+.create-form > .close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.25rem;
+
+  background-color: $modal-color;
+  border: none;
+}
+.create-form > button > .fa-xmark {
+  font-size: 1.5rem;
+  color: $delete-btn-color; 
+  cursor: pointer;
+}
+
+.create-nea-form > div > label {
+  font-size: small;
+}
+.create-nea-form > div > input {
+  height: 1rem;
+}
+
+.search-by-name {
+  margin: 0.5rem auto;
+}
+
+.search-by-name > form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-by-name > form > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  color: $text-color;
+  background-color: $alt-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+
+.search-by-name > form > button {
+  padding: 0.25rem;
+  background-color: $alt-color;
+  border: none;
+  cursor: pointer;
+}
+.search-by-name > form > button > .fa-magnifying-glass {
+  font-size: 1.25rem;
+  color: $accent-color;
+}
+
+.order-buttons {
   width: fit-content;
-  padding: 0.5rem 1.5rem;
+  height: fit-content;
+  margin: 1rem auto;
+}
+.order-buttons > button {
+  padding: 0.25rem 0.75rem;
+  background-color: $alt-color;
+  color: $text-color;
+  cursor: pointer;
+}
+.order-buttons > button:hover {
+  background-color: $accent-color;
+}
+.order-buttons > button:nth-of-type(1) {
+  border-top: 1px solid $accent-color;
+  border-bottom: 1px solid $accent-color;
+  border-left: 1px solid $accent-color;
+  border-right: 1px solid $accent-color;
+  border-radius: 5px 0 0 5px;
+}
+.order-buttons > button:nth-of-type(2) {
+  border-top: 1px solid $accent-color;
+  border-bottom: 1px solid $accent-color;
+  border-left: 1px solid $accent-color;
+  border-right: 1px solid $accent-color;
+}
+.order-buttons > button:nth-of-type(3) {
+  border-top: 1px solid $accent-color;
+  border-bottom: 1px solid $accent-color;
+  border-left: 1px solid $accent-color;
+  border-right: 1px solid $accent-color;
+  border-radius: 0 5px 5px 0;
+}
+.order-buttons > .fa-arrow-down-long,
+.order-buttons > .fa-arrow-up-long {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  color: $accent-color;
 }
 
-.landing-container {
+.cards-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -94,77 +475,644 @@ main {
   gap: 1rem;
 
   width: 90vw;
-  margin: 1rem auto;
+  margin: 0 auto;
 }
 
-.landing-card {
+
+
+.card {
+  position: relative;
+
+  width: 250px;
+  height: 250px;
+  padding: 1rem;
+
+  background-color: $card-color;
+  background-size: cover;
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+}
+
+.card:hover .card-title {
+  transform: translateY(-6rem);
+}
+.card:hover .card-title > h4 {
+  font-size: 1.5rem;
+}
+.card:hover .card-title > h4::after {
+  transform: scale(1);
+}
+.card:hover .card-content {
+  transform: translateY(20%);
+}
+.card:hover .card-content > * {
+  opacity: 1
+}
+
+.card-title {
+  position: absolute;
+
+  width: 100%;
+  left: 0;
+  bottom: 35%;
+
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  
+  transition: transform 0.5s ease-in-out;
+}
+
+.card-title > h4 {
+  position: relative;
+
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 0.25rem;
+
+  color: $text-color;
+  text-align: center;
+  font-size: 2rem;
+
+  transition-property: font-size, width;
+  transition: 0.5s ease-in-out;
+}
+
+.card-title > h4::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+
+  content: '';
+  background-color: $accent-color;
+
+  transform: scale(0);
+  transition: transform 0.25s ease-in-out;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  transform: translateY(110%);
+  transition: transform 0.5s ease-in-out;
+}
+
+.card-content > * {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  margin-bottom: 1rem;
+}
+
+.nea-card > .card-content > .card-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+}
+
+.card-info > p {
+  color: $text-color;
+  font-size: 1rem;
+}
+
+.card-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card-buttons > button {
+  background-color: $card-color;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+.fa-pen-to-square {
+  color: $edit-btn-color;
+}
+.fa-trash-can {
+  color: $delete-btn-color;
+}
+.fa-cart-shopping {
+  color: $buy-btn-color;
+}
+
+.edit-form {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  row-gap: 0.75rem;
-
-  width: 40vw;
-  max-width: 175px;
-  height: 200px;
-  margin-top: 2rem;
-  padding: 0.5rem;
-
+  align-items: center;
+  gap: 0.5rem;
+  
+  width: 250px;
+  height: 250px;
+  padding: 1rem;
+  background-color: $card-color;
+  background-size: cover;
   border-radius: 5px;
-  box-shadow: 2px 2px 10px rgb(206, 206, 206);;
 }
 
-.landing-card > .buttons {
+.edit-form > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  color: $text-color;
+  background-color: $modal-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+
+.edit-form > button:nth-of-type(1){
+  padding: 0.5rem 1rem;
+  background-color: $card-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.edit-form > button:nth-of-type(1):hover {
+  background-color: $accent-color;
+}
+
+.edit-form > button:nth-of-type(2) {
+  position: absolute;
+  top: 1%;
+  right: 5%;
+  padding: 0.25rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-nea-form > button:nth-of-type(2) {
+  top: 0;
+  right: 1%;
+}
+
+.edit-form > button:nth-of-type(2) > .fa-xmark {
+  font-size: 1.25rem;
+  color: $delete-btn-color;
+}
+
+.edit-nea-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  gap: 0.25rem;
+  
+  width: 250px;
+  height: 250px;
+  padding: 1rem;
+  
+  background-color: $card-color;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.edit-nea-form > input {
+  width: 100%;
+}
+
+.pagination-container {
   display: flex;
-  justify-content: space-between;
-
-  width: 90%;
-}
-
-.landing-card > .buttons>button {
-  padding: 0.25rem 0.5rem;
-}
-
-.landing-card > form > input {
-  display: block;
-  width: 95%;
-  margin: 0 auto;
-}
-.landing-card > form > button {
-  margin: 0.25rem 0 0 0.25rem;
-}
-
-.pagination-list {
-  display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   gap: 0.5rem;
 
   width: 90vw;
   margin: 1rem auto;
-
-  list-style-type: none;
 }
 
+.pagination-container > span {
+  color: $text-color;
+}
 
-.pagination-list > li > a {
+.pagination-container > button {
+  padding: 0.25rem;
+
+  background-color: $alt-color;
+  border: none;
+}
+
+.pagination-container > button > .fa-chevron-right,
+.pagination-container > button > .fa-chevron-left {
+  color: $accent-color;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+// *** CART *** //
+
+.shopping-section > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+
+  width: 90vw;
+  max-width: 500px;
+  margin: 1rem auto;
+
+  color: $text-color;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  color: $text-color;
+}
+
+.shopping-section > div:last-child > * {
+  font-size: 2rem;
+  color: $accent-color;
+}
+
+.cart-info {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.cart-info > button {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  background-color: $alt-color;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-info > button > .fa-xmark {
+  font-size: 1.25rem;
+  color: $delete-btn-color;
+}
+
+.dividers {
+  width: 100%;
+  height: 2px;
+  background-color: $accent-color;
+}
+
+// *** FOOTER *** //
+
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1rem;
+
+  background-color: $secondary-color;
+  color: $text-color;
+}
+
+footer > .footer-dividers {
+  width: 100%;
+  height: 1px;
+  background-color: $accent-color;
+}
+
+.footer-div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-div > h4 {
+  color: $accent-color;
+}
+
+.footer-div:last-child > a {
   text-decoration: none;
+  color: $text-color;
+  cursor: pointer;
 }
+
 
 @media (min-width: 750px) {
-  .image-section {
-    width: 95vw;
-    margin: 1rem auto;
+
+  header > h1 {
+    width: fit-content;
+    height: $header-height;
+    margin-left: calc($desktop-icon-nav-width + 1rem);
+    text-align: center;
+    
+    line-height: $header-height;
+    font-size: 3.5rem;
+    font-weight: 200;
+
+    transition: transform 0.25s ease-in-out;
   }
-  .map-form-container {
+  header > h1 > span {
+    font-size: 3rem;
+  }
+
+  main {
+    margin-left: $desktop-icon-nav-width;
+  }
+  .full {
+    margin-left: 0;
+  }
+
+  // *** NAV *** //
+
+  .hidden {
+    transform: none;
+  }
+
+  .icons-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    width: $desktop-icon-nav-width;
+    height: 100vh;
+    padding-top: $header-height;
+
+    background-color: $secondary-color;
+  }
+
+  .icons-navbar:hover + nav {
+    left: $desktop-icon-nav-width;
+  }
+  .icons-navbar:hover ~ h1 {
+    transform: translateX($desktop-nav-width);
+  }
+
+  .icons-navbar>ul {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $list-gap;
+
+    width: 100%;
+
+    margin-top: $list-margin-top;
+  }
+
+  .icons-navbar>ul>li {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 2rem;
+    align-items: center;
+
+    width: 100%;
+    height: 4rem;
+
+    list-style-type: none;
+  }
+
+  .icons-navbar > ul > li:nth-of-type(1).current-page ~ div {
+    transform: translateY(calc((64px + $list-gap) * 0));
+  }
+  .icons-navbar > ul > li:nth-of-type(2).current-page ~ div {
+    transform: translateY(calc((64px + $list-gap) * 1));
+  }
+  .icons-navbar > ul > li:nth-of-type(3).current-page ~ div {
+    transform: translateY(calc((64px + $list-gap) * 2));
+  }
+  .icons-navbar > ul > li:nth-of-type(4).current-page ~ div {
+    transform: translateY(calc((64px + $list-gap) * 3));
+  }
+  .icons-navbar > ul > li:nth-of-type(5).current-page ~ div {
+    transform: translateY(calc((64px + $list-gap) * 4));
+  }
+
+  .icons-navbar>ul>li>i {
+    font-size: 1.5rem;
+    z-index: 10;
+  }
+
+  .icon-marker {
+    position: fixed;
+    top: calc($header-height + 1.55rem);
+
+    width: 3rem;
+    height: 3rem;
+
+    background-color: $accent-color;
+    border-radius: 50%;
+
+    z-index: 9;
+
+    transition: transform 0.25s ease-in-out;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: calc($desktop-icon-nav-width - $desktop-nav-width);
+    // left: calc($desktop-icon-nav-width);
+    z-index: 9;
+
+    width: $desktop-nav-width;
+    height: 100vh;;
+    padding-top: $header-height;
+  }
+
+  nav:hover {
+    position: fixed;
+    left: $desktop-icon-nav-width;
+  }
+  nav:hover ~ h1 {
+    transform: translateX($desktop-nav-width);
+  }
+
+  nav>ul {
+    flex-direction: column;
+    gap: $list-gap;
+
+    width: 100%;
+    height: 100%;
+    margin-top: $list-margin-top;
+  }
+
+  nav>ul>li {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    height: 4rem;
+  }
+
+  nav>ul>li.current-page::after {
+    display: none;
+  }
+
+  nav>ul>li:hover {
+    background-color: $alt-color;
+  }
+
+  nav>ul>li:last-child {
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  nav>ul>li>a {
+    width: 100%;
+    height: 100%;
+
+    line-height: 4rem;
+  }
+
+
+  .image-section {
+    padding: 1rem;
+    width: calc(100vw - $desktop-icon-nav-width - 1.1rem);
+  }
+  
+  .image-container {
+    width: 100%;
+  }
+  
+  .image-container > h4 {
+    text-align: center;
+    margin: 1rem auto;
+  
+    color: $text-color;
+  }
+  
+  .image-container > img {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .explanation {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .explanation > p {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    color: $text-color;
+  }
+
+  .map-form-container {
+    gap: 1rem;
   }
 
   .leaflet-container {
-    width: 95vw;
+    width: calc(90vw - $desktop-icon-nav-width);
     height: 75vh;
-  
+
     margin: 1rem auto;
+  }
+
+  .create-nea-form > div > label {
+    font-size: medium;
+  }
+  .create-nea-form > div > input {
+    height: 1.25rem;
+  }
+
+  footer {
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+
+    width: calc(100% - $desktop-icon-nav-width);
+    height: $footer-height;
+    margin-left: $desktop-icon-nav-width;
+  }
+
+  footer > .footer-dividers {
+    width: 1px;
+    height: 100%;
+  }
+
+
+
+  
+
+}
+
+.success-message {
+  margin: 0 auto;
+}
+.success-message > p {
+  color: $accent-color;
+  text-align: center;
+}
+.error-message {
+  margin: 0 auto;
+}
+.error-message > p {
+  color: red;
+  text-align: center;
+}
+
+// *** SPINNER *** //
+
+.loading {
+  display: block;
+  width: fit-content;
+  margin: 20vh auto 0 auto;
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid $accent-color;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: $accent-color transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
