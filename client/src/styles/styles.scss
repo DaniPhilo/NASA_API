@@ -20,7 +20,7 @@ header {
 
 nav {
   height: 100vh;
-  width: 50vw;
+  width: $mobile-nav-width;
 
   position: fixed;
   top: 0;
@@ -74,7 +74,7 @@ nav>ul>li:last-child {
   top: 2rem;
   left: 1.5rem;
   content: '';
-  width: calc(50vw - 3rem);
+  width: calc($mobile-nav-width - 3rem);
   height: 2px;
 
   background-color: $accent-color;
