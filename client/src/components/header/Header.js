@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import Nav from './Nav';
 import BurgerBtn from './BurgerBtn';
 import BigNav from './BigNav';
 
+import { UserContext } from '../../context/user_context';
+
 function Header() {
+
+  const { isAuthenticated } = useContext(UserContext);
 
   const [isVisible, setIsVisible] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -25,9 +29,13 @@ function Header() {
   return (
     <header>
       <h1>NASA API</h1>
-      <BurgerBtn setIsVisible={setIsVisible} windowWidth={windowWidth} />
-      <BigNav windowWidth={windowWidth} />
-      <Nav isVisible={isVisible} setIsVisible={setIsVisible} />
+      {isAuthenticated &&
+        <>
+          <BurgerBtn setIsVisible={setIsVisible} windowWidth={windowWidth} />
+          <BigNav windowWidth={windowWidth} />
+          <Nav isVisible={isVisible} setIsVisible={setIsVisible} />
+        </>}
+
     </header>
   )
 }

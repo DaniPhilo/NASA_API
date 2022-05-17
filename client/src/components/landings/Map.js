@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import '../..//styles/styles.scss'
 
-import axios from 'axios'
+import { UserContext } from '../../context/user_context';
 
 function Map() {
 
+    const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
+
     const [landings, setLandings] = useState([]);
 
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchLandings = async () => {
@@ -19,6 +23,9 @@ function Map() {
                     },
                     credentials: 'include',
                 });
+                if (response.status === 403) {
+                    setIsAuthenticated(false);
+                  }
                 const data = await response.json();
                 if (data.response) {
                     setLandings(data.landings);
@@ -28,7 +35,12 @@ function Map() {
                 console.log(error);
             }
         }
-        fetchLandings();
+        if (isAuthenticated) {
+            fetchLandings();
+        }
+        else {
+            navigate('/');
+        }
     }, []);
 
     const handleSubmitByWeight = async (event) => {
