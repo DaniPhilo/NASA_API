@@ -43,13 +43,19 @@ function CreateNea() {
         }
     }
 
+    const handleCloseForm = () => {
+        setIsScaled(prevState => !prevState);
+        setCreated('');
+    }
+
+
     return (
         <>
             <button type='button' onClick={() => setIsScaled(prevState => !prevState)} className={isScaled ? 'launch-create-form' : 'scaled'}>Create NEA</button>
 
             <aside className={isScaled ? 'create-aside scaled' : 'create-aside'}>
 
-                <form action="" onSubmit={handleSubmit} className='create-form'>
+                <form action="" onSubmit={handleSubmit} className='create-form create-nea-form'>
 
                     <h4>Create new NEA:</h4>
 
@@ -94,9 +100,9 @@ function CreateNea() {
                         <input type="text" name='orbit_class' />
                     </div>
 
-                    <input type='submit' value='Create' />
+                    <button type='submit' className='create-button'>Create</button>
 
-                    <button type='button' onClick={() => setIsScaled(prevState => !prevState)}><i class="fa-solid fa-xmark"></i></button>
+                    <button type='button' className='close-button' onClick={handleCloseForm}><i className="fa-solid fa-xmark"></i></button>
 
                 </form>
 

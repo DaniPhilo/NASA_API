@@ -9,7 +9,7 @@ function LandingCart({ landing, setLandingsCart, setTotalPrice }) {
   return (
     <div className='cart-item'>
       <div className='cart-info'>
-        <button type='button' onClick={removeFromCart}><i class="fa-solid fa-trash-can"></i></button>
+        <button type='button' onClick={removeFromCart}><i className="fa-solid fa-trash-can"></i></button>
         <h4>{landing.name}</h4>
       </div>
 

@@ -43,11 +43,9 @@ function LandingEdit({ landing, setIsEdit, setLandings, setIsAuthenticated }) {
             <input type="text" name='year' placeholder={year} />
             <input type="text" name='reclat' placeholder={reclat} />
             <input type="text" name='reclong' placeholder={reclong} />
-            <div className="edit-buttons">
-                <button type='submit'>Edit</button>
-                <button type='button' onClick={() => setIsEdit(prevState => !prevState)}>Cancel</button>
-            </div>
-            
+            <button type='submit'>Edit</button>
+            <button type='button' onClick={() => setIsEdit(prevState => !prevState)}><i className="fa-solid fa-xmark"></i></button>
+
         </form>
     )
 }

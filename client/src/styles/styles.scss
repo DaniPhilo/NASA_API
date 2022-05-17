@@ -123,30 +123,83 @@ nav>ul>li:last-child {
 }
 
 
-main {
-  margin-top: 1rem;
-}
-
-
 // Image:
 .image-section {
+  padding: 1rem;
   width: 100vw;
 }
 
-.image-section>img {
+.image-container {
   width: 100%;
 }
 
+.image-container > h4 {
+  text-align: center;
+  margin: 1rem auto;
+
+  color: $text-color;
+}
+
+.image-container > img {
+  width: 100%;
+}
+
+.explanation {
+  margin-top: 1rem;
+}
+
+.explanation > p {
+  color: $text-color;
+}
+
 // Map:
-.map-form-container>form {
-  margin: 0.5rem 0;
+.map-form-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+
+  width: 90vw;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+.map-form-container > form {
+  color: $text-color;
+}
+
+.map-form-container > form > label {
+  margin-left: 0.5rem;
+}
+
+.map-form-container > form > div > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  margin: 0.25rem 0.5rem 0 0;
+  color: $text-color;
+  background-color: $modal-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+
+.map-form-container > form > div > button {
+  padding: 0.35rem 1rem;
+  background-color: $alt-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.map-form-container > form > div > button:hover {
+  background-color: $accent-color;
 }
 
 .leaflet-container {
   width: 100vw;
   height: 50vh;
-
-  margin-top: 1rem;
+  z-index: 5;
 }
 
 .scaled {
@@ -178,13 +231,15 @@ main {
   left: 0;
   z-index: 11;
 
-  min-width: 100vw;
-  height: 100vh;
+  width: 100vw;
+  max-height: 100vh;
 
   background-color: $modal-color;
 
   transition: transform 0.25s ease-in-out;
 }
+
+
 
 .create-form {
   position: relative;
@@ -206,7 +261,29 @@ main {
   align-items: center;
 }
 
-.create-form > button {
+.create-form > div > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  color: $text-color;
+  background-color: $modal-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+
+.create-form > .create-button {
+  padding: 0.5rem 1rem;
+  background-color: $alt-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.create-form > .create-button:hover {
+  background-color: $accent-color;
+}
+
+.create-form > .close-button {
   position: absolute;
   top: 0;
   right: 0;
@@ -218,6 +295,14 @@ main {
 .create-form > button > .fa-xmark {
   font-size: 1.5rem;
   color: $delete-btn-color; 
+  cursor: pointer;
+}
+
+.create-nea-form > div > label {
+  font-size: small;
+}
+.create-nea-form > div > input {
+  height: 1rem;
 }
 
 .search-by-name {
@@ -238,14 +323,6 @@ main {
   color: $text-color;
   background-color: $alt-color;
   border: 1px solid $accent-color;
-  border-radius: 20px;
-}
-.search-by-name > form > input:checked {
-  height: 1.75rem;
-  padding: 0.25rem;
-  color: $text-color;
-  background-color: $alt-color;
-  border: 1px solid red;
   border-radius: 20px;
 }
 
@@ -448,9 +525,10 @@ main {
 }
 
 .edit-form {
+  position: relative;
   display: flex;
   flex-direction: column;
-   justify-content: center;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
   
@@ -460,6 +538,48 @@ main {
   background-color: $card-color;
   background-size: cover;
   border-radius: 5px;
+}
+
+.edit-form > input {
+  height: 1.75rem;
+  padding: 0.25rem;
+  color: $text-color;
+  background-color: $modal-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+}
+
+.edit-form > button:nth-of-type(1){
+  padding: 0.5rem 1rem;
+  background-color: $card-color;
+  color: $text-color;
+  border: 1px solid $accent-color;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.edit-form > button:nth-of-type(1):hover {
+  background-color: $accent-color;
+}
+
+.edit-form > button:nth-of-type(2) {
+  position: absolute;
+  top: 1%;
+  right: 5%;
+  padding: 0.25rem;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-nea-form > button:nth-of-type(2) {
+  top: 0;
+  right: 1%;
+}
+
+.edit-form > button:nth-of-type(2) > .fa-xmark {
+  font-size: 1.25rem;
+  color: $delete-btn-color;
 }
 
 .edit-nea-form {
@@ -481,6 +601,8 @@ main {
 .edit-nea-form > input {
   width: 100%;
 }
+
+
 
 
 // *** CART *** //
@@ -542,6 +664,8 @@ main {
   height: 2px;
   background-color: $accent-color;
 }
+
+
 
 
 @media (min-width: 750px) {
@@ -663,20 +787,55 @@ main {
 
 
   .image-section {
-    width: 95vw;
+    padding: 1rem;
+    width: calc(100vw - $desktop-icon-nav-width - 1.1rem);
+  }
+  
+  .image-container {
+    width: 100%;
+  }
+  
+  .image-container > h4 {
+    text-align: center;
     margin: 1rem auto;
+  
+    color: $text-color;
+  }
+  
+  .image-container > img {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .explanation {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  .explanation > p {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    color: $text-color;
   }
 
   .map-form-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .leaflet-container {
-    width: 95vw;
+    width: calc(90vw - $desktop-icon-nav-width);
     height: 75vh;
 
     margin: 1rem auto;
+  }
+
+  .create-nea-form > div > label {
+    font-size: medium;
+  }
+  .create-nea-form > div > input {
+    height: 1.25rem;
   }
 }

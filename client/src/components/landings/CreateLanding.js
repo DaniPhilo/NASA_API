@@ -41,6 +41,11 @@ function CreateLanding() {
         }
     }
 
+    const handleCloseForm = () => {
+        setIsScaled(prevState => !prevState);
+        setCreated('');
+    }
+
     return (
         <>
             <button type='button' onClick={() => setIsScaled(prevState => !prevState)} className={isScaled ? 'launch-create-form' : 'scaled'}>Create Landing</button>
@@ -80,9 +85,9 @@ function CreateLanding() {
                         <input type="text" name='reclong' />
                     </div>
 
-                    <input type='submit' value='Create' />
+                    <button type='submit' className='create-button'>Create</button>
 
-                    <button type='button' onClick={() => setIsScaled(prevState => !prevState)}><i className="fa-solid fa-xmark"></i></button>
+                    <button type='button' className='close-button' onClick={handleCloseForm}><i className="fa-solid fa-xmark"></i></button>
                 </form>
 
                 {created === 'success' && <p>New landing created.</p>}

@@ -39,7 +39,7 @@ function NeaEdit({ nea, setIsEdit, setNeas, setIsAuthenticated }) {
     }
 
     return (
-        <form action="" className='edit-nea-form' onSubmit={handleEdit}>
+        <form action="" className='edit-form edit-nea-form' onSubmit={handleEdit}>
             <input type="text" name='designation' placeholder={designation} />
             <input type="text" name='discovery_date' placeholder={discovery_date} />
             <input type="text" name='h_mag' placeholder={h_mag} />
@@ -51,7 +51,7 @@ function NeaEdit({ nea, setIsEdit, setNeas, setIsAuthenticated }) {
             <input type="text" name='pha' placeholder={pha} />
             <input type="text" name='orbit_class' placeholder={orbit_class} />
             <button type='submit'>Edit</button>
-            <button type='button' onClick={() => setIsEdit(prevState => !prevState)}>Cancel</button>
+            <button type='button' onClick={() => setIsEdit(prevState => !prevState)}><i className="fa-solid fa-xmark"></i></button>
         </form>
     )
 }

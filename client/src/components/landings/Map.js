@@ -56,21 +56,25 @@ function Map() {
     }
 
     return (
-        <>
+        <section>
             <div className="map-form-container">
                 <form action="" onSubmit={handleSubmitByWeight}>
                     <label htmlFor="weight">Filter by weight: </label>
-                    <input type="number" name="weight" />
-                    <button type='submit'>Filter</button>
+                    <div>
+                        <input type="number" name="weight" />
+                        <button type='submit'>Filter</button>
+                    </div>
                 </form>
                 <form action="" onSubmit={handleSubmitByClass}>
                     <label htmlFor="_class">Filter by class: </label>
-                    <input type="text" name="_class" />
-                    <button type='submit'>Filter</button>
+                    <div>
+                        <input type="text" name="_class" />
+                        <button type='submit'>Filter</button>
+                    </div>
                 </form>
             </div>
 
-            <MapContainer center={[30, 0]} zoom={2} scrollWheelZoom={false}>
+            <MapContainer center={[40, -3]} zoom={5} scrollWheelZoom={false}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -86,7 +90,7 @@ function Map() {
                     }
                 })}
             </MapContainer>
-        </>
+        </section>
     );
 
 }
