@@ -916,3 +916,18 @@ nav>ul>li>a {
     height: 1.25rem;
   }
 }
+
+.success-message {
+  margin: 0 auto;
+}
+.success-message > p {
+  color: $accent-color;
+  text-align: center;
+}
+.error-message {
+  margin: 0 auto;
+}
+.error-message > p {
+  color: red;
+  text-align: center;
+}

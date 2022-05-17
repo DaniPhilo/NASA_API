@@ -64,7 +64,7 @@ app.use((error, req, res, next) => {
         return res.status(401).json({ response: false, authenticated: false, message: `Unauthorized: ${error.message}`, full_error: error })
     }
     if (error.type === 'authentication_error' && error.code === 403) {
-        return res.status(403).json({ response: false, message: `Forbidden: ${error.message}`, full_error: error })
+        return res.status(403).json({ response: false, authenticated: false, message: `Forbidden: ${error.message}`, full_error: error })
     }
     else if (error.type !== 'custom_error') {
         return res.status(500).json({ response: false, error: error })

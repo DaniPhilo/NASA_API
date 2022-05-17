@@ -54,7 +54,7 @@ function SignUp({ setShowSignUp }) {
                     <input type="text" name='name' />
 
                     {errorMessage.includes('name') &&
-                        <div className='login-error'>
+                        <div className='error-message'>
                             <p>Invalid name.</p>
                         </div>}
                 </div>
@@ -63,7 +63,7 @@ function SignUp({ setShowSignUp }) {
                     <input type="text" name='email' />
 
                     {errorMessage.includes('email') &&
-                        <div className='login-error'>
+                        <div className='error-message'>
                             <p>Invalid email.</p>
                         </div>}
                 </div>
@@ -72,7 +72,7 @@ function SignUp({ setShowSignUp }) {
                     <input type="password" name='password' />
 
                     {errorMessage.includes('password') &&
-                        <div className='login-error'>
+                        <div className='error-message'>
                             <p>Invalid password.</p>
                         </div>}
                 </div>

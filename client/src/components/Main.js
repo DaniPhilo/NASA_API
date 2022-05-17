@@ -25,6 +25,7 @@ function Main() {
         });
         const response = await request.json();
         if (!response.authenticated) {
+            setIsAuthenticated(false);
             return navigate('/')
         }
         setIsAuthenticated(true);

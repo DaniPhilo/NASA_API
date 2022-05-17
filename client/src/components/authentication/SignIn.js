@@ -56,7 +56,7 @@ function SignIn({ setShowSignUp }) {
 
             </form>
             {errorMessage &&
-                <div className='login-error'>
+                <div className='error-message'>
                     <p>{errorMessage}</p>
                 </div>}
             <p className='show-signIn' onClick={() => setShowSignUp(true)}>I don't have an account yet.</p>

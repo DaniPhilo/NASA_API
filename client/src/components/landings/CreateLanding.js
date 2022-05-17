@@ -90,8 +90,15 @@ function CreateLanding() {
                     <button type='button' className='close-button' onClick={handleCloseForm}><i className="fa-solid fa-xmark"></i></button>
                 </form>
 
-                {created === 'success' && <p>New landing created.</p>}
-                {created === 'failure' && <p>Incorrect parameters. Please, try again..</p>}
+                {created === 'success' &&
+                    <div className='success-message'>
+                        <p>New landing created.</p>
+                    </div>
+                }
+                {created === 'failure' &&
+                    <div className='error-message'>
+                        <p>Incorrect parameters. Please, try again..</p>
+                    </div>}
 
             </aside>
         </>

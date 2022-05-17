@@ -106,8 +106,15 @@ function CreateNea() {
 
                 </form>
 
-                {created === 'success' && <p>New NEA created.</p>}
-                {created === 'failure' && <p>Incorrect parameters. Please, try again...</p>}
+                {created === 'success' &&
+                    <div className='success-message'>
+                        <p>New NEA created.</p>
+                    </div>
+                }
+                {created === 'failure' &&
+                    <div className='error-message'>
+                        <p>Incorrect parameters. Please, try again..</p>
+                    </div>}
 
             </aside>
         </>
