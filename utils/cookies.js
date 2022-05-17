@@ -14,7 +14,7 @@ const deleteCookie = (res, name) => {
     res.clearCookie(name, {
         secure: true,
         httpOnly: true,
-        sameSite: 'lax'
+        sameSite: 'none'
     });
 }
 

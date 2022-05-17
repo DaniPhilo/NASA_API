@@ -105,7 +105,7 @@ function NeasList() {
                   )
                 })
                 :
-                <p>No results...</p>}
+                <p className='no-results'>No results...</p>}
             </div>
             <NeasPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} numberOfDocs={numberOfDocs} />
           </>

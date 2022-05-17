@@ -113,7 +113,7 @@ function LandingsList() {
                   )
                 })
                 :
-                <p>No results...</p>
+                <p className='no-results'>No results...</p>
               }
             </div>
             <LandingsPagination currentPage={currentPage} setCurrentPage={setCurrentPage} numberOfPages={numberOfPages} numberOfDocs={numberOfDocs} />
