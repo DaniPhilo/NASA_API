@@ -83,9 +83,25 @@ const authenticateToken = async (req, res, next) => {
     }
 }
 
+const createSwaggerAuth = async (req, res, next) => {
+    try {
+        const acessToken = await getAccessToken('tomas.de.zumalacarregui@gmail.com');
+        createCookie(res, 'aT', acessToken);
+
+        const refreshToken = await getRefreshToken('tomas.de.zumalacarregui@gmail.com');
+        await storeRefreshToken('tomas.de.zumalacarregui@gmail.com', refreshToken);
+        createCookie(res, 'rT', refreshToken);
+        return next()
+    }
+    catch (error) {
+        return next(error)
+    }
+}
+
 module.exports = {
     validateUser,
     createAccessToken,
     createRefreshToken,
-    authenticateToken
+    authenticateToken,
+    createSwaggerAuth
 }

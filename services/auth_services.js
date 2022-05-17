@@ -63,60 +63,6 @@ const verifyRefreshToken = async (token) => {
     });
 }
 
-
-    //     jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
-    //         if (err) {
-    //             const refreshToken = req.cookies.refresh_token;
-    //             if (!refreshToken) {
-    //                 const error = new AuthenticationError(403, 'No refresh token provided')
-    //                 return next(error)
-    //             }
-    //             jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
-    //                 if (err) {
-    //                     const error = new ForbiddenError('Invalid refresh token provided')
-    //                     return next(error)
-    //                 }
-
-    //                 const dbUser = await findUserById(user.user_id);
-    //                 if (refreshToken !== dbUser.refresh_token) {
-    //                     const error = new ForbiddenError('Refresh token does not match DB')
-    //                     return next(error)
-    //                 }
-    //             })
-
-
-// const authenticateRefreshToken = async (refreshToken) => {
-//     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, user) => {
-//         if (err) {
-//             return false
-//         }
-
-//         const dbUser = await User.find({ email: user.user_id });
-//         if (refreshToken !== dbUser.refresh_token) {
-//             return false
-//         }
-
-//         await User.findOneAndUpdate({ email: user.user_id }, { refresh_token: refreshToken });
-
-//         res.cookie('aT', refreshToken, {
-//             secure: true,
-//             httpOnly: true,
-//             sameSite: 'lax'
-//         });
-//         res.cookie('rT', refreshToken, {
-//             secure: true,
-//             httpOnly: true,
-//             sameSite: 'lax'
-//         });
-
-//         // Metemos user_id en req.user para tener siempre disponible en cada page la id de la DB del usuario.
-//         req.user = user;
-
-//         return next();
-//     });
-
-// }
-
 module.exports = {
     saveUser,
     getAccessToken,

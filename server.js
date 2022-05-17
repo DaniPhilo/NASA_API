@@ -25,9 +25,9 @@ app.use(cookieParser());
 const swaggerUI = require('swagger-ui-express');
 const specs = require('./swagger/swagger_config');
 
+const { createSwaggerAuth } = require('./middlewares/auth_middlewares');
 
-
-app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(specs));
+app.use('/api/docs', createSwaggerAuth, swaggerUI.serve, swaggerUI.setup(specs));
 
 // API Routes:
 const authRoutes = require('./routes/auth_routes');
