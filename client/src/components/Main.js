@@ -1,22 +1,24 @@
-import React, { useContext, useEffect } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom';
+/* import React, { useContext, useEffect } from 'react' */
+import React from 'react'
+/* import { Routes, Route, useNavigate } from 'react-router-dom'; */
+import { Routes, Route } from 'react-router-dom';
 
-import AuthenticationForms from './authentication/AuthenticationForms';
+/* import AuthenticationForms from './authentication/AuthenticationForms'; */
 import Image from './Image'
 import Map from './landings/Map';
 import LandingsList from './landings/LandingsList';
 import NeasList from './neas/NeasList';
 import ShoppingCart from './shopping_cart/ShoppingCart';
 
-import { UserContext } from '../context/user_context'
+/* import { UserContext } from '../context/user_context' */
 
 function Main() {
 
-    const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
+    /* const { isAuthenticated, setIsAuthenticated } = useContext(UserContext); */
 
-    const navigate = useNavigate();
+    /* const navigate = useNavigate(); */
 
-    const checkSession = async () => {
+    /* const checkSession = async () => {
         const request = await fetch('https://vast-castle-72865.herokuapp.com/api/auth/session', {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -36,20 +38,22 @@ function Main() {
         if (!isAuthenticated) {
             checkSession();
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated]); */
 
-    return (
-        <main className={isAuthenticated ? 'regular' : 'full'}>
+    return (<>
+        {/* <main className={isAuthenticated ? 'regular' : 'full'}> */}
+        <main className='full'>
             <Routes>
-                <Route path="/" element={<AuthenticationForms />} />
-                <Route path="/home" element={<Image />} />
+                {/* <Route path="/" element={<AuthenticationForms />} /> */}
+                {/* <Route path="/home" element={<Image />} /> */}
+                <Route path="/" element={<Image />} />
                 <Route path="/landings" element={<Map />} />
                 <Route path="/landings/list" element={<LandingsList />} />
                 <Route path="/neas" element={<NeasList />} />
                 <Route path="/cart" element={<ShoppingCart />} />
             </Routes>
         </main>
-    )
+        </>)
 }
 
 export default Main

@@ -4,11 +4,11 @@ import Nav from './Nav';
 import BurgerBtn from './BurgerBtn';
 import IconNav from './IconNav';
 
-import { UserContext } from '../../context/user_context';
+/* import { UserContext } from '../../context/user_context'; */
 
 function Header() {
 
-  const { isAuthenticated } = useContext(UserContext);
+  /* const { isAuthenticated } = useContext(UserContext); */
 
   const [isVisible, setIsVisible] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -29,16 +29,13 @@ function Header() {
 
   return (
     <header>
-
-      {isAuthenticated &&
-        <>
+      {/* {isAuthenticated &&
+        <> */}
           <BurgerBtn setIsVisible={setIsVisible} windowWidth={windowWidth} />
           <IconNav currentPage={currentPage} setCurrentPage={setCurrentPage} windowWidth={windowWidth} />
           <Nav currentPage={currentPage} setCurrentPage={setCurrentPage} isVisible={isVisible} setIsVisible={setIsVisible} />
-        </>}
+        {/* </>} */}
       <h1>NASA<span>.api</span></h1>
-
-
     </header>
   )
 }

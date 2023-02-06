@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+/* import { useNavigate } from 'react-router-dom'
 
-import { UserContext } from '../../context/user_context';
+import { UserContext } from '../../context/user_context'; */
 
 function LogOut() {
 
-    const { setIsAuthenticated } = useContext(UserContext);
+    /* const { setIsAuthenticated } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -20,10 +20,12 @@ function LogOut() {
             setIsAuthenticated(false);
             return navigate('/')
         }
-    }
+    } */
 
-    return (
-        <a onClick={handleLogOut}>Log Out</a>
+    return (<>
+        {/* <a onClick={handleLogOut}>Log Out</a> */}
+        <h1>jojojo</h1>
+        </>
     )
 }
 
