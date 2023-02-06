@@ -1,15 +1,16 @@
-import React, { useContext } from 'react'
+/* import React, { useContext } from 'react' */
+import React from 'react'
 
-import { UserContext } from '../context/user_context';
+/* import { UserContext } from '../context/user_context'; */
 
 function Footer() {
 
-  const { isAuthenticated } = useContext(UserContext);
+  /* const { isAuthenticated } = useContext(UserContext); */
 
   return (
     <footer>
-      {isAuthenticated &&
-        <>
+      {/* {isAuthenticated &&
+        <> */}
           <div className="footer-div">
             <h4>Contact</h4>
             <p>nasa.api@nasa-api.com</p>
@@ -31,7 +32,7 @@ function Footer() {
             <h4>Documentation</h4>
             <a href='https://vast-castle-72865.herokuapp.com/api/docs' target="_blank">API documentation.</a>
           </div>
-        </>}
+       {/*  </>} */}
     </footer>
   )
 }

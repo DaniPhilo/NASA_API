@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
-import { UserContext } from '../../context/user_context';
+/* import { UserContext } from '../../context/user_context'; */
 
 function CreateLanding() {
 
-    const { setIsAuthenticated } = useContext(UserContext);
+    /* const { setIsAuthenticated } = useContext(UserContext); */
 
     const [created, setCreated] = useState(null);
     const [isScaled, setIsScaled] = useState(true);
@@ -29,9 +29,9 @@ function CreateLanding() {
             credentials: 'include',
             body: JSON.stringify(landingData)
         });
-        if (response.status === 403) {
+        /* if (response.status === 403) {
             return setIsAuthenticated(false);
-        }
+        } */
         const data = await response.json();
         if (data.response) {
             setCreated('success');

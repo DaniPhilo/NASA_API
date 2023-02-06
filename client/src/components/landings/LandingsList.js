@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { UserContext } from '../../context/user_context';
+/* import { UserContext } from '../../context/user_context'; */
 
 import CreateLanding from './CreateLanding';
 import Landing from './Landing'
@@ -7,7 +7,7 @@ import LandingsPagination from './LandingsPagination';
 
 function LandingsList() {
 
-  const { setIsAuthenticated } = useContext(UserContext);
+  /* const { setIsAuthenticated } = useContext(UserContext); */
 
   const [landings, setLandings] = useState([]);
   const [order, setOrder] = useState(1);
@@ -24,22 +24,26 @@ function LandingsList() {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-      credentials: 'include',
+      /* credentials: 'include', */
     });
-    if (response.status === 403) {
+/*     if (response.status === 403) {
       setIsAuthenticated(false);
-    }
+    } */
     const data = await response.json();
+    /* console.log(data); */
     return data
   }
 
   useEffect(() => {
     const init = async () => {
-      const data = await fetchLandings(`https://vast-castle-72865.herokuapp.com/api/astronomy/landings/${currentPage}?field=name&order=1`);
-      if (data.response) {
+      /* const url = `https://vast-castle-72865.herokuapp.com/api/astronomy/landings/${currentPage}?field=name&order=1`; */
+      const url = "https://data.nasa.gov/resource/gh4g-9sfh.json";
+      const data = await fetchLandings(url);
+      /* console.log("kk:", data); */
+      if (data) {
         setNumberOfPages(Math.floor(data.count / 10));
         setNumberOfDocs(data.count);
-        setLandings(data.landings);
+        setLandings(data);
         setLoading(false);
         return
       }
@@ -51,12 +55,15 @@ function LandingsList() {
     event.preventDefault();
 
     setLoading(true);
-    const data = await fetchLandings(`https://vast-castle-72865.herokuapp.com/api/astronomy/landings/name/${event.target.name.value}`, {
+    /* const url = `https://vast-castle-72865.herokuapp.com/api/astronomy/landings/name/${event.target.name.value}`; */
+    const url = "https://data.nasa.gov/resource/gh4g-9sfh.json";
+    const data = await fetchLandings(url, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       credentials: 'include',
     });
+    /* console.log("data:", data); */
     if (data.response) {
       setNumberOfDocs(data.count);
       setLandings(data.landings);
@@ -106,10 +113,11 @@ function LandingsList() {
             </div>
 
             <div className='cards-container'>
+              {/* {console.log("landings", landings)} */}
               {landings.length > 0 ?
                 landings.map(landing => {
                   return (
-                    <Landing key={landing._id} landing={landing} setLandings={setLandings} landings={landings} />
+                    <Landing key={landing.id} landing={landing} setLandings={setLandings} landings={landings} />
                   )
                 })
                 :

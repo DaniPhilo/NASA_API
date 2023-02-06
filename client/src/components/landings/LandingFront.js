@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react'
 
 import { ShoppingCartContext } from '../../context/shopping_context'
 
-function LandingFront({ landing, setLandings, setIsEdit, setIsAuthenticated }) {
-
+function LandingFront({ landing, setLandings, setIsEdit }) {
+    /* console.log("landing_front:", landing); */
     const { name, recclass, mass, year, reclat, reclong, id } = landing;
-
+    /* console.log(landing);
+    console.log(year !== "undefined" ? year.slice(0, 10) : "tu puta madre"); */
     const { landingsCart, setLandingsCart } = useContext(ShoppingCartContext);
 
     const [isInCart, setIsInCart] = useState(() => {
@@ -21,9 +22,9 @@ function LandingFront({ landing, setLandings, setIsEdit, setIsAuthenticated }) {
             },
             credentials: 'include'
         });
-        if (response.status === 403) {
+/*         if (response.status === 403) {
             return setIsAuthenticated(false);
-        }
+        } */
         const data = await response.json();
         if (data.response) {
             setLandings(prevState => prevState.filter(landing => landing.id !== id));
@@ -49,7 +50,7 @@ function LandingFront({ landing, setLandings, setIsEdit, setIsAuthenticated }) {
                 <div className="card-info">
                     <p>Class: {recclass}</p>
                     <p>Mass: {mass}</p>
-                    <p>Date: {year.slice(0, 10)}</p>
+                    {/* <p>Date: {year.slice(0, 10)}</p> */}
                     <p>Lat: {reclat}</p>
                     <p>Long: {reclong}</p>
                 </div>

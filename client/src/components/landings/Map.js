@@ -1,46 +1,51 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+/* import { useNavigate } from 'react-router-dom' */
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import '../..//styles/styles.scss'
 
-import { UserContext } from '../../context/user_context';
+/* import { UserContext } from '../../context/user_context'; */
 
 function Map() {
 
-    const { isAuthenticated, setIsAuthenticated } = useContext(UserContext);
+    /* const { isAuthenticated, setIsAuthenticated } = useContext(UserContext); */
 
     const [landings, setLandings] = useState([]);
 
-    const navigate = useNavigate();
+    /* const navigate = useNavigate(); */
 
     useEffect(() => {
         const fetchLandings = async () => {
+            /* const url = 'https://vast-castle-72865.herokuapp.com/api/astronomy/landings/minMass/0'; */
+            const url = "https://data.nasa.gov/resource/gh4g-9sfh.json";
             try {
-                const response = await fetch('https://vast-castle-72865.herokuapp.com/api/astronomy/landings/minMass/0', {
+                const response = await fetch(url, {
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
+                        'Content-Type': 'application/x-www-form-urlencoded',
                     },
-                    credentials: 'include',
+                    /* credentials: 'include', */
                 });
-                if (response.status === 403) {
+               /*  if (response.status === 403) {
                     setIsAuthenticated(false);
-                  }
+                  } */
+                /* console.log("response:", response); */
                 const data = await response.json();
-                if (data.response) {
+                /* console.log("data:", data); */
+                setLandings(data);
+                /* if (data.response) {  
                     setLandings(data.landings);
-                }
+                } */
             }
             catch (error) {
                 console.log(error);
             }
         }
-        if (isAuthenticated) {
-            fetchLandings();
-        }
+        /* if (isAuthenticated) { */
+        fetchLandings();
+        /* }
         else {
             navigate('/');
-        }
+        } */
     }, []);
 
     const handleSubmitByWeight = async (event) => {
@@ -92,10 +97,11 @@ function Map() {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 />
                 {landings.length > 0 && landings.map(landing => {
-                    const { name, recclass, mass, year, reclat, reclong, _id } = landing;
+                    /* console.log("landing:", landing); */
+                    const { name, recclass, mass, year, reclat, reclong, id } = landing;
                     if (reclat && reclong) {
                         return (
-                            <Marker key={_id} position={[reclat, reclong]}>
+                            <Marker key={id} position={[reclat, reclong]}>
                                 <Popup>Name: {name}, Class: {recclass}, Mass: {mass}, Date: {year && year.slice(0, 10)}, Lat: {reclat}, Long: {reclong}</Popup>
                             </Marker>
                         )

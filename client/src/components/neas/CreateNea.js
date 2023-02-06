@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react'
-import { UserContext } from '../../context/user_context';
+/* import { UserContext } from '../../context/user_context'; */
 
 function CreateNea() {
 
-    const { setIsAuthenticated } = useContext(UserContext);
+    /* const { setIsAuthenticated } = useContext(UserContext); */
 
     const [created, setCreated] = useState(null);
     const [isScaled, setIsScaled] = useState(true);
@@ -31,9 +31,9 @@ function CreateNea() {
             credentials: 'include',
             body: JSON.stringify(neaData)
         });
-        if (response.status === 403) {
+        /* if (response.status === 403) {
             return setIsAuthenticated(false);
-        }
+        } */
         const data = await response.json();
         if (data.response) {
             setCreated('success');
